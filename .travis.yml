@@ -1,0 +1,37 @@
+# Project language
+language: php
+
+# Allows use container-based infrastructure
+sudo: false
+
+# Start mysql service
+services:
+  - mysql
+
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+php:
+  - 7.2
+
+# Define an environment variable
+env:
+  - SYMFONY_VERSION="4.1.*" DB=mysql
+
+git:
+  depth: 1
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --dev --no-interaction
+
+install:
+  - cp .env.dist .env
+
+script:
+  - vendor/bin/phpunit --coverage-clover=clover.xml
+
+after_script:
+  - bash <(curl -s https://codecov.io/bash)
