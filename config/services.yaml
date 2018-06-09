@@ -22,3 +22,7 @@ services:
         resource: '../src/User/Persistence/Entity'
         tags: ['doctrine.repository_service']
 
+    App\GameCore\Persistence\Entity\:
+        resource: '../src/GameCore/Persistence/Entity'
+        tags: ['doctrine.repository_service']
+
