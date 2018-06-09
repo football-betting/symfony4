@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
-class RegistrationController extends Controller
+class Registration extends Controller
 {
     /**
      * @Route("/register", name="user_registration")
