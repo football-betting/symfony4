@@ -1,0 +1,11 @@
+version: '3'
+services:
+    web:
+        container_name: football-betting-symfony
+        image: nxswesolowski/ubuntu-php:7.2
+        volumes:
+            - ./:/var/www
+        ports:
+            - 8080:80
+            - 3306:3306
+            - "2222:22"
