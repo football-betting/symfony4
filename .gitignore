@@ -23,3 +23,5 @@ yarn-error.log
 ###< symfony/phpunit-bridge ###
 
 /.idea
+/.cache
+/.composer
