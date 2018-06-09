@@ -14,6 +14,11 @@ services:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
 
-    App\Component\:
-        resource: '../src/*/Communication/Controller'
+    App\User\Communication\Controller\:
+        resource: '../src/User/Communication/Controller'
         tags: ['controller.service_arguments']
+
+    App\User\Persistence\Entity\:
+        resource: '../src/User/Persistence/Entity'
+        tags: ['doctrine.repository_service']
+

@@ -1,9 +1,7 @@
 security:
     encoders:
-        App\Entity\User:
+        App\User\Persistence\Entity\User:
             algorithm: bcrypt
-
-    # ...
 
     providers:
         our_db_provider:
@@ -14,7 +12,13 @@ security:
                 # manager_name: customer
 
     firewalls:
-        main:
-            pattern:    ^/
-            http_basic: ~
-            provider: our_db_provider
+        secured_area:
+            pattern: ^/
+            anonymous: true
+            form_login:
+                check_path: login
+                login_path: login
+
+            logout:
+                path: security_logout
+                target: homepage
