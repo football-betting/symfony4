@@ -9,6 +9,12 @@
 5. go to `/var/www/` and create symlink `ln -s symfony4/public symfony`
 5. ssh into the container and run `composer install` in `/var/www/symfony4/`
 
+
+## scss / js changes
+
+all files will be compiled after `composer install` has been executed.
+If you want the rebuild the frontend files manually just run `npm install` in the project root
+
 ## Credentials
 
 **MYSQL**
