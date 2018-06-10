@@ -26,3 +26,7 @@ services:
         resource: '../src/GameCore/Persistence/Entity'
         tags: ['doctrine.repository_service']
 
+    App\GameBetting\Persistence\Entity\:
+        resource: '../src/GameBetting/Persistence/Entity'
+        tags: ['doctrine.repository_service']
+
