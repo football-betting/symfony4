@@ -62,15 +62,24 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+
+        },
+        "initial-setup": {
             "doctrine:database:create": "symfony-cmd",
-            "doctrine:migrations:migrate": "symfony-cmd"
+            "doctrine:migrations:migrate": "symfony-cmd",
+            "frontend": "npm install"
+        },
+        "rebuild": {
+            "frontend": "npm install"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@setup"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@rebuild"
         ]
     },
     "conflict": {
