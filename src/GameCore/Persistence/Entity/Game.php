@@ -44,6 +44,12 @@ class Game
      */
     private $secondTeamResult;
 
+    /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $type;
+
     public function getId()
     {
         return $this->id;
@@ -107,6 +113,22 @@ class Game
         $this->secondTeamResult = $secondTeamResult;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType(int $type): void
+    {
+        $this->type = $type;
     }
 }
 
