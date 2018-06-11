@@ -19,14 +19,14 @@ class UserBetting
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\GameCore\Persistence\Entity\Game", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\GameCore\Persistence\Entity\Game", inversedBy="installations")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
      */
     private $game;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\User\Persistence\Entity\User", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\User\Persistence\Entity\User", inversedBy="installations")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
