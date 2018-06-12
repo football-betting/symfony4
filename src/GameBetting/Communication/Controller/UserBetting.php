@@ -4,6 +4,7 @@ namespace App\GameBetting\Communication\Controller;
 
 
 use App\GameBetting\Business\Form\UserBettingType;
+use App\GameBetting\Persistence\DataProvider\GamePastBetting;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -18,22 +19,70 @@ class UserBetting extends Controller
      */
     public function list()
     {
-        $pastGames = $this->getDoctrine()
-                          ->getRepository(Game::class)
-                          ->findPastGames()
-        ;
+
 
         $futureGames = $this->getDoctrine()
                             ->getRepository(Game::class)
                             ->findFutureGames()
         ;
-
-        $pastGamesFormBuilder = $this->getFormList($pastGames);
         $futureGamesFormBuilder = $this->getFormList($futureGames);
+
+
+        $pastGames = $this->getDoctrine()
+                          ->getRepository(Game::class)
+                          ->findPastGames()
+        ;
+
+        $user = $this->getUser();
+
+        $userBets = $this->getDoctrine()
+                         ->getRepository(UserBettingEntity::class)
+                         ->findUserBettingByUserId($user, $pastGames)
+        ;
+
+        $pastGamesForm = [];
+        /** @var UserBettingEntity[] $gameId2UserBets */
+        $gameId2UserBets = [];
+        /** @var UserBettingEntity $userBet */
+        foreach ($userBets as $userBet) {
+            $gameId2UserBets[$userBet->getGame()->getId()] = $userBet;
+        }
+        /** @var Game[] $pastGames */
+
+//        string $firstTeamName,
+//        string $secondTeamName,
+//        \DateTime $gameDate,
+//        int $firstTeamResult,
+//        int $secondTeamResult,
+//        ?int $firstTeamUserResult,
+//        ?int $secondTeamUserResult
+
+        foreach ($pastGames as $pastGame) {
+
+            $firstTeamUserResult = null;
+            $secondTeamUserResult = null;
+            if (isset($gameId2UserBets[$pastGame->getId()])) {
+                $firstTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getFirstTeamResult();
+                $secondTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getSecondTeamResult();
+            }
+
+            $pastGamesForm[] = new GamePastBetting(
+                $pastGame->getTeamFirst()->getName(),
+                $pastGame->getTeamSecond()->getName(),
+                $pastGame->getDate(),
+                (int)$pastGame->getFirstTeamResult(),
+                (int)$pastGame->getSecondTeamResult(),
+                $firstTeamUserResult,
+                $secondTeamUserResult
+            );
+        }
 
         return $this->render(
             'gamebetting/betting/betting.html.twig',
-            ['gamesForm' => $futureGamesFormBuilder]
+            [
+                'futureGamesForm' => $futureGamesFormBuilder,
+                'pastGamesForm'   => $pastGamesForm
+            ]
         );
     }
 
@@ -71,7 +120,7 @@ class UserBetting extends Controller
         $form = $this->createForm(UserBettingType::class, $userBetting);
         $form->handleRequest($request);
         if (!$form->isSubmitted() && !$form->isValid()) {
-            return $this->redirectToRoute('/gamebet');
+            return $this->redirectToRoute('game_bet_list', array(), 302);
         }
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -92,13 +141,7 @@ class UserBetting extends Controller
         return $this->redirectToRoute('game_bet_list', array(), 302);
     }
 
-    /**
-     *
-     * @param $NXS_TYPE_HINT $games
-     * @param $NXS_TYPE_HINT $userBets
-     * @return array
-     */
-    private function getFormList($games): array
+    private function getFormList($games, $editable = false): array
     {
         $user = $this->getUser();
 
@@ -127,7 +170,7 @@ class UserBetting extends Controller
             }
 
             $gamesFormBuilder[$game->getId()] = $this->createForm(
-                UserBettingType::class, null, ['game' => $game, 'bet' => $bet]
+                UserBettingType::class, null, ['game' => $game, 'bet' => $bet, 'editable' => $editable]
             )->createView()
             ;
         }
