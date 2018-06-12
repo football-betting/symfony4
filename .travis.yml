@@ -31,7 +31,7 @@ install:
   - cp .env.dist .env
 
 script:
-  - vendor/bin/phpunit --coverage-clover=clover.xml
+  - php bin/phpunit --coverage-clover=clover.xml
 
 after_script:
   - bash <(curl -s https://codecov.io/bash)
