@@ -30,6 +30,19 @@ class Security extends Controller
     }
 
     /**
+     * This is the route the user can use to logout.
+     *
+     * But, this will never be executed. Symfony will intercept this first
+     * and handle the logout automatically. See logout in config/packages/security.yaml
+     *
+     * @Route("/logout", name="logout")
+     */
+    public function logout(): void
+    {
+        throw new \Exception('This should never be reached!');
+    }
+
+    /**
      * ONLY A PLACEHOLDER, FOR INDEX PAGE
      * @Route("/", name="index")
      *

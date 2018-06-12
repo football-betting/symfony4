@@ -1,11 +1,64 @@
+{% extends 'user/user.base.html.twig' %}
+
+{% block body %}
+
+    {# For future translations#}
+    {#{{ form_widget(form.username, { 'attr': {'class': "span12",#}
+        {#'placeholder': 'security.login.usernameplaceholder'|trans} }) }}#}
+
+    {{ form_start(form, {label_attr: {class: 'form'} }) }}
+<div class="card card-login">
+    <div class="card-header ">
+        <h3 class="header text-center">Registrieren</h3>
+    </div>
+    <div class="card-body ">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-single-02"></i>
+                      </span>
+            </div>
+            {{ form_widget(form.username, {attr: {class: 'form-control',
+                'placeholder': 'Benutzername'} }) }}
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-key-25"></i>
+                      </span>
+            </div>
+            {{ form_widget(form.email, {attr: {class: 'form-control',
+                'placeholder': 'E-Mail'} }) }}
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-key-25"></i>
+                      </span>
+            </div>
+            {{ form_widget(form.plainPassword.first, {attr: {class: 'form-control',
+                'placeholder': 'Passwort - 1'} })}}
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-key-25"></i>
+                      </span>
+            </div>
+            {{ form_widget(form.plainPassword.second, {attr: {class: 'form-control',
+                'placeholder': 'Passwort - 2'} }) }}
+        </div>
+        <br>
+    </div>
+    <div class="card-footer ">
+        <button class="btn btn-warning btn-round btn-block mb-3" type="submit">login</button>
+    </div>
+    {{ form_end(form) }}
+</div>
 
 
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+{% endblock %}
 
-<button type="submit">Register!</button>
-{{ form_end(form) }}
+
+
 
