@@ -66,12 +66,10 @@
 
         },
         "initial-setup": {
-            "doctrine:database:create": "symfony-cmd",
-            "doctrine:migrations:migrate": "symfony-cmd",
-            "frontend": "yarn run encore dev"
+            
         },
         "rebuild": {
-            "frontend": "yarn run encore dev"
+
         },
         "post-install-cmd": [
             "@auto-scripts",
