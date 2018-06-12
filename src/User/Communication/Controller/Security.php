@@ -44,7 +44,7 @@ class Security extends Controller
 
     /**
      * ONLY A PLACEHOLDER, FOR INDEX PAGE
-     * @Route("/", name="index")
+     * @Route("/dashboard", name="dashboard")
      *
      * @param Request $request
      * @return Response

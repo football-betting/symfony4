@@ -23,3 +23,9 @@ security:
             logout:
                 path: logout
                 target: login
+
+    access_control:
+        - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/gamebet, roles: ROLE_USER }
+        - { path: ^/gamebetextra, roles: ROLE_USER }
+        - { path: ^/savebet, roles: ROLE_USER }

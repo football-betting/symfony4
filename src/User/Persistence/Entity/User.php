@@ -55,9 +55,15 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->roles = array('ROLE_USER');
     }
 
     public function getId()
@@ -90,11 +96,11 @@ class User implements UserInterface, \Serializable
     }
 
 
-
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
     }
+
 
     public function eraseCredentials()
     {
@@ -166,4 +172,5 @@ class User implements UserInterface, \Serializable
             // $this->salt
             ) = unserialize($serialized, ['allowed_classes' => false]);
     }
+
 }
