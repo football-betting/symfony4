@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for gameId, form in gamesForm %}
+        {{ form_start(form) }}
+            {{ form_row(form.firstTeamResult) }}
+            {{ form_row(form.secondTeamResult) }}
+            <input type="hidden" name="user_betting[gameId]" value="{{ gameId }}">
+        {{ form_end(form) }}
+
+    {% endfor %}
+
+{% endblock %}
