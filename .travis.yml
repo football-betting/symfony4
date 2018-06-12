@@ -30,11 +30,9 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer install --dev --no-interaction
 
-install:
+script:
   - php bin/console doctrine:database:create --no-interaction
   - php bin/console doctrine:migrations:migrate --no-interaction
-
-script:
   - php bin/phpunit --coverage-clover=clover.xml
 
 after_script:
