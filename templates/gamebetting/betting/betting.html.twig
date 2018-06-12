@@ -1,14 +1,67 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
-
-    {% for gameId, form in gamesForm %}
-        {{ form_start(form) }}
-            {{ form_row(form.firstTeamResult) }}
-            {{ form_row(form.secondTeamResult) }}
-            <input type="hidden" name="user_betting[gameId]" value="{{ gameId }}">
-        {{ form_end(form) }}
-
+    <div class="col-sm-5">
+    {% for game in pastGamesForm %}
+        <div class="mb-sm-4">
+        <form class="form-inline">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <input type="text" readonly="" class="form-control-plaintext" value="{{ game.firstTeamName }}">
+                    </div>
+                    <div class="col-sm text-center">
+                        <div class="form-control-plaintext">
+                            <span type="text" class="align-baseline" readonly disabled>{{ game.firstTeamResult }}</span>
+                            <span> : </span>
+                            <span type="text" class="align-baseline" readonly disabled>{{ game.secondTeamResult }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <input type="text" readonly="" class="form-control-plaintext text-right" value="{{ game.secondTeamName }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm text-center">
+                        <div class="form-control-plaintext">
+                            ( <span type="text" class="align-baseline" readonly disabled>{{ game.firstTeamUserResult }}</span>
+                            <span> : </span>
+                            <span type="text" class="align-baseline" readonly disabled>{{ game.secondTeamUserResult }}</span> )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
     {% endfor %}
 
+    {% for gameId, form in futureGamesForm %}
+    <div class="mb-sm-4">
+
+        {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-sm">
+                {{ form_label( form.firstTeamResult ) }}
+                </div>
+                <div class="col-sm-auto">
+                    <div class="row  justify-content-center align-items-center text-middle">
+                        {{ form_widget(form.firstTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4'} }) }}
+                        <div>   </div>
+                        {{ form_widget(form.secondTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4'} }) }}
+                    </div>
+                </div>
+                <div class="col-sm">
+                    {{ form_label(form.secondTeamResult) }}
+                </div>
+            <input type="hidden" name="user_betting[gameId]" value="{{ gameId }}">
+            </div>
+        </div>
+                <div><button type="submit" class="btn btn-primary mb-2" id="user_betting_saveBet" name="user_betting[saveBet]">Save</button></div>
+        {{ form_end(form) }}
+
+    </div>
+    {% endfor %}
+    </div>
 {% endblock %}
