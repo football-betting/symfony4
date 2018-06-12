@@ -21,7 +21,7 @@ If you want the rebuild the frontend files manually just run `yarn run encore de
 
 Docker-User
 Host: 127.0.0.1 (Docker-Host)
-Port: 3306
+Port: 3336
 User: docker
 Pass: docker
 

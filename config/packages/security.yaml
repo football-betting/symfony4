@@ -18,7 +18,8 @@ security:
             form_login:
                 check_path: login
                 login_path: login
+                default_target_path: index
 
             logout:
-                path: security_logout
-                target: homepage
+                path: logout
+                target: login
