@@ -3,7 +3,6 @@ namespace App\GameBetting\Business\Form;
 
 use App\GameCore\Persistence\Entity\Game;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +14,7 @@ class UserBettingType extends AbstractType
         /** @var Game $game */
         $game = $options['game'];
         $bet = $options['bet'];
+        $editable = $options['editable'];
 
         $builder
             ->setAction('/savebet')
@@ -22,16 +22,15 @@ class UserBettingType extends AbstractType
             ->add('firstTeamResult', IntegerType::class, array(
                 'required' => true,
                 'label' => $game ? $game->getTeamFirst()->getName() : null,
-                'data' => $bet->getFirstTeamResult()
+                'data' => $bet ? $bet->getFirstTeamResult() : null,
+                'disabled' => $editable
             ))
             ->add('secondTeamResult', IntegerType::class, array(
                 'required' => true,
                 'label' => $game ? $game->getTeamSecond()->getName() : null,
-                'data' => $bet->getSecondTeamResult()
+                'data' => $bet ? $bet->getSecondTeamResult() : null,
+                'disabled' => $editable
             ))
-            ->add('saveBet', SubmitType::class, [
-                'label' => 'Save'
-            ])
         ;
     }
 
@@ -39,7 +38,8 @@ class UserBettingType extends AbstractType
     {
         $resolver->setDefaults(array(
            'game' => null,
-           'bet' => null
+           'bet' => null,
+           'editable' => null
         ));
     }
 

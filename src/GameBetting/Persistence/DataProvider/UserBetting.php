@@ -28,7 +28,7 @@ class UserBetting
     /**
      * @param int $firstTeamResult
      */
-    public function setFirstTeamResult(int $firstTeamResult): void
+    public function setFirstTeamResult(?int $firstTeamResult): void
     {
         $this->firstTeamResult = $firstTeamResult;
     }
@@ -44,7 +44,7 @@ class UserBetting
     /**
      * @param int $secondTeamResult
      */
-    public function setSecondTeamResult(int $secondTeamResult): void
+    public function setSecondTeamResult(?int $secondTeamResult): void
     {
         $this->secondTeamResult = $secondTeamResult;
     }

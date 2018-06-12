@@ -24,7 +24,8 @@ class GameRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('game');
         $qb->where('game.date > :date')
-           ->setParameter('date', new \DateTime());
+           ->setParameter('date', new \DateTime())
+            ->orderBy('game.date', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
@@ -33,7 +34,8 @@ class GameRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('game');
         $qb->where('game.date <= :date')
-           ->setParameter('date', new \DateTime());
+            ->setParameter('date', new \DateTime())
+            ->orderBy('game.date', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
