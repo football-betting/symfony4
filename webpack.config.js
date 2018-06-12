@@ -14,7 +14,6 @@ Encore
     .addEntry('js/app', './assets/js/global.js')
     .addStyleEntry('css/app', './assets/scss/global.scss')
 
-    .addEntry('gamebetting', './assets/js/gamebetting/gamebetting,js')
     // uncomment if you use Sass/SCSS files
     .enableSassLoader(function(sassOptions) {}, {
         resolveUrlLoader: false
