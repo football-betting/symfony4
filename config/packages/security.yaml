@@ -18,7 +18,7 @@ security:
             form_login:
                 check_path: login
                 login_path: login
-                default_target_path: index
+                default_target_path: dashboard
 
             logout:
                 path: logout
