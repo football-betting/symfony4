@@ -29,22 +29,22 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="active ">
-                    <a href="./dashboard.html">
+                <li class="{{ app.request.get('_route') == 'dashboard' ? 'active' }}">
+                    <a href="{{ path('dashboard') }}">
                         <i class="nc-icon nc-bank"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ path('index') }}">
+                <li class="">
+                    <a href="{{ path('dashboard') }}" >
                         <i class="nc-icon nc-single-02"></i>
                         <p>Profile</p>
                     </a>
                 </li>
-                <li>
-                    <a href="./map.html">
-                        <i class="nc-icon nc-tile-56"></i>
-                        <p>Matches</p>
+                <li class="{{ app.request.get('_route') == 'game_bet_list' ? 'active' }}">
+                    <a href="{{ path('game_bet_list') }}">
+                        <i class="fa fa-futbol"></i>
+                        <p>Tippen</p>
                     </a>
                 </li>
             </ul>
@@ -264,25 +264,9 @@
         <footer class="footer footer-black  footer-white ">
             <div class="container-fluid">
                 <div class="row">
-                    <nav class="footer-nav">
-                        <ul>
-                            <li>
-                                <a href="#" target="_blank">NEXUS Netsoft GmbH</a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">Blog</a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">Licenses</a>
-                            </li>
-                        </ul>
-                    </nav>
                     <div class="credits ml-auto">
               <span class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> Tippspiel
+                 made with <i class="fa fa-heart heart"></i> by STZ & RAW
               </span>
                     </div>
                 </div>
