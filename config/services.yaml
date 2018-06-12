@@ -18,6 +18,10 @@ services:
         resource: '../src/User/Communication/Controller'
         tags: ['controller.service_arguments']
 
+    App\GameBetting\Communication\Controller\:
+        resource: '../src/GameBetting/Communication/Controller'
+        tags: ['controller.service_arguments']
+
     App\User\Persistence\Entity\:
         resource: '../src/User/Persistence/Entity'
         tags: ['doctrine.repository_service']
