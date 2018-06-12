@@ -17,21 +17,21 @@ final class Version20180612222822 extends AbstractMigration
 
         $this->addSql('CREATE TABLE IF NOT EXISTS `team` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin COLLATE=utf8_bin; '
         );
 
         $this->addSql('CREATE TABLE IF NOT EXISTS `app_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8_bin NOT NULL,
+  `password` varchar(64) COLLATE utf8_bin NOT NULL,
+  `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin COLLATE=utf8_bin; '
         );
 
 
@@ -48,7 +48,7 @@ final class Version20180612222822 extends AbstractMigration
   KEY `team_second_id` (`team_second_id`),
   CONSTRAINT `team_second_id` FOREIGN KEY (`team_second_id`) REFERENCES `team` (`id`),
   CONSTRAINT `team_first_id` FOREIGN KEY (`team_first_id`) REFERENCES `team` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin COLLATE=utf8_bin; '
         );
 
 
@@ -66,7 +66,7 @@ final class Version20180612222822 extends AbstractMigration
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`),
   CONSTRAINT `game_id` FOREIGN KEY (`game_id`) REFERENCES `game` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin COLLATE=utf8_bin; '
         );
 
 
@@ -75,11 +75,11 @@ final class Version20180612222822 extends AbstractMigration
   `user_id` int(11) DEFAULT NULL,
   `date` datetime NOT NULL,
   `type` int(11) NOT NULL,
-  `text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `ex_user_id` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin COLLATE=utf8_bin; '
         );
 
 
