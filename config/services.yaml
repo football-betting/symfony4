@@ -22,6 +22,10 @@ services:
         resource: '../src/GameBetting/Communication/Controller'
         tags: ['controller.service_arguments']
 
+    App\GameExtraBetting\Communication\Controller\:
+        resource: '../src/GameExtraBetting/Communication/Controller'
+        tags: ['controller.service_arguments']
+
     App\User\Persistence\Entity\:
         resource: '../src/User/Persistence/Entity'
         tags: ['doctrine.repository_service']
@@ -30,7 +34,7 @@ services:
         resource: '../src/GameCore/Persistence/Entity'
         tags: ['doctrine.repository_service']
 
-    App\GameBetting\Persistence\Entity\:
-        resource: '../src/GameBetting/Persistence/Entity'
+    App\GameExtraBetting\Persistence\Entity\:
+        resource: '../src/GameExtraBetting/Persistence/Entity'
         tags: ['doctrine.repository_service']
 
