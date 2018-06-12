@@ -1,5 +1,8 @@
 # Football Betting
 
+[![Build Status](https://travis-ci.com/football-betting/symfony4.svg?branch=master)](https://travis-ci.com/football-betting/symfony4)
+
+
 ## Setup
 
 1. set a new `127.0.0.1 symfony.dev.nxs` host-entry
