@@ -1,6 +1,9 @@
-controllers:
-   resource: ../../src/User/Communication/Controller
-   type: annotation
+controllers_user:
+    resource: ../../src/User/Communication/Controller
+    type: annotation
 controllers_gamebetting:
-   resource: ../../src/GameBetting/Communication/Controller
-   type: annotation
+    resource: ../../src/GameBetting/Communication/Controller
+    type: annotation
+controllers_gameextrabetting:
+    resource: ../../src/GameExtraBetting/Communication/Controller
+    type: annotation

@@ -65,7 +65,7 @@ class UserBetting
 
     public function getUser(): ?User
     {
-        return $this->teamSecond;
+        return $this->user;
     }
 
     public function setUser(User $user): self

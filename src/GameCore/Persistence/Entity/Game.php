@@ -45,7 +45,7 @@ class Game
     private $secondTeamResult;
 
     /**
-     * @var int
+     * @var integer
      * @ORM\Column(type="integer", nullable=true)
      */
     private $type;
