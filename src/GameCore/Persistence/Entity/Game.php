@@ -18,14 +18,14 @@ class Game
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\GameCore\Persistence\Entity\Team", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\GameCore\Persistence\Entity\Team", inversedBy="installations")
+     * @ORM\JoinColumn(name="team_first_id", referencedColumnName="id")
      */
     private $teamFirst;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\GameCore\Persistence\Entity\Team", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\GameCore\Persistence\Entity\Team", inversedBy="installations")
+     * @ORM\JoinColumn(name="team_second_id", referencedColumnName="id")
      */
     private $teamSecond;
 
@@ -43,6 +43,12 @@ class Game
      * @ORM\Column(type="integer", nullable=true)
      */
     private $secondTeamResult;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $type;
 
     public function getId()
     {
@@ -107,6 +113,22 @@ class Game
         $this->secondTeamResult = $secondTeamResult;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType(int $type): void
+    {
+        $this->type = $type;
     }
 }
 

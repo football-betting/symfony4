@@ -68,14 +68,14 @@
         "initial-setup": {
             "doctrine:database:create": "symfony-cmd",
             "doctrine:migrations:migrate": "symfony-cmd",
-            "frontend": "npm install"
+            "frontend": "yarn run encore dev"
         },
         "rebuild": {
-            "frontend": "npm install"
+            "frontend": "yarn run encore dev"
         },
         "post-install-cmd": [
             "@auto-scripts",
-            "@setup"
+            "@initial-setup"
         ],
         "post-update-cmd": [
             "@auto-scripts",
