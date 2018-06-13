@@ -1,8 +1,24 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header text-center">
-            Extra tipps!
+            Extra tipp!
         </div>
-
+        <div class="card-body">
+            <div class="">
+                <h5>Welche mannschaft wird weltmeister?</h5>
+            </div>
+            <div class="">
+                {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+                    {{ form_label( form.text ) }}
+                    {{ form_widget( form.text ) }}
+                <div>
+                    <button type="submit" class="btn btn-primary mb-2" id="user_betting_saveBet"
+                            name="user_extra_betting[saveExtraBet]">Save
+                    </button>
+                </div>
+                <input type="hidden" name="user_extra_betting[betId]" value="{{ betId }}">
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
 </div>
