@@ -1,6 +1,21 @@
 # Football Betting
 
 [![Build Status](https://travis-ci.com/football-betting/symfony4.svg?branch=master)](https://travis-ci.com/football-betting/symfony4)
+[![codecov](https://codecov.io/gh/football-betting/symfony4/branch/master/graph/badge.svg)](https://codecov.io/gh/football-betting/symfony4)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/football-betting/symfony4/badges/quality-score.png)](https://scrutinizer-ci.com/g/football-betting/symfony4)
+
+
+## Trello Board
+
+<https://trello.com/b/AoRTFOIN>
+
+
+## Requirements
+
+- Symfony 4.1
+- PHP 7.2
+- MySQL 5.5 or higher
+- Node.js 6.11.0 or higher
 
 
 ## Setup
