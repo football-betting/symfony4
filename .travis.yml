@@ -31,8 +31,8 @@ before_script:
   - travis_retry composer install --dev --no-interaction
 
 script:
-  - php bin/console doctrine:database:create --no-interaction
-  - php bin/console doctrine:migrations:migrate --no-interaction
+  - php bin/console doctrine:database:create --env=test --no-interaction
+  - php bin/console doctrine:migrations:migrate --env=test --no-interaction
   - php bin/phpunit --coverage-clover=clover.xml
 
 after_script:

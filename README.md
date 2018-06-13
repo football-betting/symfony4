@@ -16,7 +16,7 @@
 ## scss / js changes
 
 all files will be compiled after `composer install` has been executed.
-If you want the rebuild the frontend files manually just run `yarn run encore dev` in the project root
+If you want the rebuild the frontend files manually just run `./node_modules/.bin/encore dev` in the project root
 
 ## Credentials
 

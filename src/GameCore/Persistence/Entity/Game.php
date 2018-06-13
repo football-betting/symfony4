@@ -96,7 +96,7 @@ class Game
         return $this->firstTeamResult;
     }
 
-    public function setFirstTeamResult(int $firstTeamResult): self
+    public function setFirstTeamResult(?int $firstTeamResult): self
     {
         $this->firstTeamResult = $firstTeamResult;
 
@@ -108,7 +108,7 @@ class Game
         return $this->secondTeamResult;
     }
 
-    public function setSecondTeamResult(int $secondTeamResult): self
+    public function setSecondTeamResult(?int $secondTeamResult): self
     {
         $this->secondTeamResult = $secondTeamResult;
 

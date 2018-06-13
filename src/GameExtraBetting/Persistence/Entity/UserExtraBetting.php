@@ -7,7 +7,7 @@ use App\User\Persistence\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\GameExtraBetting\Persistence\Repository\UserBettingRepository")
+ * @ORM\Entity(repositoryClass="App\GameExtraBetting\Persistence\Repository\UserExtraBettingRepository")
  */
 class UserExtraBetting
 {

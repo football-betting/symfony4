@@ -21,6 +21,11 @@ class Team
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $img;
+
     public function getId()
     {
         return $this->id;
@@ -34,6 +39,17 @@ class Team
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): self
+    {
+        $this->img = $img;
 
         return $this;
     }
