@@ -2,6 +2,10 @@
 
 
 {% block body %}
+    {{ render(controller(
+        'App\\GameExtraBetting\\Communication\\Controller\\UserExtraBetting::index'
+    )) }}
+
     <div class="col-md-12">
     <div class="card">
         <div class="card-header text-center">

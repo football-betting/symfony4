@@ -49,14 +49,6 @@ class UserBetting extends Controller
         }
         /** @var Game[] $pastGames */
 
-//        string $firstTeamName,
-//        string $secondTeamName,
-//        \DateTime $gameDate,
-//        int $firstTeamResult,
-//        int $secondTeamResult,
-//        ?int $firstTeamUserResult,
-//        ?int $secondTeamUserResult
-
         foreach ($pastGames as $pastGame) {
 
             $firstTeamUserResult = null;

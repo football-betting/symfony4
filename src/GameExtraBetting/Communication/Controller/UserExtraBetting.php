@@ -18,10 +18,19 @@ class UserExtraBetting extends Controller
      */
     public function index()
     {
+        $user = $this->getUser();
+        
+        $teams = $this->getTeams();
+        $extraBet = $this->getUserExtraBet($user);
 
+        $form = $this->createForm(UserBettingType::class, null, ['teams' => $teams, 'extrabet' => $extraBet]);
 
         return $this->render(
             'gameextrabetting/user_extra_betting/index.html.twig'
         );
+    }
+
+    private function getTeams()
+    {
     }
 }
