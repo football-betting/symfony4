@@ -22,24 +22,25 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="{{ app.request.get('_route') == 'dashboard' ? 'active' }}">
-                    <a href="{{ path('dashboard') }}">
-                        <i class="nc-icon nc-bank"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ path('dashboard') }}">
-                        <i class="nc-icon nc-single-02"></i>
-                        <p>Profile</p>
-                    </a>
-                </li>
                 <li class="{{ app.request.get('_route') == 'game_bet_list' ? 'active' }}">
                     <a href="{{ path('game_bet_list') }}">
                         <i class="fa fa-futbol"></i>
                         <p>Tippen</p>
                     </a>
                 </li>
+                {#<li class="{{ app.request.get('_route') == 'dashboard' ? 'active' }}">#}
+                    {#<a href="{{ path('dashboard') }}">#}
+                        {#<i class="nc-icon nc-bank"></i>#}
+                        {#<p>Dashboard</p>#}
+                    {#</a>#}
+                {#</li>#}
+                {#<li class="">#}
+                    {#<a href="{{ path('dashboard') }}">#}
+                        {#<i class="nc-icon nc-single-02"></i>#}
+                        {#<p>Profile</p>#}
+                    {#</a>#}
+                {#</li>#}
+
             </ul>
         </div>
     </div>

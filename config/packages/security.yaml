@@ -18,7 +18,7 @@ security:
             form_login:
                 check_path: login
                 login_path: login
-                default_target_path: dashboard
+                default_target_path: game_bet_list
 
             logout:
                 path: logout
