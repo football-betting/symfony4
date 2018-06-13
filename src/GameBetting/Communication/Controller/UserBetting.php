@@ -9,6 +9,7 @@ use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -107,15 +108,17 @@ class UserBetting extends Controller
      */
     public function saveBet(Request $request)
     {
+
         $params = $request->get('user_betting');
         $userBetting = new UserBettingEntity();
         $form = $this->createForm(UserBettingType::class, $userBetting);
         $form->handleRequest($request);
         if (!$form->isSubmitted() && !$form->isValid()) {
-            return $this->redirectToRoute('game_bet_list', array(), 302);
+            return $this->json(array('status' => false));
         }
 
         $entityManager = $this->getDoctrine()->getManager();
+
         $userBetting = $entityManager->getRepository(UserBettingEntity::class)
                                      ->findByGameIdAndUserId($params['gameId'], $this->getUser()->getId())
         ;
@@ -133,7 +136,7 @@ class UserBetting extends Controller
         $entityManager->persist($userBetting);
         $entityManager->flush();
 
-        return $this->redirectToRoute('game_bet_list', array(), 302);
+        return $this->json(array('status' => true));
     }
 
     private function getFormList($games, $editable = false): array

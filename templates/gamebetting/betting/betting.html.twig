@@ -77,17 +77,17 @@
                 Zukünftige spiele!
             </div>
             {% for gameId, form in futureGamesForm %}
-                <div class="col-md-12">
+                <div class="col-md-12 betting-wrapper">
 
-                    {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+                    {{ form_start(form, {'attr': {'class': 'form-inline user-betting-form'}}) }}
                     <div class="col-sm">
                         {{ form_label( form.firstTeamResult ) }}
                     </div>
                     <div class="col-sm-auto">
                         <div class="row  justify-content-center align-items-center text-middle">
-                            {{ form_widget(form.firstTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4'} }) }}
+                            {{ form_widget(form.firstTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 first-team-result'} }) }}
                             <div></div>
-                            {{ form_widget(form.secondTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4'} }) }}
+                            {{ form_widget(form.secondTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 second-team-result'} }) }}
                         </div>
                     </div>
                     <div class="col-sm">
@@ -96,7 +96,7 @@
                     <input type="hidden" name="user_betting[gameId]" value="{{ gameId }}">
 
                     <div>
-                        <button type="submit" class="btn btn-primary mb-2" id="user_betting_saveBet"
+                        <button type="submit" class="btn btn-primary mb-2 save-bet-button" id="user_betting_saveBet"
                                 name="user_betting[saveBet]">Save
                         </button>
                     </div>
