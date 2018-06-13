@@ -7,6 +7,8 @@ import './paper/bootstrap-notify'
 import './paper/paper-dashboard'
 import './paper/demo'
 
+require('../img/wm2018.png');
+
 
 $(document).ready(function() {
     // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
