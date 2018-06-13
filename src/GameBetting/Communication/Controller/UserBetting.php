@@ -127,9 +127,12 @@ class UserBetting extends Controller
         $userBetting = $entityManager->getRepository(UserBettingEntity::class)
                                      ->findByGameIdAndUserId($params['gameId'], $this->getUser()->getId())
         ;
-
         if (!$userBetting instanceof UserBettingEntity) {
             $userBetting = new UserBettingEntity();
+            $game = $entityManager->getRepository(Game::class)
+                                  ->find($params['gameId']);
+            $userBetting->setGame($game);
+            $userBetting->setUser($this->getUser());
         }
 
         $userBetting->setFirstTeamResult($params['firstTeamResult']);
@@ -160,7 +163,7 @@ class UserBetting extends Controller
         /** @var Game $game */
         foreach ($games as $game) {
             $bet = new \App\GameBetting\Persistence\DataProvider\UserBetting();
-            if ($gameId2UserBets[$game->getId()]) {
+            if (isset($gameId2UserBets[$game->getId()])) {
                 $bet->setSecondTeamResult(
                     $gameId2UserBets[$game->getId()]->getSecondTeamResult()
                 );

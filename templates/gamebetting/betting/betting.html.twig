@@ -22,8 +22,14 @@
                                 <th>
                                     Manschaft 2
                                 </th>
-                                <th class="text-right">
+                                <th>
                                     Ergebnis
+                                </th>
+                                <th>
+                                    Tipp
+                                </th>
+                                <th class="text-right">
+                                    Punkte
                                 </th>
                             </tr>
                             </thead>
@@ -34,8 +40,18 @@
                                         {{ game.firstTeamName }}
                                     </td>
                                     <td>{{ game.secondTeamName }}</td>
+                                    <td>
+                                        {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                    </td>
+                                    <td>
+                                        {% if game.firstTeamUserResult and game.secondTeamUserResult %}
+                                            {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
                                     <td class="text-right">
-                                        {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}
+                                        lorem
                                     </td>
                                 </tr>
                             {% endfor %}
