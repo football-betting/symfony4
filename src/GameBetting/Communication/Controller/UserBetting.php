@@ -52,36 +52,12 @@ class UserBetting extends Controller
         );
     }
 
-
-    /**
-     * @Route("/gamebet/{gameId}", name="game_bet")
-     */
-    public function index($gameId)
-    {
-        $game = $this->getDoctrine()
-                     ->getRepository(Game::class)
-                     ->find($gameId)
-        ;
-
-        if (!$game) {
-            return $this->redirectToRoute('replace_with_some_route');
-        }
-
-        $form = $this->createForm(UserBettingType::class, null, ['game' => $game]);
-
-        return $this->render(
-            'gamebetting/betting/betting.html.twig',
-            array('form' => $form->createView())
-        );
-    }
-
     /**
      * @Route("/savebet", name="save_bet")
      * @Method({"POST"})
      */
     public function saveBet(Request $request)
     {
-
         $params = $request->get('user_betting');
         $userBetting = new UserBettingEntity();
         $form = $this->createForm(UserBettingType::class, $userBetting);
@@ -95,8 +71,7 @@ class UserBetting extends Controller
         if(!isset($params['secondTeamResult'])  || $params['secondTeamResult'] < 0) {
             return $this->json(['status' => false]);
         }
-
-
+        
         $entityManager = $this->getDoctrine()->getManager();
 
         $userBetting = $entityManager->getRepository(UserBettingEntity::class)
