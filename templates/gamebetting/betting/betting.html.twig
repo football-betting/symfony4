@@ -85,9 +85,9 @@
                     </div>
                     <div class="col-sm-auto">
                         <div class="row  justify-content-center align-items-center text-middle">
-                            {{ form_widget(form.firstTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 first-team-result'} }) }}
+                            {{ form_widget(form.firstTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 first-team-result', 'min' : 0} }) }}
                             <div></div>
-                            {{ form_widget(form.secondTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 second-team-result'} }) }}
+                            {{ form_widget(form.secondTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 second-team-result', 'min' : 0} }) }}
                         </div>
                     </div>
                     <div class="col-sm">
