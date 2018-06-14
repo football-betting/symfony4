@@ -34,7 +34,9 @@ $(document).on("click", ".save-bet-button", function (event) {
     let $_target = $(event.target);
     let bettingWrapperSelector = $('.betting-wrapper');
     let bettingFormSelector = $('.user-betting-form');
+    let submitSelector = $('.save-bet-button');
 
+    submitSelector.prop('disabled', true);
     let data = $_target.closest(bettingWrapperSelector).find(bettingFormSelector).serializeObject();
 
     $.ajax({
@@ -49,7 +51,42 @@ $(document).on("click", ".save-bet-button", function (event) {
                 showNotification("Fehler! 🙁", 'danger', 'nc-simple-remove')
 
             }
+        },
+        complete: function () {
+            submitSelector.prop('disabled', false);
         }
     });
 
 });
+
+$(document).on("click", ".extra-bet-submit", function (event) {
+    event.preventDefault();
+    let $_target = $(event.target);
+    let bettingWrapperSelector = $('.extra-bet-wrapper');
+    let bettingFormSelector = $('.extra-bet-form');
+    let submitSelector = $('.extra-bet-submit');
+
+    submitSelector.prop('disabled', true);
+
+    let data = $_target.closest(bettingWrapperSelector).find(bettingFormSelector).serializeObject();
+
+    $.ajax({
+        url: '/saveextrabet',
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+        success: function (data) {
+            if (data.status) {
+                showNotification("Tipp erfolgreich gespeichert!", 'success', 'nc-check-2')
+            } else {
+                showNotification("Fehler! 🙁", 'danger', 'nc-simple-remove')
+
+            }
+        },
+        complete: function () {
+            submitSelector.prop('disabled', false);
+        }
+    });
+
+});
+
