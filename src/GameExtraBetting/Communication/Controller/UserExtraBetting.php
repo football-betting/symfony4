@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserExtraBetting extends Controller
 {
-    const TIPP_DATE = '14.06.2018';
+    public const TIPP_DATE = '14.06.2018';
     /**
      * @Route("/gamebetextra/", name="game_bet_extra")
      */
