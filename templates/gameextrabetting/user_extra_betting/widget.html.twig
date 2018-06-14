@@ -1,23 +1,27 @@
-<div class="col-md-12">
+<div class="col-md-6">
     <div class="card">
         <div class="card-header text-center">
-            Extra tipp!
+            <h5>Welche mannschaft wird weltmeister?</h5>
         </div>
         <div class="card-body">
             <div class="">
-                <h5>Welche mannschaft wird weltmeister?</h5>
-            </div>
-            <div class="">
-                {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
-                    {{ form_label( form.text ) }}
-                    {{ form_widget( form.text ) }}
-                <div>
-                    <button type="submit" class="btn btn-primary mb-2" id="user_betting_saveBet"
-                            name="user_extra_betting[saveExtraBet]">Save
-                    </button>
-                </div>
-                <input type="hidden" name="user_extra_betting[betId]" value="{{ betId }}">
-                {{ form_end(form) }}
+                {% for betId, form in forms %}
+                    {{ form_start(form, {'attr': {'class': 'form-inline  justify-content-center'}}) }}
+                    <div class=" mr-2">
+                        {{ form_label( form.text ) }}
+                    </div>
+                    <div class=" mr-5">
+                        {{ form_widget( form.text ) }}
+                    </div>
+                    <div class=" mr-5">
+                        <button type="submit" class="btn btn-primary mb-2" id="user_betting_saveBet"
+                                name="user_extra_betting[saveExtraBet]">Save
+                        </button>
+                    </div>
+                    {{ form_row( form.type ) }}
+                    <input type="hidden" name="user_extra_betting[betId]" value="{{ betId }}">
+                    {{ form_end(form) }}
+                {% endfor %}
             </div>
         </div>
     </div>

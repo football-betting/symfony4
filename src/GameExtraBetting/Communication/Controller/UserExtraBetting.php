@@ -21,17 +21,25 @@ class UserExtraBetting extends Controller
         $user = $this->getUser();
         
         $teams = $this->getTeams();
-        $userExtraBet = $this->getUserExtraBet($user);
+        $bets = [];
+        /** @var \App\GameExtraBetting\Persistence\Entity\UserExtraBetting[] $userExtraBets */
+        $userExtraBets = $this->getUserExtraBet($user);
+        foreach ($userExtraBets as $userExtraBet) {
+            $bets[$userExtraBet->getType()] = $userExtraBet;
+        }
+
         $bet = new \App\GameExtraBetting\Persistence\Entity\UserExtraBetting();
-        $form = $this->createForm(UserExtraBettingType::class, $bet,
-                ['teams' => $teams, 'extrabet' => $userExtraBet]
+        $forms[1] = $this->createForm(UserExtraBettingType::class, $bet,
+                ['teams' => $teams, 'extrabet' => $bets[1] ?? null, 'label' => 'Tipp 1', 'type' => 1]
+                )->createView();
+        $forms[2] =  $this->createForm(UserExtraBettingType::class, $bet,
+                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2', 'type' => 2]
                 )->createView();
 
         return $this->render(
             'gameextrabetting/user_extra_betting/widget.html.twig',
             [
-                'form' => $form,
-                'betId' => $userExtraBet ? $userExtraBet->getId() : '',
+                'forms' => $forms,
             ]
         );
     }
@@ -58,12 +66,11 @@ class UserExtraBetting extends Controller
         if (!$userExtraBetting instanceof \App\GameExtraBetting\Persistence\Entity\UserExtraBetting) {
             $userExtraBetting = new \App\GameExtraBetting\Persistence\Entity\UserExtraBetting();
             $userExtraBetting->setUser($this->getUser());
+            $userExtraBetting->setType($params['type']);
         }
 
         $userExtraBetting->setDate(new \DateTime("now"));
         $userExtraBetting->setText($params['text']);
-        //TODO: This must be changed
-        $userExtraBetting->setType(1);
 
         $entityManager->persist($userExtraBetting);
         $entityManager->flush();
@@ -87,6 +94,6 @@ class UserExtraBetting extends Controller
     private function getUserExtraBet($user)
     {
         return $this->getDoctrine()->getRepository(\App\GameExtraBetting\Persistence\Entity\UserExtraBetting::class)
-                    ->findOneBy(['user' => $user->getId()]);
+                    ->findBy(['user' => $user->getId()]);
     }
 }
