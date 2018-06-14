@@ -145,19 +145,11 @@ class UserBetting extends Controller
             $userBetting->setUser($this->getUser());
         }
 
-        if($params['firstTeamResult'] < 0) {
-            $params['firstTeamResult'] = 0;
-        }
-
-        if($params['secondTeamResult'] < 0) {
-            $params['secondTeamResult'] = 0;
-        }
 
         $userBetting->setFirstTeamResult($params['firstTeamResult']);
         $userBetting->setSecondTeamResult($params['secondTeamResult']);
 
         if($userBetting->getGame()->getDate()->getTimestamp() < time() ) {
-            dump(__FUNCTION__ .' / '. __FILE__ .' / '. __LINE__);
             return $this->json(['status' => false]);
         }
 
