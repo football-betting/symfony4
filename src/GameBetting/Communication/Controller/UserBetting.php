@@ -121,7 +121,10 @@ class UserBetting extends Controller
         $userBetting = new UserBettingEntity();
         $form = $this->createForm(UserBettingType::class, $userBetting);
         $form->handleRequest($request);
-        if (!$form->isSubmitted() && !$form->isValid()) {
+        if ((!$form->isSubmitted() && !$form->isValid())
+            || empty($params['firstTeamResult'])
+            || empty($params['secondTeamResult'])
+        ) {
             return $this->json(['status' => false]);
         }
 
