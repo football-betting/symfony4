@@ -17,7 +17,7 @@ class UserExtraBettingType extends AbstractType
         $type = $options['type'];
 
         $builder
-            ->setAction('/saveextrabet/')
+            ->setAction('/saveextrabet')
             ->setMethod('POST')
             ->add('text', ChoiceType::class, array(
                 'label' => $label,

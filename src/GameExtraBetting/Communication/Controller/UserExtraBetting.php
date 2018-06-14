@@ -45,7 +45,7 @@ class UserExtraBetting extends Controller
     }
 
     /**
-     * @Route("/saveextrabet/", name="save_extra_bet")
+     * @Route("/saveextrabet", name="save_extra_bet")
      * @Method({"POST"})
      */
     public function saveExtraBet(Request $request)
@@ -56,7 +56,7 @@ class UserExtraBetting extends Controller
         $form = $this->createForm(UserExtraBettingType::class, $userExtraBetting);
         $form->handleRequest($request);
         if (!$form->isSubmitted() && !$form->isValid()) {
-            return $this->redirectToRoute('game_bet_list', array(), 302);
+            return $this->json(['status' => false]);
         }
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -75,7 +75,7 @@ class UserExtraBetting extends Controller
         $entityManager->persist($userExtraBetting);
         $entityManager->flush();
 
-        return $this->redirectToRoute('game_bet_list');
+        return $this->json(['status' => true]);
     }
 
     private function getTeams()
