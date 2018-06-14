@@ -7,7 +7,6 @@ namespace App\GameApi\Business\ApiFootballData\Import;
 use App\GameApi\Business\ApiFootballData\ClientInterface;
 use App\GameCore\Persistence\Entity\Game as GameEntity;
 use App\GameCore\Persistence\Entity\Team as TeamEntity;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
