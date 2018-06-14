@@ -114,7 +114,7 @@ class UserBetting extends Controller
         $form = $this->createForm(UserBettingType::class, $userBetting);
         $form->handleRequest($request);
         if (!$form->isSubmitted() && !$form->isValid()) {
-            return $this->json(array('status' => false));
+            return $this->json(['status' => false]);
         }
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -133,10 +133,14 @@ class UserBetting extends Controller
         $userBetting->setFirstTeamResult($params['firstTeamResult']);
         $userBetting->setSecondTeamResult($params['secondTeamResult']);
 
+        if($userBetting->getGame()->getDate()->getTimestamp() < time() ) {
+            return $this->json(['status' => false]);
+        }
+        
         $entityManager->persist($userBetting);
         $entityManager->flush();
 
-        return $this->json(array('status' => true));
+        return $this->json(['status' => true]);
     }
 
     private function getFormList($games, $editable = false): array
