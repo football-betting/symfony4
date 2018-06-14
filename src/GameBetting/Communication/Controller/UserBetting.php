@@ -4,29 +4,37 @@ namespace App\GameBetting\Communication\Controller;
 
 
 use App\GameBetting\Business\Form\UserBettingType;
+use App\GameBetting\Business\Games\UserFutureGamesInterface;
 use App\GameBetting\Persistence\DataProvider\GamePastBetting;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserBetting extends Controller
 {
     /**
+     * @var UserFutureGamesInterface
+     */
+    private $userFutureGames;
+
+    /**
+     * @param UserFutureGamesInterface $userFutureGames
+     */
+    public function __construct(UserFutureGamesInterface $userFutureGames)
+    {
+        $this->userFutureGames = $userFutureGames;
+    }
+
+
+    /**
      * @Route("/gamebet/", name="game_bet_list")
      */
     public function list()
     {
-
-
-        $futureGames = $this->getDoctrine()
-                            ->getRepository(Game::class)
-                            ->findFutureGames()
-        ;
-        $futureGamesFormBuilder = $this->getFormList($futureGames);
+        $futureGamesFormBuilder = $this->getFutureGamesFormBuilder();
 
 
         $pastGames = $this->getDoctrine()
@@ -114,7 +122,7 @@ class UserBetting extends Controller
         $form = $this->createForm(UserBettingType::class, $userBetting);
         $form->handleRequest($request);
         if (!$form->isSubmitted() && !$form->isValid()) {
-            return $this->json(array('status' => false));
+            return $this->json(['status' => false]);
         }
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -133,46 +141,30 @@ class UserBetting extends Controller
         $userBetting->setFirstTeamResult($params['firstTeamResult']);
         $userBetting->setSecondTeamResult($params['secondTeamResult']);
 
+        if($userBetting->getGame()->getDate()->getTimestamp() < time() ) {
+            return $this->json(['status' => false]);
+        }
+
         $entityManager->persist($userBetting);
         $entityManager->flush();
 
-        return $this->json(array('status' => true));
+        return $this->json(['status' => true]);
     }
 
-    private function getFormList($games, $editable = false): array
+    /**
+     * @return array
+     */
+    private function getFutureGamesFormBuilder(): array
     {
-        $user = $this->getUser();
-
-        $userBets = $this->getDoctrine()
-                         ->getRepository(UserBettingEntity::class)
-                         ->findUserBettingByUserId($user, $games)
-        ;
-
-        /** @var UserBettingEntity[] $gameId2UserBets */
-        $gameId2UserBets = [];
-        /** @var UserBettingEntity $userBet */
-        foreach ($userBets as $userBet) {
-            $gameId2UserBets[$userBet->getGame()->getId()] = $userBet;
-        }
+        $userFurureGames = $this->userFutureGames->get(
+            $this->getUser()
+        );
         $gamesFormBuilder = [];
-        /** @var Game $game */
-        foreach ($games as $game) {
-            $bet = new \App\GameBetting\Persistence\DataProvider\UserBetting();
-            if (isset($gameId2UserBets[$game->getId()])) {
-                $bet->setSecondTeamResult(
-                    $gameId2UserBets[$game->getId()]->getSecondTeamResult()
-                );
-                $bet->setFirstTeamResult(
-                    $gameId2UserBets[$game->getId()]->getFirstTeamResult()
-                );
-            }
-
-            $gamesFormBuilder[$game->getId()] = $this->createForm(
-                UserBettingType::class, null, ['game' => $game, 'bet' => $bet, 'editable' => $editable]
-            )->createView()
-            ;
+        foreach ($userFurureGames as $gameId => $futureGameInfo) {
+            $gamesFormBuilder[$gameId] = $this->createForm(
+                UserBettingType::class, null, $futureGameInfo
+            )->createView();
         }
-
         return $gamesFormBuilder;
     }
 }
