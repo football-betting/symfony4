@@ -7,7 +7,7 @@ namespace App\GameRating\Business\GamePoints;
 use App\GameRating\Business\GamePoints\Collection\CollectionInterface;
 use App\GameRating\Persistence\DataProvider\Result;
 
-class Points
+class Points implements PointsInterface
 {
     /**
      * @var CollectionInterface
