@@ -21,6 +21,7 @@ class UserExtraBetting extends Controller
         $user = $this->getUser();
         
         $teams = $this->getTeams();
+        $bets = [];
         /** @var \App\GameExtraBetting\Persistence\Entity\UserExtraBetting[] $userExtraBets */
         $userExtraBets = $this->getUserExtraBet($user);
         foreach ($userExtraBets as $userExtraBet) {
@@ -29,10 +30,10 @@ class UserExtraBetting extends Controller
 
         $bet = new \App\GameExtraBetting\Persistence\Entity\UserExtraBetting();
         $forms[1] = $this->createForm(UserExtraBettingType::class, $bet,
-                ['teams' => $teams, 'extrabet' => array_key_exists(1, $bets) ? $bets[1] : null , 'label' => 'Tipp 1', 'type' => 1]
+                ['teams' => $teams, 'extrabet' => $bets[1] ?? null, 'label' => 'Tipp 1', 'type' => 1]
                 )->createView();
         $forms[2] =  $this->createForm(UserExtraBettingType::class, $bet,
-                ['teams' => $teams, 'extrabet' => array_key_exists(2, $bets) ? $bets[2] : null, 'label' => 'Tipp 2', 'type' => 2]
+                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2', 'type' => 2]
                 )->createView();
 
         return $this->render(
