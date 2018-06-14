@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\GameBetting\Business\Games;
-
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

@@ -5,7 +5,7 @@ namespace App\GameBetting\Communication\Controller;
 
 use App\GameBetting\Business\Form\UserBettingType;
 use App\GameBetting\Business\Games\UserFutureGamesInterface;
-use App\GameBetting\Persistence\DataProvider\GamePastBetting;
+use App\GameBetting\Business\Games\UserPastGamesInterface;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -21,13 +21,19 @@ class UserBetting extends Controller
     private $userFutureGames;
 
     /**
-     * @param UserFutureGamesInterface $userFutureGames
+     * @var UserPastGamesInterface
      */
-    public function __construct(UserFutureGamesInterface $userFutureGames)
+    private $userPastGames;
+
+    /**
+     * @param UserFutureGamesInterface $userFutureGames
+     * @param UserPastGamesInterface $userPastGames
+     */
+    public function __construct(UserFutureGamesInterface $userFutureGames, UserPastGamesInterface $userPastGames)
     {
         $this->userFutureGames = $userFutureGames;
+        $this->userPastGames = $userPastGames;
     }
-
 
     /**
      * @Route("/gamebet/", name="game_bet_list")
@@ -35,48 +41,7 @@ class UserBetting extends Controller
     public function list()
     {
         $futureGamesFormBuilder = $this->getFutureGamesFormBuilder();
-
-
-        $pastGames = $this->getDoctrine()
-                          ->getRepository(Game::class)
-                          ->findPastGames()
-        ;
-
-        $user = $this->getUser();
-
-        $userBets = $this->getDoctrine()
-                         ->getRepository(UserBettingEntity::class)
-                         ->findUserBettingByUserId($user, $pastGames)
-        ;
-
-        $pastGamesForm = [];
-        /** @var UserBettingEntity[] $gameId2UserBets */
-        $gameId2UserBets = [];
-        /** @var UserBettingEntity $userBet */
-        foreach ($userBets as $userBet) {
-            $gameId2UserBets[$userBet->getGame()->getId()] = $userBet;
-        }
-        /** @var Game[] $pastGames */
-
-        foreach ($pastGames as $pastGame) {
-
-            $firstTeamUserResult = null;
-            $secondTeamUserResult = null;
-            if (isset($gameId2UserBets[$pastGame->getId()])) {
-                $firstTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getFirstTeamResult();
-                $secondTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getSecondTeamResult();
-            }
-
-            $pastGamesForm[] = new GamePastBetting(
-                $pastGame->getTeamFirst()->getName(),
-                $pastGame->getTeamSecond()->getName(),
-                $pastGame->getDate(),
-                (int)$pastGame->getFirstTeamResult(),
-                (int)$pastGame->getSecondTeamResult(),
-                $firstTeamUserResult,
-                $secondTeamUserResult
-            );
-        }
+        $pastGamesForm = $this->userPastGames->get($this->getUser());
 
         return $this->render(
             'gamebetting/betting/betting.html.twig',
@@ -87,36 +52,12 @@ class UserBetting extends Controller
         );
     }
 
-
-    /**
-     * @Route("/gamebet/{gameId}", name="game_bet")
-     */
-    public function index($gameId)
-    {
-        $game = $this->getDoctrine()
-                     ->getRepository(Game::class)
-                     ->find($gameId)
-        ;
-
-        if (!$game) {
-            return $this->redirectToRoute('replace_with_some_route');
-        }
-
-        $form = $this->createForm(UserBettingType::class, null, ['game' => $game]);
-
-        return $this->render(
-            'gamebetting/betting/betting.html.twig',
-            array('form' => $form->createView())
-        );
-    }
-
     /**
      * @Route("/savebet", name="save_bet")
      * @Method({"POST"})
      */
     public function saveBet(Request $request)
     {
-
         $params = $request->get('user_betting');
         $userBetting = new UserBettingEntity();
         $form = $this->createForm(UserBettingType::class, $userBetting);
@@ -130,8 +71,7 @@ class UserBetting extends Controller
         if(!isset($params['secondTeamResult'])  || $params['secondTeamResult'] < 0) {
             return $this->json(['status' => false]);
         }
-
-
+        
         $entityManager = $this->getDoctrine()->getManager();
 
         $userBetting = $entityManager->getRepository(UserBettingEntity::class)

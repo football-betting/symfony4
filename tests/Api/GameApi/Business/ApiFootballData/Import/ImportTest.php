@@ -70,8 +70,13 @@ class ImportTest extends KernelTestCase
 
         $gameRepo = $this->entityManager->getRepository(\App\GameCore\Persistence\Entity\Game::class);
 
+        $teamRepo = $this->entityManager->getRepository(\App\GameCore\Persistence\Entity\Team::class);
+        $polandTeamEntity = $teamRepo->findOneBy([
+            'name' => 'Poland'
+        ]);
+
         $polandGamesHome = $gameRepo->findBy([
-            'teamFirst' => 31
+            'teamFirst' => $polandTeamEntity
         ]);
 
         $this->assertCount(2, $polandGamesHome);
