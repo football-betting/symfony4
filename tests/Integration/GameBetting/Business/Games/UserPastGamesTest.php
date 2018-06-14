@@ -6,6 +6,7 @@ namespace App\Tests\Integration\GameBetting\Business\Games;
 use App\GameBetting\Business\Games\UserFutureGames;
 use App\GameBetting\Business\Games\UserPastGames;
 use App\GameCore\Persistence\Entity\Game;
+use App\GameRating\Business\GameRatingFacadeInterface;
 use App\Tests\Integration\Helper\Games;
 use App\Tests\Integration\Helper\User;
 use App\Tests\Integration\Helper\UserGames;
@@ -46,8 +47,14 @@ class UserPastGamesTest extends KernelTestCase
 
     public function testPastGame()
     {
+        $mockGameRatingFacade = $this->createMock(GameRatingFacadeInterface::class);
+
+        $mockGameRatingFacade->method('getPoints')
+            ->willReturn(1);
+
         $userPastGames = new UserPastGames(
-            $this->entityManager
+            $this->entityManager,
+            $mockGameRatingFacade
         );
 
         $futureTestGame = $this->createTestFutureGames();
@@ -85,8 +92,14 @@ class UserPastGamesTest extends KernelTestCase
 
     public function testPastGameWithUserBetting()
     {
+        $mockGameRatingFacade = $this->createMock(GameRatingFacadeInterface::class);
+
+        $mockGameRatingFacade->method('getPoints')
+                ->willReturn(55);
+
         $userPastGames = new UserPastGames(
-            $this->entityManager
+            $this->entityManager,
+            $mockGameRatingFacade
         );
 
         $futureTestUserGame = $this->createTestFutureGamesUserGames();
@@ -113,6 +126,7 @@ class UserPastGamesTest extends KernelTestCase
                 $foundPastGame = true;
                 self::assertSame(4, $pastGame->getFirstTeamUserResult());
                 self::assertSame(5, $pastGame->getSecondTeamUserResult());
+                self::assertSame(55, $pastGame->getScore());
             }
             if ($gameId === $pastTestGameSecond->getId()) {
                 $foundPastGameSecond = true;

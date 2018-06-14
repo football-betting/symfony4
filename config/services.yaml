@@ -26,6 +26,10 @@ services:
         resource: '../src/GameExtraBetting/Communication/Controller'
         tags: ['controller.service_arguments']
 
+    App\GameRating\Communication\Controller\:
+        resource: '../src/GameRating/Communication/Controller'
+        tags: ['controller.service_arguments']
+
     App\User\Persistence\Entity\:
         resource: '../src/User/Persistence/Entity'
         tags: ['doctrine.repository_service']
@@ -41,4 +45,11 @@ services:
     App\GameApi\Communication\Command\:
         resource: '../src/GameApi/Communication/Command'
         tags: ['console.command']
+
+    App\GameRating\Business\GamePoints\Points:
+        arguments:
+            - '@App\GameRating\Business\GamePoints\Collection\NoWin'
+            - '@App\GameRating\Business\GamePoints\Collection\WinExact'
+            - '@App\GameRating\Business\GamePoints\Collection\WinScoreRightDiff'
+            - '@App\GameRating\Business\GamePoints\Collection\WinTeam'
 

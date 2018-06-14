@@ -2,6 +2,8 @@
 
 namespace App\GameBetting\Business\Games;
 
+use App\GameRating\Business\GameRatingFacadeInterface;
+use App\GameRating\Persistence\DataProvider\Result;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
@@ -16,11 +18,18 @@ class UserPastGames implements UserPastGamesInterface
     private $entityManager;
 
     /**
-     * @param EntityManagerInterface $entityManager
+     * @var GameRatingFacadeInterface
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    private $gameRatingFacade;
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param GameRatingFacadeInterface $gameRatingFacade
+     */
+    public function __construct(EntityManagerInterface $entityManager, GameRatingFacadeInterface $gameRatingFacade)
     {
         $this->entityManager = $entityManager;
+        $this->gameRatingFacade = $gameRatingFacade;
     }
 
     /**
@@ -47,19 +56,28 @@ class UserPastGames implements UserPastGamesInterface
                 $secondTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getSecondTeamResult();
             }
 
-            $pastGamesForm[$pastGame->getId()] = new GamePastBetting(
-                $pastGame->getTeamFirst()->getName(),
-                $pastGame->getTeamSecond()->getName(),
-                $pastGame->getDate(),
+            $gameResult = new Result(
                 (int)$pastGame->getFirstTeamResult(),
                 (int)$pastGame->getSecondTeamResult(),
                 $firstTeamUserResult,
                 $secondTeamUserResult
             );
+
+            $pastGamesForm[$pastGame->getId()] = new GamePastBetting(
+                $pastGame->getTeamFirst()->getName(),
+                $pastGame->getTeamSecond()->getName(),
+                $pastGame->getDate(),
+                $gameResult->getFirstTeamResult(),
+                $gameResult->getSecondTeamResult(),
+                $gameResult->getFirstTeamUserResult(),
+                $gameResult->getSecondTeamUserResult(),
+                $this->gameRatingFacade->getPoints($gameResult)
+            );
         }
 
         return $pastGamesForm;
     }
+
 
     /**
      * @param UserInterface $user
