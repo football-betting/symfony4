@@ -45,8 +45,6 @@ class UserFutureGamesTest extends KernelTestCase
 
     public function testFutureGame()
     {
-        dump(new \DateTime());
-        var_dump(new \DateTime());
         $userFutureGames = new UserFutureGames(
             $this->entityManager
         );
