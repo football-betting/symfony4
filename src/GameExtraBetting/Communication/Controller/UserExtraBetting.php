@@ -32,9 +32,9 @@ class UserExtraBetting extends Controller
         $forms[1] = $this->createForm(UserExtraBettingType::class, $bet,
                 ['teams' => $teams, 'extrabet' => $bets[1] ?? null, 'label' => 'Tipp 1', 'type' => 1]
                 )->createView();
-        $forms[2] =  $this->createForm(UserExtraBettingType::class, $bet,
-                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2', 'type' => 2]
-                )->createView();
+//        $forms[2] =  $this->createForm(UserExtraBettingType::class, $bet,
+//                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2', 'type' => 2]
+//                )->createView();
 
         return $this->render(
             'gameextrabetting/user_extra_betting/widget.html.twig',
