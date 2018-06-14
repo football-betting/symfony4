@@ -7,11 +7,12 @@ use App\GameBetting\Business\Games\UserFutureGames;
 use App\GameCore\Persistence\Entity\Game;
 use App\Tests\Integration\Helper\Games;
 use App\Tests\Integration\Helper\User;
+use App\Tests\Integration\Helper\UserGames;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class UserFutureGamesTest extends KernelTestCase
 {
-    use Games, User;
+    use Games, User, UserGames;
 
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -34,6 +35,7 @@ class UserFutureGamesTest extends KernelTestCase
     {
         parent::tearDown();
 
+        $this->deleteTestUserGames();
         $this->deleteTestGames();
 
         $this->entityManager->close();
@@ -48,11 +50,17 @@ class UserFutureGamesTest extends KernelTestCase
         );
 
         $futureTestGame = $this->createTestFutureGames();
+        $futureTestGameSecond = $this->createTestFutureGamesSecond();
         $pastTestGame = $this->createTestPastGames();
+        $pastTestGameSecond = $this->createTestPastGamesSecond();
+
 
         $futureGames = $userFutureGames->get($this->getUser());
+
         $foundFutureGame = false;
+        $foundFutureGameSecond = false;
         $foundPastGame = false;
+        $foundPastGameSecond = false;
 
         foreach ($futureGames as $futureGame) {
             /** @var Game $game */
@@ -60,13 +68,67 @@ class UserFutureGamesTest extends KernelTestCase
             if ($game->getId() === $futureTestGame->getId()) {
                 $foundFutureGame = true;
             }
+            if ($game->getId() === $futureTestGameSecond->getId()) {
+                $foundFutureGameSecond = true;
+            }
             if ($game->getId() === $pastTestGame->getId()) {
                 $foundPastGame = true;
+            }
+            if ($game->getId() === $pastTestGameSecond->getId()) {
+                $foundPastGameSecond = true;
             }
         }
 
         self::assertTrue($foundFutureGame);
+        self::assertTrue($foundFutureGameSecond);
         self::assertFalse($foundPastGame);
+        self::assertFalse($foundPastGameSecond);
+    }
 
+
+    public function testFutureGameWithUserBet()
+    {
+        $userFutureGames = new UserFutureGames(
+            $this->entityManager
+        );
+
+        $futureTestUserGame = $this->createTestFutureGamesUserGames();
+        $futureTestGame = $futureTestUserGame->getGame();
+        $futureTestGameSecond = $this->createTestFutureGamesSecond();
+        $pastTestUserGame = $this->createTestPastGamesUserGames();
+        $pastTestGame = $pastTestUserGame->getGame();
+        $pastTestGameSecond = $this->createTestPastGamesSecond();
+
+
+        $futureGames = $userFutureGames->get($this->getUser());
+
+        $foundFutureGame = false;
+        $foundFutureGameSecond = false;
+        $foundPastGame = false;
+        $foundPastGameSecond = false;
+
+        foreach ($futureGames as $futureGame) {
+            /** @var Game $game */
+            $game = $futureGame['game'];
+            if ($game->getId() === $futureTestGame->getId()) {
+                $foundFutureGame = true;
+                self::assertSame(4, $futureGame['bet']->getFirstTeamResult());
+                self::assertSame(5, $futureGame['bet']->getSecondTeamResult());
+            }
+            if ($game->getId() === $futureTestGameSecond->getId()) {
+                $foundFutureGameSecond = true;
+            }
+            if ($game->getId() === $pastTestGame->getId()) {
+                $foundPastGame = true;
+            }
+            if ($game->getId() === $pastTestGameSecond->getId()) {
+                $foundPastGameSecond = true;
+            }
+        }
+
+        self::assertTrue($foundFutureGame);
+        self::assertTrue($foundFutureGameSecond);
+        self::assertFalse($foundPastGame);
+        self::assertFalse($foundPastGameSecond);
     }
 }

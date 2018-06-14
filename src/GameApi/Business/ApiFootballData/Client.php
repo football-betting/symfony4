@@ -16,10 +16,28 @@ class Client implements ClientInterface
      */
     private $client;
 
+    /**
+     * @var string
+     */
+    private $options = [];
+
+    /**
+     */
+    public function __construct()
+    {
+        if (null !== getenv('API_FOOTBALL_DATA')) {
+            $this->options = [
+                'headers' => [
+                    'X-Auth-Token' => getenv('API_FOOTBALL_DATA')
+                ]
+            ];
+        }
+    }
+
 
     public function getTeams()
     {
-        $res = $this->getClient()->request('GET', self::TEAMS);
+        $res = $this->getClient()->get(self::TEAMS, $this->options);
         return json_decode(
             (string)$res->getBody()->getContents(),
             true
@@ -28,7 +46,7 @@ class Client implements ClientInterface
 
     public function getGames()
     {
-        $res = $this->getClient()->request('GET', self::GAMES);
+        $res = $this->getClient()->get(self::GAMES, $this->options);
         return json_decode(
             (string)$res->getBody()->getContents(),
             true
