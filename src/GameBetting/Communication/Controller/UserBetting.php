@@ -6,7 +6,6 @@ namespace App\GameBetting\Communication\Controller;
 use App\GameBetting\Business\Form\UserBettingType;
 use App\GameBetting\Business\Games\UserFutureGamesInterface;
 use App\GameBetting\Business\Games\UserPastGamesInterface;
-use App\GameBetting\Persistence\DataProvider\GamePastBetting;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
