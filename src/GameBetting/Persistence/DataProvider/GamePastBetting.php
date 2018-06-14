@@ -42,14 +42,19 @@ class GamePastBetting
     private $secondTeamUserResult;
 
     /**
-     * GamePastBetting constructor.
+     * @var int
+     */
+    private $score;
+
+    /**
      * @param string $firstTeamName
      * @param string $secondTeamName
      * @param \DateTimeInterface $gameDate
-     * @param int $firstTeamResult
-     * @param int $secondTeamResult
+     * @param int|null $firstTeamResult
+     * @param int|null $secondTeamResult
      * @param int|null $firstTeamUserResult
      * @param int|null $secondTeamUserResult
+     * @param int $score
      */
     public function __construct(
         string $firstTeamName,
@@ -58,8 +63,10 @@ class GamePastBetting
         ?int $firstTeamResult,
         ?int $secondTeamResult,
         ?int $firstTeamUserResult,
-        ?int $secondTeamUserResult
-    ) {
+        ?int $secondTeamUserResult,
+        int $score
+    )
+    {
         $this->firstTeamName = $firstTeamName;
         $this->secondTeamName = $secondTeamName;
         $this->gameDate = $gameDate;
@@ -67,6 +74,7 @@ class GamePastBetting
         $this->secondTeamResult = $secondTeamResult;
         $this->firstTeamUserResult = $firstTeamUserResult;
         $this->secondTeamUserResult = $secondTeamUserResult;
+        $this->score = $score;
     }
 
     /**
@@ -125,6 +133,11 @@ class GamePastBetting
         return $this->secondTeamUserResult;
     }
 
-
-
+    /**
+     * @return int
+     */
+    public function getScore(): int
+    {
+        return $this->score;
+    }
 }
