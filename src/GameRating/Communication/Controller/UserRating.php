@@ -6,5 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserRating extends Controller
 {
+    public function tabelle()
+    {
 
+    }
 }

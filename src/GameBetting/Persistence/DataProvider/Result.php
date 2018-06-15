@@ -1,8 +1,7 @@
 <?php
 
 
-namespace App\GameRating\Persistence\DataProvider;
-
+namespace App\GameBetting\Persistence\DataProvider;
 
 class Result
 {
