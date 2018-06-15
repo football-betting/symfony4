@@ -7,67 +7,67 @@
     )) }}
 
     <div class="col-md-12">
-    <div class="card">
-        <div class="card-header text-center">
-           <h5>Abgegeben tipps!</h5>
-        </div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h5>Abgegeben tipps!</h5>
+            </div>
 
-        <div class="card-body">
+            <div class="card-body">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="">
-                            <tr>
-                                <th>
-                                    Team 1
-                                </th>
-                                <th>
-                                    Team 2
-                                </th>
-                                <th>
-                                    Ergebnis
-                                </th>
-                                <th>
-                                    Tipp
-                                </th>
-                                <th class="text-right">
-                                    Punkte
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for game in pastGamesForm %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="">
                                 <tr>
-                                    <td>
-                                        {{ game.firstTeamName }}
-                                    </td>
-                                    <td>{{ game.secondTeamName }}</td>
-                                    <td>
-                                        {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
-                                    </td>
-                                    <td>
-                                        {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
-                                            -
-                                        {% else %}
-                                            {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}
-                                        {% endif %}
-                                    </td>
-                                    <td class="text-right">
-                                        {{ game.score }}
-                                    </td>
+                                    <th>
+                                        Team 1
+                                    </th>
+                                    <th>
+                                        Team 2
+                                    </th>
+                                    <th>
+                                        Ergebnis
+                                    </th>
+                                    <th>
+                                        Tipp
+                                    </th>
+                                    <th class="text-right">
+                                        Punkte
+                                    </th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for game in pastGamesForm %}
+                                    <tr>
+                                        <td>
+                                            {{ game.firstTeamName }}
+                                        </td>
+                                        <td>{{ game.secondTeamName }}</td>
+                                        <td>
+                                            {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                        </td>
+                                        <td>
+                                            {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
+                                                -
+                                            {% else %}
+                                                {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-right">
+                                            {{ game.score }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
     </div>
 
     <div class="col-md-12">

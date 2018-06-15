@@ -7,8 +7,7 @@ use App\GameRating\Persistence\DataProvider\Result;
 interface GameRatingFacadeInterface
 {
     /**
-     * @param Result $result
-     * @return int
+     * @return \App\GameRating\Persistence\DataProvider\UserScoreWithPosition[]|array
      */
-    public function getPoints(Result $result);
+    public function getUserScoreWithPosition(): array;
 }

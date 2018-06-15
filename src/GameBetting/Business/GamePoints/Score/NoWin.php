@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
 
-namespace App\GameRating\Business\GamePoints\Collection;
+namespace App\GameBetting\Business\GamePoints\Score;
 
 
-use App\GameRating\Business\GamePoints\Config;
-use App\GameRating\Persistence\DataProvider\Result;
+use App\GameBetting\Business\GamePoints\Config;
+use App\GameBetting\Persistence\DataProvider\Result;
 
-class NoWin implements CollectionInterface
+class NoWin implements ScoreInterface
 {
     /**
      * @param Result $result

@@ -3,10 +3,8 @@
 
 namespace App\Tests\Integration\GameBetting\Business\Games;
 
-use App\GameBetting\Business\Games\UserFutureGames;
+use App\GameBetting\Business\GamePoints\PointsInterface;
 use App\GameBetting\Business\Games\UserPastGames;
-use App\GameCore\Persistence\Entity\Game;
-use App\GameRating\Business\GameRatingFacadeInterface;
 use App\Tests\Integration\Helper\Games;
 use App\Tests\Integration\Helper\User;
 use App\Tests\Integration\Helper\UserGames;
@@ -35,10 +33,10 @@ class UserPastGamesTest extends KernelTestCase
 
     protected function tearDown()
     {
-        parent::tearDown();
-
         $this->deleteTestUserGames();
         $this->deleteTestGames();
+
+        parent::tearDown();
 
         $this->entityManager->close();
         $this->entityManager = null;
@@ -47,9 +45,9 @@ class UserPastGamesTest extends KernelTestCase
 
     public function testPastGame()
     {
-        $mockGameRatingFacade = $this->createMock(GameRatingFacadeInterface::class);
+        $mockGameRatingFacade = $this->createMock(PointsInterface::class);
 
-        $mockGameRatingFacade->method('getPoints')
+        $mockGameRatingFacade->method('get')
             ->willReturn(1);
 
         $userPastGames = new UserPastGames(
@@ -92,9 +90,9 @@ class UserPastGamesTest extends KernelTestCase
 
     public function testPastGameWithUserBetting()
     {
-        $mockGameRatingFacade = $this->createMock(GameRatingFacadeInterface::class);
+        $mockGameRatingFacade = $this->createMock(PointsInterface::class);
 
-        $mockGameRatingFacade->method('getPoints')
+        $mockGameRatingFacade->method('get')
                 ->willReturn(55);
 
         $userPastGames = new UserPastGames(
