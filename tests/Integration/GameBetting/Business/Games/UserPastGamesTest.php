@@ -33,10 +33,10 @@ class UserPastGamesTest extends KernelTestCase
 
     protected function tearDown()
     {
-        parent::tearDown();
-
         $this->deleteTestUserGames();
         $this->deleteTestGames();
+
+        parent::tearDown();
 
         $this->entityManager->close();
         $this->entityManager = null;
