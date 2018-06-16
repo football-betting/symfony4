@@ -29,32 +29,22 @@ $.fn.serializeObject = function () {
     return o;
 };
 
-$(document).on("change", ".firstGame-fake-input", function (event) {
-    let $_bettingWrapperSelector = $('.betting-wrapper-dashboard');
-    let $_firstGameHiddenSelector = $('.firstGame-hidden-input');
-    let $_target = $(event.target);
-
-    $_target.closest($_bettingWrapperSelector).find($_firstGameHiddenSelector).val($(this).val());
-});
-
-$(document).on("change", ".secondGame-fake-input", function (event) {
-    let $_bettingWrapperSelector = $('.betting-wrapper-dashboard');
-    let $_secondGameHiddenSelector = $('.secondGame-hidden-input');
-    let $_target = $(event.target);
-
-    $_target.closest($_bettingWrapperSelector).find($_secondGameHiddenSelector).val($(this).val());
-});
-
-
 $(document).on("click", ".save-bet-button-dashboard", function (event) {
     event.preventDefault();
     let $_target = $(event.target);
-    let bettingWrapperSelector = $('.betting-wrapper-dashboard');
+    let $_bettingWrapperSelector = $('.betting-wrapper-dashboard');
     let bettingFormSelector = $('.user-betting-form-dashboard');
     let submitSelector = $('.save-bet-button-dashboard');
+    let $_firstGameHiddenSelector = $('.firstGame-hidden-input');
+    let $_firstGameFakeSelector = $('.firstGame-fake-input');
+    let $_secondGameFakeSelector = $('.secondGame-fake-input');
+    let $_secondGameHiddenSelector = $('.secondGame-hidden-input');
+
+    $_target.closest($_bettingWrapperSelector).find($_firstGameHiddenSelector).val($_firstGameFakeSelector.val());
+    $_target.closest($_bettingWrapperSelector).find($_secondGameHiddenSelector).val($_secondGameFakeSelector.val());
 
     submitSelector.prop('disabled', true);
-    let data = $_target.closest(bettingWrapperSelector).find(bettingFormSelector).serializeObject();
+    let data = $_target.closest($_bettingWrapperSelector).find(bettingFormSelector).serializeObject();
 
     $.ajax({
         url: '/savebet',
