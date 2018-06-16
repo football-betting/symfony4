@@ -49,7 +49,7 @@ class UserBetting extends Controller
             'gamebetting/betting/betting.html.twig',
             [
                 'futureGamesForm' => $futureGamesFormBuilder,
-                'pastGamesForm'   => $pastGamesForm
+                'pastGamesForm'   => \array_slice($pastGamesForm, -10)
             ]
         );
     }
@@ -70,6 +70,22 @@ class UserBetting extends Controller
         );
     }
 
+
+    /**
+     * @Route("/all-past-games", name="all_past_games")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function allPastGames()
+    {
+        $pastGamesForm = $this->userPastGames->get($this->getUser());
+
+        return $this->render(
+            'gamebetting/betting/past_games.html.twig',
+            [
+                'pastGamesForm'   => $pastGamesForm
+            ]
+        );
+    }
 
     public function getNextGames(int $numberOfGames)
     {
