@@ -36,12 +36,14 @@ $(document).on("click", ".save-bet-button-dashboard", function (event) {
     let bettingFormSelector = $('.user-betting-form-dashboard');
     let submitSelector = $('.save-bet-button-dashboard');
     let $_firstGameHiddenSelector = $('.firstGame-hidden-input');
+    let $_secondGameHiddenSelector = $('.secondGame-hidden-input');
     let $_firstGameFakeSelector = $('.firstGame-fake-input');
     let $_secondGameFakeSelector = $('.secondGame-fake-input');
-    let $_secondGameHiddenSelector = $('.secondGame-hidden-input');
+    let closestFirstFakeSelector = $_target.closest($_bettingWrapperSelector).find($_firstGameFakeSelector);
+    let closestSecondFakeSelector = $_target.closest($_bettingWrapperSelector).find($_secondGameFakeSelector);
 
-    $_target.closest($_bettingWrapperSelector).find($_firstGameHiddenSelector).val($_firstGameFakeSelector.val());
-    $_target.closest($_bettingWrapperSelector).find($_secondGameHiddenSelector).val($_secondGameFakeSelector.val());
+    $_target.closest($_bettingWrapperSelector).find($_firstGameHiddenSelector).val(closestFirstFakeSelector.val());
+    $_target.closest($_bettingWrapperSelector).find($_secondGameHiddenSelector).val(closestSecondFakeSelector.val());
 
     submitSelector.prop('disabled', true);
     let data = $_target.closest($_bettingWrapperSelector).find(bettingFormSelector).serializeObject();
