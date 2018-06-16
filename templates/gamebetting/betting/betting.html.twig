@@ -2,110 +2,136 @@
 
 
 {% block body %}
-    {{ render(controller(
-        'App\\GameExtraBetting\\Communication\\Controller\\UserExtraBetting::index'
-    )) }}
+    <div class="row">
+        <div class="col-md-6">
 
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header text-center">
-                <h5>Abgegeben tipps!</h5>
-            </div>
-
-            <div class="card-body">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="">
-                                <tr>
-                                    <th>
-                                        Team 1
-                                    </th>
-                                    <th>
-                                        Team 2
-                                    </th>
-                                    <th>
-                                        Ergebnis
-                                    </th>
-                                    <th>
-                                        Tipp
-                                    </th>
-                                    <th class="text-right">
-                                        Punkte
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for game in pastGamesForm %}
+            {{ render(controller(
+                'App\\GameExtraBetting\\Communication\\Controller\\UserExtraBetting::index'
+            )) }}
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5>Vergangene Spiele</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="">
                                     <tr>
-                                        <td>
-                                            {{ game.firstTeamName }}
-                                        </td>
-                                        <td>{{ game.secondTeamName }}</td>
-                                        <td>
-                                            {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
-                                        </td>
-                                        <td>
-                                            {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
-                                                -
-                                            {% else %}
-                                                {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}
-                                            {% endif %}
-                                        </td>
-                                        <td class="text-right">
-                                            {{ game.score }}
-                                        </td>
+                                        <th>
+                                            Team 1
+                                        </th>
+                                        <th>
+                                            Team 2
+                                        </th>
+                                        <th>
+                                            Ergebnis
+                                        </th>
+                                        <th>
+                                            Tipp
+                                        </th>
+                                        <th class="text-right">
+                                            Punkte
+                                        </th>
                                     </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {% for game in pastGamesForm %}
+                                        <tr>
+                                            <td>
+                                                {{ game.firstTeamName }}
+                                            </td>
+                                            <td>{{ game.secondTeamName }}</td>
+                                            <td>
+                                                {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                            </td>
+                                            <td>
+                                                {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
+                                                    -
+                                                {% else %}
+                                                    {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-right">
+                                                lorem
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-    </div>
+        <div class="col-md-6">
+            {{ render(controller(
+                'App\\GameBetting\\Communication\\Controller\\UserBetting::getNextGames', {'numberOfGames': 3}
+            )) }}
+            {#<div class="card">#}
+            {#<div class="card-header text-center">#}
+            {#<h5>Abgegeben tipps!</h5>#}
+            {#</div>#}
 
-    <div class="col-md-12">
-        <div class="card">
+            {#<div class="card-body">#}
 
-            <div class="card-header text-center">
-                <h5>Zukünftige spiele!</h5>
-            </div>
-            {% for gameId, form in futureGamesForm %}
-                <div class="col-md-12 betting-wrapper">
+            {#<div class="row">#}
+            {#<div class="col-md-12">#}
+            {#<div class="table-responsive">#}
+            {#<table class="table">#}
+            {#<thead class="">#}
+            {#<tr>#}
+            {#<th>#}
+            {#Team 1#}
+            {#</th>#}
+            {#<th>#}
+            {#Team 2#}
+            {#</th>#}
+            {#<th>#}
+            {#Ergebnis#}
+            {#</th>#}
+            {#<th>#}
+            {#Tipp#}
+            {#</th>#}
+            {#<th class="text-right">#}
+            {#Punkte#}
+            {#</th>#}
+            {#</tr>#}
+            {#</thead>#}
+            {#<tbody>#}
+            {#{% for game in pastGamesForm %}#}
+            {#<tr>#}
+            {#<td>#}
+            {#{{ game.firstTeamName }}#}
+            {#</td>#}
+            {#<td>{{ game.secondTeamName }}</td>#}
+            {#<td>#}
+            {#{{ game.firstTeamResult }} : {{ game.secondTeamResult }}#}
+            {#</td>#}
+            {#<td>#}
+            {#{% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}#}
+            {#-#}
+            {#{% else %}#}
+            {#{{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}#}
+            {#{% endif %}#}
+            {#</td>#}
+            {#<td class="text-right">#}
+            {#{{ game.score }}#}
+            {#</td>#}
+            {#</tr>#}
+            {#{% endfor %}#}
+            {#</tbody>#}
+            {#</table>#}
+            {#</div>#}
+            {#</div>#}
+            {#</div>#}
 
-                    {{ form_start(form, {'attr': {'class': 'form-inline user-betting-form'}}) }}
-                    <div class="col-sm">
-                        {{ form_label( form.firstTeamResult ) }}
-                    </div>
-                    <div class="col-sm-auto">
-                        <div class="row  justify-content-center align-items-center text-middle">
-                            {{ form_widget(form.firstTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 first-team-result', 'min' : 0} }) }}
-                            <div></div>
-                            {{ form_widget(form.secondTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 second-team-result', 'min' : 0} }) }}
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        {{ form_label(form.secondTeamResult) }}
-                    </div>
-                    <input type="hidden" name="user_betting[gameId]" value="{{ gameId }}">
+            {#</div>#}
 
-                    <div>
-                        <button type="submit" class="btn btn-primary mb-2 save-bet-button" id="user_betting_saveBet"
-                                name="user_betting[saveBet]">Save
-                        </button>
-                    </div>
-                    {{ form_end(form) }}
-
-                </div>
-            {% endfor %}
+            {#</div>#}
         </div>
-
     </div>
 
 {% endblock %}

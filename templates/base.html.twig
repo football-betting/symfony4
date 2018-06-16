@@ -31,10 +31,15 @@
                 <li class="{{ app.request.get('_route') == 'game_rating_users' ? 'active' }}">
                     <a href="{{ path('game_rating_users') }}">
                         <i class="fa fa-chart-bar"></i>
-                        <p>Tabelle</p>
+                        <p>Rangliste</p>
                     </a>
                 </li>
-
+                <li class="{{ app.request.get('_route') == 'all_upcomming_games' ? 'active' }}">
+                    <a href="{{ path('all_upcomming_games') }}">
+                        <i class="nc-icon nc-bullet-list-67"></i>
+                        <p>Alle Matches</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

@@ -1,0 +1,116 @@
+<div class="card card-timeline card-plain">
+    <div class="card-body">
+
+        <ul class="timeline timeline-simple">
+            {% for singleGame in gameBetResult %}
+                <li class="timeline-inverted">
+                    <div class="timeline-badge danger">
+                        <i class="football-icon fa fa-futbol"></i>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <span class="badge badge-pill badge-danger">{{ singleGame.game.date|date("d.m.Y G:i") }}</span>
+                        </div>
+                        <div class="timeline-body betting-wrapper-dashboard">
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <img src="{{ singleGame.game.teamFirst.img }}" alt="" class=""
+                                         style="width: 200px; height: 100px">
+                                    <h6 class="text-center">
+                                        {{ singleGame.game.teamFirst.name }}
+                                    </h6>
+                                    <hr>
+                                    <input type="number" class="text-center firstGame-fake-input"
+                                            {% if singleGame.bet.firstTeamResult matches '/^\\d+$/' %}
+                                                value="{{ singleGame.bet.firstTeamResult }}"
+                                            {% else %}
+                                                placeholder="{{ singleGame.game.teamFirst.name }}"
+                                            {% endif %}
+                                    >
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="{{ singleGame.game.teamSecond.img }}" alt="" class=""
+                                         style="width: 200px; height: 100px">
+                                    <h6 class="text-center">
+                                        {{ singleGame.game.teamSecond.name }}
+                                    </h6>
+                                    <hr>
+                                    <input type="number" class="text-center secondGame-fake-input"
+                                            {% if singleGame.bet.secondTeamResult matches '/^\\d+$/' %}
+                                                value="{{ singleGame.bet.secondTeamResult }}"
+                                            {% else %}
+                                                placeholder="{{ singleGame.game.teamSecond.name }}"
+                                            {% endif %}
+                                    >
+                                </div>
+                                <form name="user_betting" method="post" action="/savebet" class="form-inline user-betting-form-dashboard">
+                                    <input type="hidden" name="user_betting[firstTeamResult]" class="firstGame-hidden-input">
+                                    <input type="hidden" name="user_betting[secondTeamResult]" class="secondGame-hidden-input">
+                                    <input type="hidden" name="user_betting[gameId]" value="{{ singleGame.game.id }}">
+                                </form>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary col-md-12 save-bet-button-dashboard"
+                                            id="user_betting_saveBet" name="user_betting[saveExtraBet]">Save
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            {#<li class="timeline-inverted">#}
+            {#<div class="timeline-badge success">#}
+            {#<i class="football-icon fa fa-futbol"></i>#}
+            {#</div>#}
+            {#<div class="timeline-panel">#}
+            {#<div class="timeline-heading">#}
+            {#<span class="badge badge-pill badge-success">21.06.2018 15:00</span>#}
+            {#</div>#}
+            {#<div class="timeline-body">#}
+            {#<p>Thank God for the support of my wife and real friends. I also wanted to point out#}
+            {#that it’s the first album to go number 1 off of streaming!!! I love you Ellen and#}
+            {#also my number one design rule of anything I do from shoes to music to homes is#}
+            {#that Kim has to like it....</p>#}
+            {#</div>#}
+            {#</div>#}
+            {#</li>#}
+            {#<li class="timeline-inverted">#}
+            {#<div class="timeline-badge info">#}
+            {#<i class="football-icon fa fa-futbol"></i>#}
+            {#</div>#}
+            {#<div class="timeline-panel">#}
+            {#<div class="timeline-heading">#}
+            {#<span class="badge badge-pill badge-info">21.06.2018 15:00</span>#}
+            {#</div>#}
+            {#<div class="timeline-body">#}
+            {#<p>Called I Miss the Old Kanye That’s all it was Kanye And I love you like Kanye#}
+            {#loves Kanye Famous viewing @ Figueroa and 12th in downtown LA 11:10PM</p>#}
+            {#<p>What if Kanye made a song about Kanye Royère doesn't make a Polar bear bed but#}
+            {#the Polar bear couch is my favorite piece of furniture we own It wasn’t any#}
+            {#Kanyes Set on his goals Kanye</p>#}
+            {#<hr>#}
+            {#</div>#}
+            {#<div class="timeline-footer">#}
+            {#<div class="dropdown">#}
+            {#<button type="button" class="btn btn-round btn-info dropdown-toggle"#}
+            {#data-toggle="dropdown">#}
+            {#<i class="nc-icon nc-settings-gear-65"></i>#}
+            {#</button>#}
+            {#<div class="dropdown-menu">#}
+            {#<a class="dropdown-item" href="#">Action</a>#}
+            {#<a class="dropdown-item" href="#">Another action</a>#}
+            {#<a class="dropdown-item" href="#">Something else here</a>#}
+            {#</div>#}
+            {#</div>#}
+            {#</div>#}
+            {#</div>#}
+            {#</li>#}
+        </ul>
+
+
+    </div>
+</div>
