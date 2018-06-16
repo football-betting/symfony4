@@ -2,8 +2,8 @@
 
 namespace App\GameBetting\Business\Games;
 
-use App\GameRating\Business\GameRatingFacadeInterface;
-use App\GameRating\Persistence\DataProvider\Result;
+use App\GameBetting\Business\GamePoints\PointsInterface;
+use App\GameBetting\Persistence\DataProvider\Result;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
@@ -18,18 +18,18 @@ class UserPastGames implements UserPastGamesInterface
     private $entityManager;
 
     /**
-     * @var GameRatingFacadeInterface
+     * @var PointsInterface
      */
-    private $gameRatingFacade;
+    private $points;
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param GameRatingFacadeInterface $gameRatingFacade
+     * @param PointsInterface $points
      */
-    public function __construct(EntityManagerInterface $entityManager, GameRatingFacadeInterface $gameRatingFacade)
+    public function __construct(EntityManagerInterface $entityManager, PointsInterface $points)
     {
         $this->entityManager = $entityManager;
-        $this->gameRatingFacade = $gameRatingFacade;
+        $this->points = $points;
     }
 
     /**
@@ -71,7 +71,7 @@ class UserPastGames implements UserPastGamesInterface
                 $gameResult->getSecondTeamResult(),
                 $gameResult->getFirstTeamUserResult(),
                 $gameResult->getSecondTeamUserResult(),
-                $this->gameRatingFacade->getPoints($gameResult)
+                $this->points->get($gameResult)
             );
         }
 

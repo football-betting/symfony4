@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\GameRating\Business\GamePoints;
+namespace App\GameBetting\Business\GamePoints;
 
 
 interface Config

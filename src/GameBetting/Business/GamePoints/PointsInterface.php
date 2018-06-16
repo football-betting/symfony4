@@ -1,8 +1,8 @@
 <?php
 
-namespace App\GameRating\Business\GamePoints;
+namespace App\GameBetting\Business\GamePoints;
 
-use App\GameRating\Persistence\DataProvider\Result;
+use App\GameBetting\Persistence\DataProvider\Result;
 
 interface PointsInterface
 {

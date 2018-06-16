@@ -1,18 +1,17 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Tests\Unit\GameRating\Business\GamePoints;
+namespace App\Tests\Unit\GameBetting\Business\GamePoints;
 
 
-use App\GameRating\Business\GamePoints\Collection\NoWin;
-use App\GameRating\Business\GamePoints\Collection\WinExact;
-use App\GameRating\Business\GamePoints\Collection\WinScoreRightDiff;
-use App\GameRating\Business\GamePoints\Collection\WinTeam;
-use App\GameRating\Business\GamePoints\Points;
-use App\GameRating\Persistence\DataProvider\Result;
-use App\GameRating\Business\GamePoints\Config;
+use App\GameBetting\Business\GamePoints\Score\NoWin;
+use App\GameBetting\Business\GamePoints\Score\WinExact;
+use App\GameBetting\Business\GamePoints\Score\WinScoreRightDiff;
+use App\GameBetting\Business\GamePoints\Score\WinTeam;
+use App\GameBetting\Business\GamePoints\Points;
+use App\GameBetting\Persistence\DataProvider\Result;
+use App\GameBetting\Business\GamePoints\Config;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\Tests\Fixtures\StdClassDecorator;
 
 class PointsTest extends TestCase
 {

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header text-center">
+                <h5>Ranking-Liste</h5>
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="">
+                                <tr>
+                                    <th>
+                                        Position
+                                    </th>
+                                    <th>
+                                        Username
+                                    </th>
+                                    <th>
+                                        r. Sieger
+                                    </th>
+                                    <th>
+                                        r. Tordifferenz
+                                    </th>
+                                    <th>
+                                        r. Ergebnis
+                                    </th>
+                                    <th>
+                                        Kein treffer
+                                    </th>
+                                    <th class="text-left">
+                                        Punkte
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for userScoreWithPosition in userScoreWithPositions %}
+                                    <tr>
+                                        <td>
+                                            {{ userScoreWithPosition.position }}
+                                        </td>
+                                        <td>
+                                            {{ userScoreWithPosition.userScore.user.username }}
+                                        </td>
+                                        <td>
+                                            {{ userScoreWithPosition.userScore.countWinExact }}
+                                        </td>
+                                        <td>
+                                            {{ userScoreWithPosition.userScore.countWinScoreDiff }}
+                                        </td>
+                                        <td>
+                                            {{ userScoreWithPosition.userScore.countWinTeam }}
+                                        </td>
+                                        <td>
+                                            {{ userScoreWithPosition.userScore.countNoWinTeam }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ userScoreWithPosition.userScore.scoreSumme }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
