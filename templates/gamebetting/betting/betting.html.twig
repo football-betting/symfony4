@@ -6,8 +6,13 @@
         <div class="col-md-6">
 
             {{ render(controller(
+                'App\\GameRating\\Communication\\Controller\\UserRating::myInfo'
+            )) }}
+
+            {{ render(controller(
                 'App\\GameExtraBetting\\Communication\\Controller\\UserExtraBetting::index'
             )) }}
+
             <div class="card">
                 <div class="card-header text-center">
                     <h5>Vergangene Spiele</h5>
@@ -54,7 +59,7 @@
                                                 {% endif %}
                                             </td>
                                             <td class="text-right">
-                                                lorem
+                                                {{ game.score }}
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -65,72 +70,16 @@
                     </div>
                 </div>
             </div>
+
+            {{ render(controller(
+                'App\\GameRating\\Communication\\Controller\\UserRating::ratingTopThree'
+            )) }}
+
         </div>
         <div class="col-md-6">
             {{ render(controller(
-                'App\\GameBetting\\Communication\\Controller\\UserBetting::getNextGames', {'numberOfGames': 3}
+                'App\\GameBetting\\Communication\\Controller\\UserBetting::getNextGames', {'numberOfGames': 4}
             )) }}
-            {#<div class="card">#}
-            {#<div class="card-header text-center">#}
-            {#<h5>Abgegeben tipps!</h5>#}
-            {#</div>#}
-
-            {#<div class="card-body">#}
-
-            {#<div class="row">#}
-            {#<div class="col-md-12">#}
-            {#<div class="table-responsive">#}
-            {#<table class="table">#}
-            {#<thead class="">#}
-            {#<tr>#}
-            {#<th>#}
-            {#Team 1#}
-            {#</th>#}
-            {#<th>#}
-            {#Team 2#}
-            {#</th>#}
-            {#<th>#}
-            {#Ergebnis#}
-            {#</th>#}
-            {#<th>#}
-            {#Tipp#}
-            {#</th>#}
-            {#<th class="text-right">#}
-            {#Punkte#}
-            {#</th>#}
-            {#</tr>#}
-            {#</thead>#}
-            {#<tbody>#}
-            {#{% for game in pastGamesForm %}#}
-            {#<tr>#}
-            {#<td>#}
-            {#{{ game.firstTeamName }}#}
-            {#</td>#}
-            {#<td>{{ game.secondTeamName }}</td>#}
-            {#<td>#}
-            {#{{ game.firstTeamResult }} : {{ game.secondTeamResult }}#}
-            {#</td>#}
-            {#<td>#}
-            {#{% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}#}
-            {#-#}
-            {#{% else %}#}
-            {#{{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }}#}
-            {#{% endif %}#}
-            {#</td>#}
-            {#<td class="text-right">#}
-            {#{{ game.score }}#}
-            {#</td>#}
-            {#</tr>#}
-            {#{% endfor %}#}
-            {#</tbody>#}
-            {#</table>#}
-            {#</div>#}
-            {#</div>#}
-            {#</div>#}
-
-            {#</div>#}
-
-            {#</div>#}
         </div>
     </div>
 

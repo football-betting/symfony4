@@ -71,7 +71,7 @@ class UserBetting extends Controller
     }
 
 
-    public function getNextGames(int $numberOfGames, GameRepository $gameRepository)
+    public function getNextGames(int $numberOfGames)
     {
         $gameBetResult = \array_slice($this->userFutureGames->get($this->getUser()),0,$numberOfGames);
 

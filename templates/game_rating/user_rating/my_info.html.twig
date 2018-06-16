@@ -1,16 +1,24 @@
-<div class="col-md-6">
-    <div class="card">
-        <div class="card-header text-center">
-            <h5>My Rankng</h5>
+<div class="card card card-stats">
+    <div class="card-body ">
+        <div class="row">
+            <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                    <i class="nc-icon nc-trophy text-success"></i>
+                </div>
+            </div>
+            <div class="col-7 col-md-8">
+                <div class="numbers">
+                    <p class="card-category">Tabellenplatz</p>
+                    <p class="card-title">{{ myScoreWithPositions.position }}
+                    </p><p>
+                    </p></div>
+            </div>
         </div>
-        <div class="card-body">
-            Position: {{ myScoreWithPositions.position }}<br>
-            Punkte: {{ myScoreWithPositions.userScore.scoreSumme }}<br>
-            Punkte: {{ myScoreWithPositions.userScore.scoreSumme }}<br>
-            Count Richtiger Sieger: {{ myScoreWithPositions.userScore.countWinExact }}<br>
-            Count RIchtiger Sieger + richtige Tordifferenz : {{ myScoreWithPositions.userScore.countWinScoreDiff }}<br>
-            Count Richtiger Sieger + richtiges Ergebnis : {{ myScoreWithPositions.userScore.countWinTeam }}<br>
-            Count Kein treffer: {{ myScoreWithPositions.userScore.countNoWinTeam }}<br>
+    </div>
+    <div class="card-footer ">
+        <hr>
+        <div class="stats">
+            <i class="fa fa-calendar-o"></i> Punkte: {{ myScoreWithPositions.userScore.scoreSumme }}
         </div>
     </div>
 </div>
