@@ -39,7 +39,8 @@ class UserBettingType extends AbstractType
         $resolver->setDefaults(array(
            'game' => null,
            'bet' => null,
-           'editable' => null
+           'editable' => null,
+            'csrf_protection' => false
         ));
     }
 

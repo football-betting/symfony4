@@ -8,6 +8,7 @@ use App\GameBetting\Business\Games\UserFutureGamesInterface;
 use App\GameBetting\Business\Games\UserPastGamesInterface;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
+use App\GameCore\Persistence\Repository\GameRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,6 +49,20 @@ class UserBetting extends Controller
             [
                 'futureGamesForm' => $futureGamesFormBuilder,
                 'pastGamesForm'   => $pastGamesForm
+            ]
+        );
+    }
+
+
+    public function getNextGames(int $numberOfGames, GameRepository $gameRepository)
+    {
+        $gameBetResult = \array_slice($this->userFutureGames->get($this->getUser()),0,$numberOfGames);
+
+
+        return $this->render(
+            'dashboard/next_games.html.twig',
+            [
+                'gameBetResult' => $gameBetResult
             ]
         );
     }
