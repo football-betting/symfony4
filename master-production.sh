@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-git pull origin master && ./node_modules/.bin/encore production && /home/footbdbe/bin/php bin/console cache:clear
+git pull origin master && ./node_modules/.bin/encore production && /usr/local/pd-admin2/bin/php-7.2-cli bin/console cache:clear
