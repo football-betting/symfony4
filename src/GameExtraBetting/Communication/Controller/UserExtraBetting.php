@@ -61,7 +61,7 @@ class UserExtraBetting extends Controller
 
         $entityManager = $this->getDoctrine()->getManager();
         $userExtraBetting = $entityManager->getRepository(\App\GameExtraBetting\Persistence\Entity\UserExtraBetting::class)
-            ->find($params['betId']);
+            ->findOneBy(['user' => $this->getUser(), 'type' => $params['type']]);
 
         if (!$userExtraBetting instanceof \App\GameExtraBetting\Persistence\Entity\UserExtraBetting) {
             $userExtraBetting = new \App\GameExtraBetting\Persistence\Entity\UserExtraBetting();
