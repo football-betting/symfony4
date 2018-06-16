@@ -41,12 +41,19 @@
                                 </thead>
                                 <tbody>
                                 {% for userScoreWithPosition in userScoreWithPositions %}
-                                    <tr>
+                                    <tr{% if myUserId == userScoreWithPosition.userScore.user.id %} class="table-secondary"{% endif %}>
                                         <td>
                                             {{ userScoreWithPosition.position }}
                                         </td>
                                         <td>
-                                            {{ userScoreWithPosition.userScore.user.username }}
+                                            {% if myUserId == userScoreWithPosition.userScore.user.id %}
+                                                {{ userScoreWithPosition.userScore.user.username }}
+                                            {% else %}
+                                                <a href="{{ path('game_past_games_by_users', {'userId': userScoreWithPosition.userScore.user.id}) }}">
+                                                    {{ userScoreWithPosition.userScore.user.username }}
+                                                </a>
+                                            {% endif %}
+
                                         </td>
                                         <td>
                                             {{ userScoreWithPosition.userScore.countWinExact }}

@@ -40,16 +40,9 @@ class UserRating extends Controller
             'game_rating/user_rating/users.html.twig',
             [
                 'userScoreWithPositions' => $userScoreWithPositions,
+                'myUserId' => $this->getUser()->getId()
             ]
         );
-    }
-
-    /**
-     * @Route("/pastgame/{userId}", name="game_past_games_by_users")
-     */
-    public function pastGameByUserId(int $userId)
-    {
-
     }
 
     /**

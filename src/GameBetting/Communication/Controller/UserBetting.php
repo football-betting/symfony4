@@ -9,6 +9,7 @@ use App\GameBetting\Business\Games\UserPastGamesInterface;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
 use App\GameCore\Persistence\Repository\GameRepository;
+use App\User\Persistence\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,9 +83,34 @@ class UserBetting extends Controller
         return $this->render(
             'gamebetting/betting/past_games.html.twig',
             [
-                'pastGamesForm'   => $pastGamesForm
+                'pastGamesForm'   => $pastGamesForm,
+                'username' => false
             ]
         );
+    }
+
+    /**
+     * @Route("/all-past-games-by-user/{userId}", name="game_past_games_by_users")
+     */
+    public function allPastGameByUserId(int $userId)
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)
+                            ->findOneBy(['id' => $userId]);
+        $pastGamesForm = [];
+        $username = '';
+        if($user instanceof User) {
+            $pastGamesForm = $this->userPastGames->get($user);
+            $username = $user->getUsername();
+        }
+
+        return $this->render(
+            'gamebetting/betting/past_games.html.twig',
+            [
+                'pastGamesForm'   => $pastGamesForm,
+                'username'   => $username
+            ]
+        );
+
     }
 
     public function getNextGames(int $numberOfGames)
