@@ -37,6 +37,7 @@ class UserBetting extends Controller
     }
 
     /**
+     * @TODO template struktur überarbeiten und eigene actions machen
      * @Route("/gamebet/", name="game_bet_list")
      */
     public function list()
@@ -53,11 +54,26 @@ class UserBetting extends Controller
         );
     }
 
+    /**
+     * @Route("/all-upcomming-games", name="all_upcomming_games")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function allUpcommingGames()
+    {
+        $futureGamesFormBuilder = $this->getFutureGamesFormBuilder();
+
+        return $this->render(
+            'gamebetting/betting/all_games.html.twig',
+            [
+                'futureGamesForm' => $futureGamesFormBuilder
+            ]
+        );
+    }
+
 
     public function getNextGames(int $numberOfGames, GameRepository $gameRepository)
     {
         $gameBetResult = \array_slice($this->userFutureGames->get($this->getUser()),0,$numberOfGames);
-
 
         return $this->render(
             'dashboard/next_games.html.twig',
@@ -81,7 +97,7 @@ class UserBetting extends Controller
             return $this->json(['status' => false]);
         }
         if(!isset($params['firstTeamResult'])  || $params['firstTeamResult'] < 0) {
-            return $this->json(['status' => false]);
+            return $this->json(['status' => $params]);
         }
         if(!isset($params['secondTeamResult'])  || $params['secondTeamResult'] < 0) {
             return $this->json(['status' => false]);
@@ -101,8 +117,8 @@ class UserBetting extends Controller
         }
 
 
-        $userBetting->setFirstTeamResult($params['firstTeamResult']);
-        $userBetting->setSecondTeamResult($params['secondTeamResult']);
+        $userBetting->setFirstTeamResult((int)$params['firstTeamResult']);
+        $userBetting->setSecondTeamResult((int)$params['secondTeamResult']);
 
         if($userBetting->getGame()->getDate()->getTimestamp() < time() ) {
             return $this->json(['status' => false]);

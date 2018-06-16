@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="card-header text-center">
+                <h5>Zukünftige spiele!</h5>
+            </div>
+            {% for gameId, form in futureGamesForm %}
+                <div class="col-md-12 betting-wrapper">
+
+                    {{ form_start(form, {'attr': {'class': 'form-inline user-betting-form'}}) }}
+                    <div class="col-sm">
+                        {{ form_label( form.firstTeamResult ) }}
+                    </div>
+                    <div class="col-sm-auto">
+                        <div class="row  justify-content-center align-items-center text-middle">
+                            {{ form_widget(form.firstTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 first-team-result', 'min' : 0} }) }}
+                            <div></div>
+                            {{ form_widget(form.secondTeamResult, { 'attr': {'class': 'text-center mx-auto col-lg-4 second-team-result', 'min' : 0} }) }}
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        {{ form_label(form.secondTeamResult) }}
+                    </div>
+                    <input type="hidden" name="user_betting[gameId]" value="{{ gameId }}">
+
+                    <div>
+                        <button type="submit" class="btn btn-primary mb-2 save-bet-button" id="user_betting_saveBet"
+                                name="user_betting[saveBet]">Save
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
