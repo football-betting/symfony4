@@ -56,4 +56,26 @@ class UserRating extends Controller
             ]
         );
     }
+
+    /**
+     * @Route("/ratingTop3/", name="game_rating_top_three")
+     */
+    public function ratingTopThree()
+    {
+        $userScoreWithPositions = $this->gameRatingFacade->getUserScoreWithPosition();
+        $topTree = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            if(isset($userScoreWithPositions[$i])) {
+                $topTree[] = $userScoreWithPositions[$i];
+            }
+        }
+
+        return $this->render(
+            'game_rating/user_rating/top_three.html.twig',
+            [
+                'userScoreWithPositions' => $topTree,
+            ]
+        );
+    }
 }
