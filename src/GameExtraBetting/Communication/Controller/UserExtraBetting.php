@@ -30,10 +30,10 @@ class UserExtraBetting extends Controller
 
         $bet = new \App\GameExtraBetting\Persistence\Entity\UserExtraBetting();
         $forms[1] = $this->createForm(UserExtraBettingType::class, $bet,
-                ['teams' => $teams, 'extrabet' => $bets[1] ?? null, 'label' => 'Tipp 1', 'type' => 1]
+                ['teams' => $teams, 'extrabet' => $bets[1] ?? null, 'label' => 'Tipp 1 (+10 Punkte)', 'type' => 1]
                 )->createView();
         $forms[2] =  $this->createForm(UserExtraBettingType::class, $bet,
-                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2', 'type' => 2]
+                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2 (+5 Punkte)', 'type' => 2]
                 )->createView();
 
         return $this->render(

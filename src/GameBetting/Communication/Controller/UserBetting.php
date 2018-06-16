@@ -9,6 +9,7 @@ use App\GameBetting\Business\Games\UserPastGamesInterface;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
 use App\GameCore\Persistence\Repository\GameRepository;
+use App\User\Persistence\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,7 @@ class UserBetting extends Controller
             'gamebetting/betting/betting.html.twig',
             [
                 'futureGamesForm' => $futureGamesFormBuilder,
-                'pastGamesForm'   => $pastGamesForm
+                'pastGamesForm'   => \array_slice($pastGamesForm, -10)
             ]
         );
     }
@@ -71,7 +72,48 @@ class UserBetting extends Controller
     }
 
 
-    public function getNextGames(int $numberOfGames, GameRepository $gameRepository)
+    /**
+     * @Route("/all-past-games", name="all_past_games")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function allPastGames()
+    {
+        $pastGamesForm = $this->userPastGames->get($this->getUser());
+
+        return $this->render(
+            'gamebetting/betting/past_games.html.twig',
+            [
+                'pastGamesForm'   => $pastGamesForm,
+                'username' => false
+            ]
+        );
+    }
+
+    /**
+     * @Route("/all-past-games-by-user/{userId}", name="game_past_games_by_users")
+     */
+    public function allPastGameByUserId(int $userId)
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)
+                            ->findOneBy(['id' => $userId]);
+        $pastGamesForm = [];
+        $username = '';
+        if($user instanceof User) {
+            $pastGamesForm = $this->userPastGames->get($user);
+            $username = $user->getUsername();
+        }
+
+        return $this->render(
+            'gamebetting/betting/past_games.html.twig',
+            [
+                'pastGamesForm'   => $pastGamesForm,
+                'username'   => $username
+            ]
+        );
+
+    }
+
+    public function getNextGames(int $numberOfGames)
     {
         $gameBetResult = \array_slice($this->userFutureGames->get($this->getUser()),0,$numberOfGames);
 

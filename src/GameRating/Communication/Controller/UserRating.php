@@ -2,6 +2,7 @@
 
 namespace App\GameRating\Communication\Controller;
 
+use App\GameBetting\Business\Games\UserPastGamesInterface;
 use App\GameRating\Business\GameRatingFacadeInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,12 +15,20 @@ class UserRating extends Controller
     private $gameRatingFacade;
 
     /**
-     * @param GameRatingFacadeInterface $gameRatingFacade
+     * @var UserPastGamesInterface
      */
-    public function __construct(GameRatingFacadeInterface $gameRatingFacade)
+    private $userPastGames;
+
+    /**
+     * @param GameRatingFacadeInterface $gameRatingFacade
+     * @param UserPastGamesInterface $userPastGames
+     */
+    public function __construct(GameRatingFacadeInterface $gameRatingFacade, UserPastGamesInterface $userPastGames)
     {
         $this->gameRatingFacade = $gameRatingFacade;
+        $this->userPastGames = $userPastGames;
     }
+
 
     /**
      * @Route("/users/", name="game_rating_users")
@@ -31,6 +40,7 @@ class UserRating extends Controller
             'game_rating/user_rating/users.html.twig',
             [
                 'userScoreWithPositions' => $userScoreWithPositions,
+                'myUserId' => $this->getUser()->getId()
             ]
         );
     }
@@ -66,7 +76,7 @@ class UserRating extends Controller
         $topTree = [];
 
         for ($i = 0; $i < 3; $i++) {
-            if(isset($userScoreWithPositions[$i])) {
+            if (isset($userScoreWithPositions[$i])) {
                 $topTree[] = $userScoreWithPositions[$i];
             }
         }

@@ -34,10 +34,16 @@
                         <p>Rangliste</p>
                     </a>
                 </li>
-                <li class="{{ app.request.get('_route') == 'all_upcomming_games' ? 'active' }}">
+                <li class="{{ app.request.get('_route') == 'all_upcomming_games'  ? 'active' }}">
                     <a href="{{ path('all_upcomming_games') }}">
                         <i class="nc-icon nc-bullet-list-67"></i>
-                        <p>Alle Matches</p>
+                        <p>Zukünftige spiele</p>
+                    </a>
+                </li>
+                <li class="{{ app.request.get('_route') == 'all_past_games' ? 'active' }}">
+                    <a href="{{ path('all_past_games') }}">
+                        <i class="nc-icon nc-single-copy-04"></i>
+                        <p>Alle vergangene Spiele</p>
                     </a>
                 </li>
             </ul>
