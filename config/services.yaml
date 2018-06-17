@@ -46,10 +46,12 @@ services:
         resource: '../src/GameApi/Communication/Command'
         tags: ['console.command']
 
-    App\GameRating\Business\GamePoints\Points:
+    App\GameBetting\Business\GamePoints\Points:
         arguments:
-            - '@App\GameRating\Business\GamePoints\Collection\NoWin'
-            - '@App\GameRating\Business\GamePoints\Collection\WinExact'
-            - '@App\GameRating\Business\GamePoints\Collection\WinScoreRightDiff'
-            - '@App\GameRating\Business\GamePoints\Collection\WinTeam'
+            - '@App\GameBetting\Business\GamePoints\Score\NoWin'
+            - '@App\GameBetting\Business\GamePoints\Score\WinExact'
+            - '@App\GameBetting\Business\GamePoints\Score\WinScoreRightDiff'
+            - '@App\GameBetting\Business\GamePoints\Score\WinTeam'
 
+    App\GameRating\Business\GameRatingFacade:
+        public: true

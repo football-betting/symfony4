@@ -24,6 +24,11 @@ class UserFutureGames implements UserFutureGamesInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @TODO übergabe Parameter für die Anzahl results übergeben?
+     * @param UserInterface $user
+     * @return array
+     */
     public function get(UserInterface $user): array
     {
         $futureGames = $this->entityManager

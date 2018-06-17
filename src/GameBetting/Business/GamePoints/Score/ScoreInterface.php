@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\GameRating\Business\GamePoints\Collection;
+namespace App\GameBetting\Business\GamePoints\Score;
 
-use App\GameRating\Persistence\DataProvider\Result;
+use App\GameBetting\Persistence\DataProvider\Result;
 
-interface CollectionInterface
+interface ScoreInterface
 {
     /**
      * @param Result $result

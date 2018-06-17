@@ -1,21 +1,21 @@
 <?php
 
 
-namespace App\GameRating\Business\GamePoints;
+namespace App\GameBetting\Business\GamePoints;
 
 
-use App\GameRating\Business\GamePoints\Collection\CollectionInterface;
-use App\GameRating\Persistence\DataProvider\Result;
+use App\GameBetting\Business\GamePoints\Score\ScoreInterface;
+use App\GameBetting\Persistence\DataProvider\Result;
 
 class Points implements PointsInterface
 {
     /**
-     * @var CollectionInterface
+     * @var ScoreInterface
      */
     private $collections;
 
     /**
-     * @param CollectionInterface[] $collections
+     * @param ScoreInterface[] $collections
      */
     public function __construct(...$collections)
     {
@@ -49,8 +49,8 @@ class Points implements PointsInterface
     private function checkCollection()
     {
         foreach ($this->collections as $collection) {
-            if (!$collection instanceof CollectionInterface) {
-                throw new \RuntimeException('Collection: ' . get_class($collection) . 'is not instanceof ' . CollectionInterface::class);
+            if (!$collection instanceof ScoreInterface) {
+                throw new \RuntimeException('Collection: ' . get_class($collection) . 'is not instanceof ' . ScoreInterface::class);
             }
         }
     }

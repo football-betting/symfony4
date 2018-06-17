@@ -4,31 +4,44 @@
 namespace App\GameRating\Business;
 
 
-use App\GameRating\Business\GamePoints\PointsInterface;
+use App\GameRating\Business\UserPoint\UserRatingInterface;
+use App\GameRating\Business\UserPoint\UserScoreProviderInterface;
 use App\GameRating\Persistence\DataProvider\Result;
 
 class GameRatingFacade implements GameRatingFacadeInterface
 {
 
     /**
-     * @var PointsInterface
+     * @var UserRatingInterface
      */
-    private $points;
+    private $userRating;
 
     /**
-     * @param PointsInterface $points
+     * @var UserScoreProviderInterface
      */
-    public function __construct(PointsInterface $points)
+    private $userScoreProvider;
+
+    /**
+     * @param UserRatingInterface $userRating
+     * @param UserScoreProviderInterface $userScoreProvider
+     */
+    public function __construct(
+        UserRatingInterface $userRating,
+        UserScoreProviderInterface $userScoreProvider
+    )
     {
-        $this->points = $points;
+        $this->userRating = $userRating;
+        $this->userScoreProvider = $userScoreProvider;
     }
 
+
     /**
-     * @param Result $result
-     * @return int
+     * @return \App\GameRating\Persistence\DataProvider\UserScoreWithPosition[]|array
      */
-    public function getPoints(Result $result)
+    public function getUserScoreWithPosition() : array
     {
-        return $this->points->get($result);
+        return $this->userRating->sortUserByScore(
+            $this->userScoreProvider->get()
+        );
     }
 }

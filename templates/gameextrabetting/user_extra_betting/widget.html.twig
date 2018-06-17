@@ -1,12 +1,12 @@
-<div class="col-md-6">
+
     <div class="card">
         <div class="card-header text-center">
             <h5>Wer wird Weltmeister 2018</h5>
         </div>
         <div class="card-body">
-            <div class="">
-                {% for betId, form in forms %}
-                    {{ form_start(form, {'attr': {'class': 'form-inline  justify-content-center'}}) }}
+            {% for betId, form in forms %}
+                <div class="extra-bet-wrapper">
+                    {{ form_start(form, {'attr': {'class': 'form-inline  justify-content-center extra-bet-form'}}) }}
                     <div class=" mr-2">
                         {{ form_label( form.text ) }}
                     </div>
@@ -14,15 +14,14 @@
                         {{ form_widget( form.text ) }}
                     </div>
                     <div class=" mr-5">
-                        <button type="submit" class="btn btn-primary mb-2" id="user_betting_saveBet"
+                        <button type="submit" class="btn btn-primary mb-2 extra-bet-submit" id="user_betting_saveBet"
                                 name="user_extra_betting[saveExtraBet]">Save
                         </button>
                     </div>
                     {{ form_row( form.type ) }}
                     <input type="hidden" name="user_extra_betting[betId]" value="{{ betId }}">
                     {{ form_end(form) }}
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
-</div>

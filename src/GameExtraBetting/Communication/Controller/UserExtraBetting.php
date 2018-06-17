@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserExtraBetting extends Controller
 {
-    const TIPP_DATE = '14.06.2018';
+    public const TIPP_DATE = '14.06.2018';
     /**
      * @Route("/gamebetextra/", name="game_bet_extra")
      */
@@ -30,11 +30,11 @@ class UserExtraBetting extends Controller
 
         $bet = new \App\GameExtraBetting\Persistence\Entity\UserExtraBetting();
         $forms[1] = $this->createForm(UserExtraBettingType::class, $bet,
-                ['teams' => $teams, 'extrabet' => $bets[1] ?? null, 'label' => 'Tipp 1', 'type' => 1]
+                ['teams' => $teams, 'extrabet' => $bets[1] ?? null, 'label' => 'Tipp 1 (+10 Punkte)', 'type' => 1]
                 )->createView();
-//        $forms[2] =  $this->createForm(UserExtraBettingType::class, $bet,
-//                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2', 'type' => 2]
-//                )->createView();
+        $forms[2] =  $this->createForm(UserExtraBettingType::class, $bet,
+                ['teams' => $teams, 'extrabet' => $bets[2] ?? null, 'label' => 'Tipp 2 (+5 Punkte)', 'type' => 2]
+                )->createView();
 
         return $this->render(
             'gameextrabetting/user_extra_betting/widget.html.twig',
@@ -45,7 +45,7 @@ class UserExtraBetting extends Controller
     }
 
     /**
-     * @Route("/saveextrabet/", name="save_extra_bet")
+     * @Route("/saveextrabet", name="save_extra_bet")
      * @Method({"POST"})
      */
     public function saveExtraBet(Request $request)
@@ -56,12 +56,12 @@ class UserExtraBetting extends Controller
         $form = $this->createForm(UserExtraBettingType::class, $userExtraBetting);
         $form->handleRequest($request);
         if (!$form->isSubmitted() && !$form->isValid()) {
-            return $this->redirectToRoute('game_bet_list', array(), 302);
+            return $this->json(['status' => false]);
         }
 
         $entityManager = $this->getDoctrine()->getManager();
         $userExtraBetting = $entityManager->getRepository(\App\GameExtraBetting\Persistence\Entity\UserExtraBetting::class)
-            ->find($params['betId']);
+            ->findOneBy(['user' => $this->getUser(), 'type' => $params['type']]);
 
         if (!$userExtraBetting instanceof \App\GameExtraBetting\Persistence\Entity\UserExtraBetting) {
             $userExtraBetting = new \App\GameExtraBetting\Persistence\Entity\UserExtraBetting();
@@ -75,7 +75,7 @@ class UserExtraBetting extends Controller
         $entityManager->persist($userExtraBetting);
         $entityManager->flush();
 
-        return $this->redirectToRoute('game_bet_list');
+        return $this->json(['status' => true]);
     }
 
     private function getTeams()
