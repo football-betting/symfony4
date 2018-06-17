@@ -3,24 +3,38 @@
 ### Release 1.0.0
 
 ##### Functionality:
-* register user
-* login user
-* betting only future games
+---
+###### User management
+
+* Registration
+* Login
+* Roles and page restriction
+
+###### Betting
+
+* bet can be placed until the match starts
 * see past games
-* see user ranking 
+* global user scoreboard
 * see all past games from another user
-* Add points functionality
-  * right games result: 3 points
-  * right diff score: 2 points
-  * right winner: 1 points
-  * not right score: 0 point
-  * no betting: 0 point
-* API Conntect to <https://api.football-data.org/> for:
+* see all past games from current user
+* bet for worldcup winner
+* score system:
+  * correct games result: 3 points
+  * correct score differance: 2 points
+  * correct winner: 1 points
+  * inaccurate score: 0 point
+  * no bet placed: 0 point
+
+###### Dashboard widgets
+
+* current place in scoreboard
+* last 10 games
+* top 3 user in scoreboard
+* bet can be placed on 4 upcomming matches
+
+###### Integrated
+
+*  [Football-data.org API](<https://api.football-data.org/>) to:
   * create/update Teams
   * create/update games
-* Integrate template: [paper-dashboard](https://www.creative-tim.com/product/paper-dashboard)
-* create dashboard with
-  * see my rating
-  * see my last 10 past games
-  * see 3 top rating user 
-  * user can betting next 4 games 
+* used template: [paper-dashboard](https://www.creative-tim.com/product/paper-dashboard)
