@@ -19,11 +19,11 @@
 * see all past games from current user
 * bet for worldcup winner
 * score system:
-  * correct games result: 3 points
-  * correct score differance: 2 points
-  * correct winner: 1 points
-  * inaccurate score: 0 point
-  * no bet placed: 0 point
+    * correct games result: 3 points
+    * correct score differance: 2 points
+    * correct winner: 1 points
+    * inaccurate score: 0 point
+    * no bet placed: 0 point
 
 ###### Dashboard widgets
 
@@ -34,7 +34,7 @@
 
 ###### Integrated
 
-*  [Football-data.org API](<https://api.football-data.org/>) to:
-  * create/update Teams
-  * create/update games
+* [Football-data.org API](<https://api.football-data.org/>) to:
+    * create/update Teams
+    * create/update games
 * used template: [paper-dashboard](https://www.creative-tim.com/product/paper-dashboard)
