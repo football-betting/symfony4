@@ -139,7 +139,7 @@ class UserBetting extends Controller
             return $this->json(['status' => false]);
         }
         if(!isset($params['firstTeamResult'])  || $params['firstTeamResult'] < 0) {
-            return $this->json(['status' => $params]);
+            return $this->json(['status' => false]);
         }
         if(!isset($params['secondTeamResult'])  || $params['secondTeamResult'] < 0) {
             return $this->json(['status' => false]);

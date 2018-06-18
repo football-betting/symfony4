@@ -20,7 +20,7 @@
                                         {{ singleGame.game.teamFirst.name }}
                                     </h6>
                                     <hr>
-                                    <input type="number" class="text-center firstGame-fake-input"
+                                    <input type="number" min="0" class="text-center firstGame-fake-input"
                                             {% if singleGame.bet.firstTeamResult matches '/^\\d+$/' %}
                                                 value="{{ singleGame.bet.firstTeamResult }}"
                                             {% else %}
@@ -35,7 +35,7 @@
                                         {{ singleGame.game.teamSecond.name }}
                                     </h6>
                                     <hr>
-                                    <input type="number" class="text-center secondGame-fake-input"
+                                    <input type="number" min="0" class="text-center secondGame-fake-input"
                                             {% if singleGame.bet.secondTeamResult matches '/^\\d+$/' %}
                                                 value="{{ singleGame.bet.secondTeamResult }}"
                                             {% else %}
