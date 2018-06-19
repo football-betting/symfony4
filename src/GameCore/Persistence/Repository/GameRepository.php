@@ -61,11 +61,11 @@ class GameRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder('game');
         $qb->where('game.date <= :dateNow');
-        $qb->where('game.date >= :dateGameStartRange');
+        $qb->andWhere('game.date >= :dateGameStartRange');
         $qb->setParameter('dateNow', new \DateTime());
         $qb->setParameter('dateGameStartRange', $dateGameStartRange);
         $qb->orderBy('game.date', 'ASC');
-
+        
         return $qb->getQuery()->getResult();
     }
 }

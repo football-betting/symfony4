@@ -85,7 +85,6 @@ class UserPastGamesTest extends KernelTestCase
         self::assertFalse($foundFutureGameSecond);
         self::assertTrue($foundPastGame);
         self::assertTrue($foundPastGameSecond);
-
     }
 
     public function testPastGameWithUserBetting()
@@ -135,6 +134,97 @@ class UserPastGamesTest extends KernelTestCase
         self::assertFalse($foundFutureGameSecond);
         self::assertTrue($foundPastGame);
         self::assertTrue($foundPastGameSecond);
+    }
 
+    public function testActiveGame()
+    {
+        $mockGameRatingFacade = $this->createMock(PointsInterface::class);
+
+        $mockGameRatingFacade->method('get')
+            ->willReturn(10);
+
+        $userPastGames = new UserPastGames(
+            $this->entityManager,
+            $mockGameRatingFacade
+        );
+
+        $pastTestGameNotActive = $this->createTestPastGamesNotActive();
+        $futureTestGameSecond = $this->createTestFutureGamesSecond();
+        $pastTestUserGame = $this->createTestPastGamesUserGames();
+        $pastTestGame = $pastTestUserGame->getGame();
+        $pastTestGameSecond = $this->createTestPastGamesSecond();
+
+        $pastGames = $userPastGames->getActiveGames($this->getUser());
+        $foundFutureGame = false;
+        $foundFutureGameSecond = false;
+        $foundPastGame = false;
+        $foundPastGameSecond = false;
+
+        foreach ($pastGames as $gameId => $pastGame) {
+            if ($gameId === $pastTestGameNotActive->getId()) {
+                $foundFutureGame = true;
+            }
+            if ($gameId === $futureTestGameSecond->getId()) {
+                $foundFutureGameSecond = true;
+            }
+            if ($gameId === $pastTestGame->getId()) {
+                $foundPastGame = true;
+                self::assertSame(4, $pastGame->getFirstTeamUserResult());
+                self::assertSame(5, $pastGame->getSecondTeamUserResult());
+                self::assertSame(10, $pastGame->getScore());
+            }
+            if ($gameId === $pastTestGameSecond->getId()) {
+                $foundPastGameSecond = true;
+            }
+        }
+
+        self::assertFalse($foundFutureGame);
+        self::assertFalse($foundFutureGameSecond);
+        self::assertTrue($foundPastGame);
+        self::assertTrue($foundPastGameSecond);
+    }
+
+    public function testActiveGameWithUserBetting()
+    {
+        $mockGameRatingFacade = $this->createMock(PointsInterface::class);
+
+        $mockGameRatingFacade->method('get')
+            ->willReturn(1);
+
+        $userPastGames = new UserPastGames(
+            $this->entityManager,
+            $mockGameRatingFacade
+        );
+
+        $pastTestGameNotActive = $this->createTestPastGamesNotActive();
+        $futureTestGameSecond = $this->createTestFutureGamesSecond();
+        $pastTestGame = $this->createTestPastGames();
+        $pastTestGameSecond = $this->createTestPastGamesSecond();
+
+        $pastGames = $userPastGames->getActiveGames($this->getUser());
+        $foundFutureGame = false;
+        $foundFutureGameSecond = false;
+        $foundPastGame = false;
+        $foundPastGameSecond = false;
+
+        foreach ($pastGames as $gameId => $pastGame) {
+            if ($gameId === $pastTestGameNotActive->getId()) {
+                $foundFutureGame = true;
+            }
+            if ($gameId === $futureTestGameSecond->getId()) {
+                $foundFutureGameSecond = true;
+            }
+            if ($gameId === $pastTestGame->getId()) {
+                $foundPastGame = true;
+            }
+            if ($gameId === $pastTestGameSecond->getId()) {
+                $foundPastGameSecond = true;
+            }
+        }
+
+        self::assertFalse($foundFutureGame);
+        self::assertFalse($foundFutureGameSecond);
+        self::assertTrue($foundPastGame);
+        self::assertTrue($foundPastGameSecond);
     }
 }
