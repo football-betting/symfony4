@@ -92,7 +92,7 @@ class UserPastGamesTest extends KernelTestCase
         $mockGameRatingFacade = $this->createMock(PointsInterface::class);
 
         $mockGameRatingFacade->method('get')
-                ->willReturn(55);
+            ->willReturn(55);
 
         $userPastGames = new UserPastGames(
             $this->entityManager,

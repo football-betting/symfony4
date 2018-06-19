@@ -6,6 +6,10 @@
         <div class="col-md-6">
 
             {{ render(controller(
+                'App\\GameBetting\\Communication\\Controller\\UserBetting::getActiveGames'
+            )) }}
+
+            {{ render(controller(
                 'App\\GameRating\\Communication\\Controller\\UserRating::myInfo'
             )) }}
 

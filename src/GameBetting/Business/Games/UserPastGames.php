@@ -51,7 +51,7 @@ class UserPastGames implements UserPastGamesInterface
      * @return array
      * @throws \Exception
      */
-    public function getActiveGames(UserInterface $user) : array
+    public function getActiveGames(UserInterface $user): array
     {
         /** @var Game[] $pastGames */
         $activeGamesGames = $this->entityManager
@@ -66,7 +66,7 @@ class UserPastGames implements UserPastGamesInterface
      * @param Game[] $games
      * @return array
      */
-    private function getGamePastBetting(UserInterface $user, array $games) : array
+    private function getGamePastBetting(UserInterface $user, array $games): array
     {
         $pastGamesForm = [];
         $gameId2UserBets = $this->getGameIdForUserBets($user, $games);
@@ -122,6 +122,10 @@ class UserPastGames implements UserPastGamesInterface
      */
     private function getGameIdForUserBets(UserInterface $user, array $pastGames): array
     {
+        if (empty($pastGames)) {
+            return [];
+        }
+
         /** @var UserBettingEntity[] $userBets */
         $userBets = $this->entityManager
             ->getRepository(UserBettingEntity::class)

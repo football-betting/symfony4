@@ -1,0 +1,69 @@
+<div class="card card-timeline card-plain">
+    <div class="card-body">
+
+        {#<tr>#}
+            {#<td>#}
+                {#{{ game.gameDate|date("d.m.Y G:i") }}#}
+            {#</td>#}
+            {#<td>#}
+                {#{{ game.firstTeamName }}#}
+            {#</td>#}
+            {#<td>{{ game.secondTeamName }}</td>#}
+            {#<td>#}
+                {#{{ game.firstTeamResult }} : {{ game.secondTeamResult }}#}
+            {#</td>#}
+            {#<td>#}
+
+            {#</td>#}
+            {#<td class="text-right">#}
+                {#{{ game.score }}#}
+            {#</td>#}
+        {#</tr>#}
+
+        <div class="card">
+            {% for game in activeGames %}
+                <div class="">
+                    <div class="">
+                        <div class="timeline-heading" style="padding: 10px">
+                            <span class="badge badge-pill badge-danger">{{ game.gameDate|date("d.m.Y G:i") }}</span>
+                        </div>
+                        <div class="timeline-body betting-wrapper-dashboard">
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    {#<img src="{{ game.game.teamFirst.img }}" alt="" class=""#}
+                                         {#style="width: 200px; height: 100px">#}
+                                    <h6 class="text-center">
+                                        {{ game.firstTeamName }}
+                                    </h6>
+                                    <div class="text-right">{{ game.firstTeamResult }}</div>
+                                </div>
+                                <div class="col-md-6">
+                                    {#<img src="{{ singleGame.game.teamSecond.img }}" alt="" class=""#}
+                                         {#style="width: 200px; height: 100px">#}
+                                    <h6 class="text-center">
+                                        {{ game.secondTeamName }}
+                                    </h6>
+                                    <div class="text-left">{{ game.secondTeamResult }}</div>
+                                </div>
+                                <div class="card-footer col-md-12">
+
+                                    <div class="col-md-6">
+                                        Punkte: {{ game.score }}
+                                        {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
+                                            ( - : - )
+                                        {% else %}
+                                            ( {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }} )
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</div>
