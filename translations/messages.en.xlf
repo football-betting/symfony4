@@ -42,6 +42,26 @@
                    <source>sidebar.dashboard.first-letter</source>
                    <target>D</target>
               </trans-unit>
+              <trans-unit id="sidebar.scores">
+                   <source>sidebar.scores</source>
+                   <target>Scores</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking">
+                   <source>sidebar.ranking</source>
+                   <target>Ranking</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking.first-letter">
+                   <source>sidebar.ranking.first-letter</source>
+                   <target>R</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games">
+                   <source>sidebar.past-games</source>
+                   <target>Past games</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games.first-letter">
+                   <source>sidebar.past-games.first-letter</source>
+                   <target>P</target>
+              </trans-unit>
         </body>
     </file>
 </xliff>

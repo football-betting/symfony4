@@ -50,6 +50,26 @@
                    <source>sidebar.future-games.first-letter</source>
                    <target>Z</target>
               </trans-unit>
+              <trans-unit id="sidebar.scores">
+                   <source>sidebar.scores</source>
+                   <target>Punkte</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking">
+                   <source>sidebar.ranking</source>
+                   <target>Rangliste</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking.first-letter">
+                   <source>sidebar.ranking.first-letter</source>
+                   <target>R</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games">
+                   <source>sidebar.past-games</source>
+                   <target>Vergangene Spiele</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games.first-letter">
+                   <source>sidebar.past-games.first-letter</source>
+                   <target>V</target>
+              </trans-unit>
         </body>
     </file>
 </xliff>
