@@ -30,7 +30,7 @@
                     <a data-toggle="collapse" href="#betting">
                         <i class="fa fa-futbol"></i>
                         <p>
-                            Tippen
+                            {{ 'sidebar.bet'|trans }}
                             <b class="caret"></b>
                         </p>
                     </a>
@@ -43,15 +43,15 @@
                         <ul class="nav">
                             <li class="{{ app.request.get('_route') == 'game_bet_list'  ? 'active' }}">
                                 <a href="{{ path('game_bet_list') }}">
-                                    <span class="sidebar-mini">D</span>
-                                    <span class="sidebar-normal">Dashboard</span>
+                                    <span class="sidebar-mini">{{ 'sidebar.dashboard.first-letter'|trans }}</span>
+                                    <span class="sidebar-normal">{{ 'sidebar.dashboard'|trans }}</span>
                                 </a>
                             </li>
                             <li class="{{ app.request.get('_route') == 'all_upcomming_games'  ? 'active' }}">
                                 <a href="{{ path('all_upcomming_games') }}">
 
-                                    <span class="sidebar-mini">Z</span>
-                                    <span class="sidebar-normal">Zukünftige spiele</span>
+                                    <span class="sidebar-mini"> {{ 'sidebar.future-games.first-letter'|trans }}</span>
+                                    <span class="sidebar-normal"> {{ 'sidebar.future-games'|trans }}</span>
                                 </a>
                             </li>
                         </ul>

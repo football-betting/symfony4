@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+    <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
         <body>
               <trans-unit id="login">
                     <source>login</source>
@@ -29,6 +29,26 @@
               <trans-unit id="betting">
                    <source>betting</source>
                    <target>Tippspiel!</target>
+              </trans-unit>
+              <trans-unit id="sidebar.bet">
+                   <source>sidebar.bet</source>
+                   <target>Tippen</target>
+              </trans-unit>
+              <trans-unit id="sidebar.dashboard">
+                   <source>sidebar.dashboard</source>
+                   <target>Dashboard</target>
+              </trans-unit>
+              <trans-unit id="sidebar.dashboard.first-letter">
+                   <source>sidebar.dashboard.first-letter</source>
+                   <target>D</target>
+              </trans-unit>
+              <trans-unit id="sidebar.future-games">
+                   <source>sidebar.future-games</source>
+                   <target>Zukünftige spiele</target>
+              </trans-unit>
+              <trans-unit id="sidebar.future-games.first-letter">
+                   <source>sidebar.future-games.first-letter</source>
+                   <target>Z</target>
               </trans-unit>
         </body>
     </file>
