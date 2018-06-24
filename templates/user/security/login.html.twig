@@ -3,37 +3,38 @@
 {% block body %}
 
 
-<form action="{{ path('login') }}" method="post" class="form">
-    <div class="card card-login">
-        <div class="card-header ">
-            <h3 class="header text-center">Login</h3>
-        </div>
-        {% if error %}
-            <div class="text-center error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-        <div class="card-body ">
+    <form action="{{ path('login') }}" method="post" class="form">
+        <div class="card card-login">
+            <div class="card-header ">
+                <h3 class="header text-center">{{ 'login'|trans }}</h3>
+            </div>
+            {% if error %}
+                <div class="text-center error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="card-body ">
 
-            <div class="input-group">
-                <div class="input-group-prepend">
+                <div class="input-group">
+                    <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="nc-icon nc-single-02"></i>
                       </span>
+                    </div>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"
+                           placeholder="{{ 'login.username'|trans }}">
                 </div>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Benutzername">
-            </div>
-            <div class="input-group">
-                <div class="input-group-prepend">
+                <div class="input-group">
+                    <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="nc-icon nc-key-25"></i>
                       </span>
+                    </div>
+                    <input type="password" id="password" name="_password" placeholder="{{ 'login.password'|trans }}" class="form-control">
                 </div>
-                <input type="password" id="password" name="_password" placeholder="Passwort" class="form-control">
+                <br>
             </div>
-            <br>
+            <div class="card-footer ">
+                <button class="btn btn-warning btn-round btn-block mb-3" type="submit">{{ 'login'|trans }}</button>
+            </div>
         </div>
-        <div class="card-footer ">
-            <button class="btn btn-warning btn-round btn-block mb-3" type="submit">login</button>
-        </div>
-    </div>
-</form>
+    </form>
 {% endblock %}

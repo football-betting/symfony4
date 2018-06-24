@@ -1,11 +1,6 @@
 {% extends 'user/user.base.html.twig' %}
 
 {% block body %}
-
-    {# For future translations#}
-    {#{{ form_widget(form.username, { 'attr': {'class': "span12",#}
-        {#'placeholder': 'security.login.usernameplaceholder'|trans} }) }}#}
-
     {{ form_start(form, {label_attr: {class: 'form'} }) }}
 <div class="card card-login">
     <div class="card-header ">
@@ -19,7 +14,7 @@
                       </span>
             </div>
             {{ form_widget(form.username, {attr: {class: 'form-control',
-                'placeholder': 'Benutzername'} }) }}
+                'placeholder': 'login.username'|trans} }) }}
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -28,7 +23,7 @@
                       </span>
             </div>
             {{ form_widget(form.email, {attr: {class: 'form-control',
-                'placeholder': 'E-Mail'} }) }}
+                'placeholder': 'register.mail'|trans} }) }}
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -37,7 +32,7 @@
                       </span>
             </div>
             {{ form_widget(form.plainPassword.first, {attr: {class: 'form-control',
-                'placeholder': 'Passwort - 1'} })}}
+                'placeholder': 'login.password'|trans} })}}
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -46,12 +41,12 @@
                       </span>
             </div>
             {{ form_widget(form.plainPassword.second, {attr: {class: 'form-control',
-                'placeholder': 'Passwort - 2'} }) }}
+                'placeholder': 'register.repeat-password'|trans} }) }}
         </div>
         <br>
     </div>
     <div class="card-footer ">
-        <button class="btn btn-warning btn-round btn-block mb-3" type="submit">Registrieren!</button>
+        <button class="btn btn-warning btn-round btn-block mb-3" type="submit">{{ 'register'|trans }}</button>
     </div>
     {{ form_end(form) }}
 </div>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+              <trans-unit id="login">
+                    <source>login</source>
+                    <target>Anmelden</target>
+              </trans-unit>
+              <trans-unit id="login.username">
+                    <source>login.username</source>
+                    <target>Benutzername</target>
+              </trans-unit>
+              <trans-unit id="login.password">
+                    <source>login.password</source>
+                    <target>Passwort</target>
+              </trans-unit>
+              <trans-unit id="register">
+                   <source>register</source>
+                   <target>Registrieren</target>
+              </trans-unit>
+              <trans-unit id="register.mail">
+                   <source>register.mail</source>
+                   <target>E-Mail</target>
+              </trans-unit>
+              <trans-unit id="register.repeat-password">
+                   <source>register.repeat-password</source>
+                   <target>Passwort wiederholen</target>
+              </trans-unit>
+              <trans-unit id="betting">
+                   <source>betting</source>
+                   <target>Tippspiel!</target>
+              </trans-unit>
+        </body>
+    </file>
+</xliff>
