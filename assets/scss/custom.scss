@@ -1,0 +1,26 @@
+.sidebar,
+.off-canvas-sidebar{
+    .nav{
+        p{
+            margin: 0;
+            line-height: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .caret {
+            top: 10px;
+            margin-top: 12px;
+            position: absolute;
+            right: 1px;
+        }
+    }
+    .sidebar-mini{
+        text-transform: uppercase;
+        float: left;
+        width: 30px;
+        text-align: center;
+        margin-right: 15px;
+        letter-spacing: 1px;
+    }
+}
