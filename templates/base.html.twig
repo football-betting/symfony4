@@ -22,29 +22,75 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="{{ app.request.get('_route') == 'game_bet_list' ? 'active' }}">
-                    <a href="{{ path('game_bet_list') }}">
+                <li class="
+                {% if app.request.get('_route') == 'game_bet_list' or app.request.get('_route') == 'all_upcomming_games' %}
+                active
+                {% endif %}
+                ">
+                    <a data-toggle="collapse" href="#betting">
                         <i class="fa fa-futbol"></i>
-                        <p>Tippen</p>
+                        <p>
+                            Tippen
+                            <b class="caret"></b>
+                        </p>
                     </a>
+                    <div class="
+                    {% if app.request.get('_route') == 'game_bet_list' or app.request.get('_route') == 'all_upcomming_games' %}
+                        in collapse show
+                {% else %}
+                        collapse
+                {% endif %}" id="betting" style="">
+                        <ul class="nav">
+                            <li class="{{ app.request.get('_route') == 'game_bet_list'  ? 'active' }}">
+                                <a href="{{ path('game_bet_list') }}">
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-normal">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="{{ app.request.get('_route') == 'all_upcomming_games'  ? 'active' }}">
+                                <a href="{{ path('all_upcomming_games') }}">
+
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-normal">Zukünftige spiele</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li class="{{ app.request.get('_route') == 'game_rating_users' ? 'active' }}">
-                    <a href="{{ path('game_rating_users') }}">
-                        <i class="fa fa-chart-bar"></i>
-                        <p>Rangliste</p>
+                <li class="
+                    {% if app.request.get('_route') == 'game_rating_users' or app.request.get('_route') == 'all_past_games' %}
+                active
+                {% endif %}
+                ">
+                    <a data-toggle="collapse" href="#data">
+                        <i class="nc-icon nc-trophy"></i>
+                        <p>
+                            Punkte
+                            <b class="caret"></b>
+                        </p>
                     </a>
-                </li>
-                <li class="{{ app.request.get('_route') == 'all_upcomming_games'  ? 'active' }}">
-                    <a href="{{ path('all_upcomming_games') }}">
-                        <i class="nc-icon nc-bullet-list-67"></i>
-                        <p>Zukünftige spiele</p>
-                    </a>
-                </li>
-                <li class="{{ app.request.get('_route') == 'all_past_games' ? 'active' }}">
-                    <a href="{{ path('all_past_games') }}">
-                        <i class="nc-icon nc-single-copy-04"></i>
-                        <p>Alle vergangene Spiele</p>
-                    </a>
+                    <div class="
+                    {% if app.request.get('_route') == 'game_rating_users' or app.request.get('_route') == 'all_past_games' %}
+                        in collapse show
+                    {% else %}
+                        collapse
+                    {% endif %}
+                    collapse" id="data" aria-expanded="true" style="">
+                        <ul class="nav">
+                            <li class="{{ app.request.get('_route') == 'game_rating_users'  ? 'active' }}">
+                                <a href="{{ path('game_rating_users') }}">
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-normal">Rangliste</span>
+                                </a>
+                            </li>
+                            <li class="{{ app.request.get('_route') == 'all_past_games' ? 'active' }}">
+                                <a href="{{ path('all_past_games') }}">
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-normal">Vergangene Spiele</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -86,24 +132,24 @@
         </nav>
 
         <div class="content">
-                {% block body %}
+            {% block body %}
 
-                {% endblock %}
-        <footer class="footer footer-black  footer-white ">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="credits ml-auto">
+            {% endblock %}
+            <footer class="footer footer-black  footer-white ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="credits ml-auto">
               <span class="copyright">
                  made with <i class="fa fa-heart heart"></i> by <a
                           href="https://github.com/football-betting/symfony4/graphs/contributors">football-betting</a>
               </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </div>
-</div>
-<script src="{{ asset('build/js/app.js') }}"></script>
-{% block javascripts %}{% endblock %}
+    <script src="{{ asset('build/js/app.js') }}"></script>
+    {% block javascripts %}{% endblock %}
 </body>
 </html>

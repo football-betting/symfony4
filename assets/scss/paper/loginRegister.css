@@ -4523,8 +4523,8 @@ a.fc-more:hover {
 
 @font-face {
     font-family: nucleo-icons;
-    src: url(../fonts/nucleo-icons.eot);
-    src: url(../fonts/nucleo-icons.eot) format("embedded-opentype"),url(../fonts/nucleo-icons.woff2) format("woff2"),url(../fonts/nucleo-icons.woff) format("woff"),url(../fonts/nucleo-icons.ttf) format("truetype");
+    src: url(../../fonts/nucleo-icons.eot);
+    src: url(../../fonts/nucleo-icons.eot) format("embedded-opentype"),url(../../fonts/nucleo-icons.woff2) format("woff2"),url(../../fonts/nucleo-icons.woff) format("woff"),url(../../fonts/nucleo-icons.ttf) format("truetype");
     font-weight: 400;
     font-style: normal
 }
