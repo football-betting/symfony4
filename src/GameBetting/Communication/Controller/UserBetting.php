@@ -50,7 +50,7 @@ class UserBetting extends Controller
             'gamebetting/betting/betting.html.twig',
             [
                 'futureGamesForm' => $futureGamesFormBuilder,
-                'pastGamesForm' => \array_slice($pastGamesForm, -10)
+                'pastGamesForm' => \array_reverse(\array_slice($pastGamesForm, -6))
             ]
         );
     }
