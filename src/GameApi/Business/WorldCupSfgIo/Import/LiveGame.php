@@ -4,7 +4,7 @@
 namespace App\GameApi\Business\WorldCupSfgIo\Import;
 
 
-use App\GameApi\Business\WorldcupSfgIo\Client\ClientInterface;
+use App\GameApi\Business\WorldCupSfgIo\Client\ClientInterface;
 use App\GameCore\Persistence\Entity\Game;
 use Doctrine\ORM\EntityManagerInterface;
 

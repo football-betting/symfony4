@@ -42,10 +42,6 @@ services:
         resource: '../src/GameExtraBetting/Persistence/Entity'
         tags: ['doctrine.repository_service']
 
-    App\GameApi\Communication\Command\:
-        resource: '../src/GameApi/Communication/Command'
-        tags: ['console.command']
-
     App\GameBetting\Business\GamePoints\Points:
         arguments:
             - '@App\GameBetting\Business\GamePoints\Score\NoWin'
