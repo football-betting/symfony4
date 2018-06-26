@@ -22,6 +22,12 @@ env:
 
 git:
   depth: 1
+  
+before_install:
+  - nvm install 6.10
+
+install
+  - npm install
 
 before_script:
   - echo 'date.timezone = "Europe/Berlin"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
@@ -32,6 +38,7 @@ before_script:
   - travis_retry composer install --dev --no-interaction
 
 script:
+  - ./node_modules/.bin/encore dev
   - php bin/console doctrine:database:create --env=test --no-interaction
   - php bin/console doctrine:migrations:migrate --env=test --no-interaction
   - php bin/phpunit --coverage-clover=clover.xml
