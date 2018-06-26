@@ -23,13 +23,10 @@ env:
 git:
   depth: 1
   
-before_install:
-  - nvm install 6.10
-
-install
-  - npm install
 
 before_script:
+  - nvm install 6.10
+  - npm install
   - echo 'date.timezone = "Europe/Berlin"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - mysql -uroot -e "CREATE USER 'docker'@'%' IDENTIFIED BY 'docker'"
   - mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'docker'@'%' WITH GRANT OPTION"
