@@ -52,6 +52,20 @@ class GameRepository extends ServiceEntityRepository
 
     /**
      * @return Game[]
+     */
+    public function findPastGamesById(int $id)
+    {
+        $qb = $this->createQueryBuilder('game');
+        $qb->where('game.date <= :date');
+        $qb->andWhere('game.id = :id');
+        $qb->setParameter('date', new \DateTime());
+        $qb->setParameter('id', $id);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return Game[]
      * @throws \Exception
      */
     public function findActiveGames()
@@ -65,7 +79,7 @@ class GameRepository extends ServiceEntityRepository
         $qb->setParameter('dateNow', new \DateTime());
         $qb->setParameter('dateGameStartRange', $dateGameStartRange);
         $qb->orderBy('game.date', 'ASC');
-        
+
         return $qb->getQuery()->getResult();
     }
 }

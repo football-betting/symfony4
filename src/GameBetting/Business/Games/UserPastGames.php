@@ -48,6 +48,22 @@ class UserPastGames implements UserPastGamesInterface
 
     /**
      * @param UserInterface $user
+     * @param int $id
+     * @return GamePastBetting[]
+     */
+    public function getOnePastGame(UserInterface $user, int $id): array
+    {
+        /** @var Game[] $pastGames */
+        $pastGames = $this->entityManager
+            ->getRepository(Game::class)
+            ->findPastGamesById($id);
+
+        return $this->getGamePastBetting($user, $pastGames);
+    }
+
+
+    /**
+     * @param UserInterface $user
      * @return array
      * @throws \Exception
      */
@@ -104,6 +120,7 @@ class UserPastGames implements UserPastGamesInterface
         );
 
         return new GamePastBetting(
+            $pastGame->getId(),
             $pastGame->getTeamFirst()->getName(),
             $pastGame->getTeamSecond()->getName(),
             $pastGame->getDate(),

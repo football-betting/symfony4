@@ -66,17 +66,17 @@ class UserPastGamesTest extends KernelTestCase
         $foundPastGame = false;
         $foundPastGameSecond = false;
 
-        foreach ($pastGames as $gameId => $pastGame) {
-            if ($gameId === $futureTestGame->getId()) {
+        foreach ($pastGames as $pastGame) {
+            if ($pastGame->getGameId() === $futureTestGame->getId()) {
                 $foundFutureGame = true;
             }
-            if ($gameId === $futureTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $futureTestGameSecond->getId()) {
                 $foundFutureGameSecond = true;
             }
-            if ($gameId === $pastTestGame->getId()) {
+            if ($pastGame->getGameId() === $pastTestGame->getId()) {
                 $foundPastGame = true;
             }
-            if ($gameId === $pastTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $pastTestGameSecond->getId()) {
                 $foundPastGameSecond = true;
             }
         }
@@ -112,20 +112,20 @@ class UserPastGamesTest extends KernelTestCase
         $foundPastGame = false;
         $foundPastGameSecond = false;
 
-        foreach ($pastGames as $gameId => $pastGame) {
-            if ($gameId === $futureTestGame->getId()) {
+        foreach ($pastGames as $pastGame) {
+            if ($pastGame->getGameId() === $futureTestGame->getId()) {
                 $foundFutureGame = true;
             }
-            if ($gameId === $futureTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $futureTestGameSecond->getId()) {
                 $foundFutureGameSecond = true;
             }
-            if ($gameId === $pastTestGame->getId()) {
+            if ($pastGame->getGameId() === $pastTestGame->getId()) {
                 $foundPastGame = true;
                 self::assertSame(4, $pastGame->getFirstTeamUserResult());
                 self::assertSame(5, $pastGame->getSecondTeamUserResult());
                 self::assertSame(55, $pastGame->getScore());
             }
-            if ($gameId === $pastTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $pastTestGameSecond->getId()) {
                 $foundPastGameSecond = true;
             }
         }
@@ -160,20 +160,20 @@ class UserPastGamesTest extends KernelTestCase
         $foundPastGame = false;
         $foundPastGameSecond = false;
 
-        foreach ($pastGames as $gameId => $pastGame) {
-            if ($gameId === $pastTestGameNotActive->getId()) {
+        foreach ($pastGames as $pastGame) {
+            if ($pastGame->getGameId() === $pastTestGameNotActive->getId()) {
                 $foundFutureGame = true;
             }
-            if ($gameId === $futureTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $futureTestGameSecond->getId()) {
                 $foundFutureGameSecond = true;
             }
-            if ($gameId === $pastTestGame->getId()) {
+            if ($pastGame->getGameId() === $pastTestGame->getId()) {
                 $foundPastGame = true;
                 self::assertSame(4, $pastGame->getFirstTeamUserResult());
                 self::assertSame(5, $pastGame->getSecondTeamUserResult());
                 self::assertSame(10, $pastGame->getScore());
             }
-            if ($gameId === $pastTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $pastTestGameSecond->getId()) {
                 $foundPastGameSecond = true;
             }
         }
@@ -207,17 +207,17 @@ class UserPastGamesTest extends KernelTestCase
         $foundPastGame = false;
         $foundPastGameSecond = false;
 
-        foreach ($pastGames as $gameId => $pastGame) {
-            if ($gameId === $pastTestGameNotActive->getId()) {
+        foreach ($pastGames as $pastGame) {
+            if ($pastGame->getGameId() === $pastTestGameNotActive->getId()) {
                 $foundFutureGame = true;
             }
-            if ($gameId === $futureTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $futureTestGameSecond->getId()) {
                 $foundFutureGameSecond = true;
             }
-            if ($gameId === $pastTestGame->getId()) {
+            if ($pastGame->getGameId() === $pastTestGame->getId()) {
                 $foundPastGame = true;
             }
-            if ($gameId === $pastTestGameSecond->getId()) {
+            if ($pastGame->getGameId() === $pastTestGameSecond->getId()) {
                 $foundPastGameSecond = true;
             }
         }
@@ -227,4 +227,39 @@ class UserPastGamesTest extends KernelTestCase
         self::assertTrue($foundPastGame);
         self::assertTrue($foundPastGameSecond);
     }
+
+    public function testGetOnePastGame()
+    {
+        $mockGameRatingFacade = $this->createMock(PointsInterface::class);
+
+        $mockGameRatingFacade->method('get')
+            ->willReturn(1);
+
+        $userPastGames = new UserPastGames(
+            $this->entityManager,
+            $mockGameRatingFacade
+        );
+
+        $futureTestGame = $this->createTestFutureGames();
+        $pastTestGame = $this->createTestPastGames();
+
+        $pastGames = $userPastGames->getOnePastGame($this->getUser(), $pastTestGame->getId());
+
+        $foundFutureGame = false;
+        $foundPastGame = false;
+
+        foreach ($pastGames as $pastGame) {
+            if ($pastGame->getGameId() === $futureTestGame->getId()) {
+                $foundFutureGame = true;
+            }
+            if ($pastGame->getGameId() === $pastTestGame->getId()) {
+                $foundPastGame = true;
+                dump($pastTestGame);
+            }
+        }
+
+        self::assertFalse($foundFutureGame);
+        self::assertTrue($foundPastGame);
+    }
+
 }
