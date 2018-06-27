@@ -7,10 +7,13 @@ use App\User\Persistence\Entity\User as UserEntity;
 
 trait User
 {
-    public function getUser()
+    /**
+     * @return UserEntity
+     */
+    public function getUser(): UserEntity
     {
-        $teamRepository = $this->entityManager->getRepository(UserEntity::class);
-        $userEntity = $teamRepository->findOneBy([
+        $userRepository = $this->entityManager->getRepository(UserEntity::class);
+        $userEntity = $userRepository->findOneBy([
             'username' => Config::USER_NAME
         ]);
 
@@ -21,10 +24,13 @@ trait User
         return $userEntity;
     }
 
-    public function getUserTwo()
+    /**
+     * @return UserEntity
+     */
+    public function getUserTwo(): UserEntity
     {
-        $teamRepository = $this->entityManager->getRepository(UserEntity::class);
-        $userEntity = $teamRepository->findOneBy([
+        $userRepository = $this->entityManager->getRepository(UserEntity::class);
+        $userEntity = $userRepository->findOneBy([
             'username' => Config::USER_NAME_TWO
         ]);
 
@@ -35,7 +41,27 @@ trait User
         return $userEntity;
     }
 
-    private function createUser()
+    /**
+     * @param string $username
+     */
+    public function deleteUserByUsername(string $username): void
+    {
+        $userRepository = $this->entityManager->getRepository(UserEntity::class);
+        $userEntity = $userRepository->findOneBy([
+            'username' => $username
+        ]);
+
+        if( $userEntity instanceof UserEntity ) {
+            $this->entityManager->remove($userEntity);
+            $this->entityManager->flush();
+        }
+
+    }
+
+    /**
+     * @return UserEntity
+     */
+    private function createUser(): UserEntity
     {
         $user = new UserEntity();
         $user->setEmail(Config::USER_EMAIL);
@@ -52,7 +78,10 @@ trait User
         return $user;
     }
 
-    private function createUserTwo()
+    /**
+     * @return UserEntity
+     */
+    private function createUserTwo(): UserEntity
     {
         $user = new UserEntity();
         $user->setEmail(Config::USER_EMAIL_TWO);
