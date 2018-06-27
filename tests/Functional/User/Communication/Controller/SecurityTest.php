@@ -6,7 +6,6 @@ use App\Tests\Integration\Helper\Config;
 use App\Tests\Integration\Helper\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Client;
-use Symfony\Component\DomCrawler\Crawler;
 
 class SecurityTest extends WebTestCase
 {
@@ -21,29 +20,22 @@ class SecurityTest extends WebTestCase
      */
     private $entityManager;
 
-    /**
-     * @var Crawler
-     */
-    protected $loginRequest;
-
     protected function setUp()
     {
         $this->client = self::createClient();
-        $this->loginRequest = $this->client->request('GET', '/');
         $this->entityManager = $this->client->getContainer()->get('doctrine')->getManager();
         $this->getUser();
     }
 
     protected function tearDown()
     {
+        $this->deleteUserByUsername(Config::USER_NAME);
         $this->entityManager->close();
         $this->entityManager = null;
     }
 
     public function testLoginFormExists(): void
     {
-        $this->loginRequest;
-
         $this->assertContains(
             '_username',
             $this->client->getResponse()->getContent()
@@ -56,7 +48,7 @@ class SecurityTest extends WebTestCase
 
     public function testLoginSuccess(): void
     {
-        $crawler = $this->loginRequest;
+        $crawler = $this->client->request('GET', '/');
 
         $form = $crawler->selectButton('login')->form();
         $form['_username'] = Config::USER_NAME;
@@ -70,7 +62,7 @@ class SecurityTest extends WebTestCase
 
     public function testLoginErrorMessage(): void
     {
-        $crawler = $this->loginRequest;
+        $crawler = $this->client->request('GET', '/');
 
         $form = $crawler->selectButton('login')->form();
         $form['_username'] = 'FAIL_USER';
