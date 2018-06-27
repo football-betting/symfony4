@@ -20,4 +20,11 @@ interface UserPastGamesInterface
      * @return GamePastBetting[]
      */
     public function getActiveGames(UserInterface $user): array;
+
+    /**
+     * @param UserInterface $user
+     * @param int $id
+     * @return GamePastBetting[]
+     */
+    public function getOnePastGame(UserInterface $user, int $id): array;
 }

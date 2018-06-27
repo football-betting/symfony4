@@ -87,7 +87,6 @@ class UserBetting extends Controller
         );
     }
 
-
     /**
      * @Route("/all-past-games", name="all_past_games")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -101,6 +100,40 @@ class UserBetting extends Controller
             [
                 'pastGamesForm' => $pastGamesForm,
                 'username' => false
+            ]
+        );
+    }
+
+    /**
+     * toDo Refactor this
+     * @Route("/past-game-detail/{gameId}", name="past_game_detail")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function pastGameDetail(int $gameId)
+    {
+        $users = $this->getDoctrine()->getRepository(User::class)
+            ->findBy([], ['username' => 'ASC']);
+
+        $teamFirstName = '';
+        $teamSecondName = '';
+        $gameInfo2users = [];
+        foreach ($users as $user) {
+            $pastGamesForm = $this->userPastGames->getOnePastGame($user, $gameId);
+            if (!empty($pastGamesForm)) {
+                $teamFirstName = current($pastGamesForm)->getFirstTeamName();
+                $teamSecondName = current($pastGamesForm)->getSecondTeamName();
+
+                $gameInfo2users[$user->getUsername()] = current($pastGamesForm);
+            }
+
+        }
+
+        return $this->render(
+            'gamebetting/betting/past_game_detail.html.twig',
+            [
+                'gameInfo2users' => $gameInfo2users,
+                'teamFirstName' => $teamFirstName,
+                'teamSecondName' => $teamSecondName,
             ]
         );
     }

@@ -245,6 +245,7 @@ class UserPastGamesTest extends KernelTestCase
 
         $pastGames = $userPastGames->getOnePastGame($this->getUser(), $pastTestGame->getId());
 
+        self::assertCount(1, $pastGames);
         $foundFutureGame = false;
         $foundPastGame = false;
 
@@ -260,6 +261,24 @@ class UserPastGamesTest extends KernelTestCase
 
         self::assertFalse($foundFutureGame);
         self::assertTrue($foundPastGame);
+    }
+
+    public function testGetOnePastGameNoGameFound()
+    {
+        $mockGameRatingFacade = $this->createMock(PointsInterface::class);
+
+        $mockGameRatingFacade->method('get')
+            ->willReturn(1);
+
+        $userPastGames = new UserPastGames(
+            $this->entityManager,
+            $mockGameRatingFacade
+        );
+
+        $pastGames = $userPastGames->getOnePastGame($this->getUser(), 99999999);
+
+        self::assertCount(0, $pastGames);
+        self::assertEmpty($pastGames);
     }
 
 }

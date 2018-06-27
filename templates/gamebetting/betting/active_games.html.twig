@@ -21,16 +21,20 @@
                     <hr>
                 </div>
                 <hr>
-                    <div style="color: #9A9A9A;" class="col-md-6 text-center">
-                        Punkte: {{ game.score }}
-                    </div>
-                    <div style="color: #9A9A9A;" class="col-md-6 text-center">
-                        Dein Tipp: {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
+                <div style="color: #9A9A9A;" class="col-md-6 text-center">
+                    Punkte: {{ game.score }}
+                </div>
+                <div style="color: #9A9A9A;" class="col-md-6 text-center">
+                    Dein Tipp:
+
+                    <a class="text-danger" href="{{ path('past_game_detail', {'gameId': game.gameId}) }}">
+                        {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
                             ( - : - )
                         {% else %}
                             ( {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }} )
                         {% endif %}
-                    </div>
+                    </a>
+                </div>
                 <div class="card-footer col-md-12">
                 </div>
             </div>
