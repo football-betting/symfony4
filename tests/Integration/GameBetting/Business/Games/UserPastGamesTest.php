@@ -255,7 +255,6 @@ class UserPastGamesTest extends KernelTestCase
             }
             if ($pastGame->getGameId() === $pastTestGame->getId()) {
                 $foundPastGame = true;
-                dump($pastTestGame);
             }
         }
 

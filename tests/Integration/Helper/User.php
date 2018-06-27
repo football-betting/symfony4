@@ -29,9 +29,7 @@ trait User
         ]);
 
         if( ! $userEntity instanceof UserEntity ) {
-            dump(__FUNCTION__ .' / '. __FILE__ .' / '. __LINE__);
             $userEntity = $this->createUserTwo();
-            dump($userEntity);
         }
 
         return $userEntity;

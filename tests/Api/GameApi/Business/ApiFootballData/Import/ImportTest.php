@@ -82,7 +82,7 @@ class ImportTest extends KernelTestCase
         $this->assertCount(2, $polandGamesHome);
 
         $firstHomePolandGames = $polandGamesHome[0];
-        $this->assertSame('2018-06-19 17:00:00', $firstHomePolandGames->getDate()->format('Y-m-d H:i:s'));
+        $this->assertSame('2018-06-19', $firstHomePolandGames->getDate()->format('Y-m-d'));
         $this->assertSame('Senegal', $firstHomePolandGames->getTeamSecond()->getName());
     }
 }
