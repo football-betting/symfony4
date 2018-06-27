@@ -70,6 +70,68 @@
                    <source>sidebar.past-games.first-letter</source>
                    <target>V</target>
               </trans-unit>
+              <trans-unit id="dashboard.logout">
+                   <source>dashboard.logout</source>
+                   <target>Abmelden</target>
+              </trans-unit>
+              <trans-unit id="dashboard.save">
+                   <source>dashboard.save</source>
+                   <target>Speichern</target>
+              </trans-unit>
+              <trans-unit id="dashboard.date">
+                   <source>dashboard.date</source>
+                   <target>Datum</target>
+              </trans-unit>
+              <trans-unit id="dashboard.team">
+                   <source>dashboard.team</source>
+                   <target>Mannschaft</target>
+              </trans-unit>
+              <trans-unit id="dashboard.result">
+                   <source>dashboard.result</source>
+                   <target>Ergebnis</target>
+              </trans-unit>
+              <trans-unit id="dashboard.points">
+                   <source>dashboard.points</source>
+                   <target>Punkte</target>
+              </trans-unit>
+              <trans-unit id="dashboard.bet">
+                   <source>dashboard.bet</source>
+                   <target>Tipp</target>
+              </trans-unit>
+              <trans-unit id="dashboard.futureGames">
+                   <source>dashboard.futureGames</source>
+                   <target>Zukünftige Spiele</target>
+              </trans-unit>
+              <trans-unit id="dashboard.pastGames">
+                   <source>dashboard.pastGames</source>
+                   <target>Alle vergangenen Spiele</target>
+              </trans-unit>
+              <trans-unit id="dashboard.top3">
+                   <source>dashboard.top3</source>
+                   <target>Top 3</target>
+              </trans-unit>
+              <trans-unit id="dashboard.rank">
+                   <source>dashboard.rank</source>
+                   <target>Tabellenplatz</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.position">
+                   <source>dashboard.ranking.position</source>
+                   <target>Position</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.difference">
+                   <source>dashboard.ranking.difference</source>
+                   <target>Tordifferenz</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.winner">
+                   <source>dashboard.ranking.winner</source>
+                   <target>Sieger</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.nohit">
+                   <source>dashboard.ranking.nohit</source>
+                   <target>Kein Treffer</target>
+              </trans-unit>
+
+
         </body>
     </file>
 </xliff>
