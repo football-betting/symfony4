@@ -3,6 +3,8 @@
 namespace App\User\Communication\Controller;
 
 use App\Tests\Integration\Helper\Config;
+use App\Tests\Integration\Helper\User;
+use App\User\Persistence\Entity\User as UserEntity;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -10,6 +12,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class RegistrationTest extends WebTestCase
 {
 
+    use User;
     /**
      * @var Client
      */
@@ -20,23 +23,16 @@ class RegistrationTest extends WebTestCase
      */
     private $entityManager;
 
-    /**
-     * @var Crawler
-     */
-    protected $registerRequest;
 
     protected function setUp()
     {
         $this->client = self::createClient();
-        $this->registerRequest = $this->client->request('GET', '/register');
         $this->entityManager = $this->client->getContainer()->get('doctrine')->getManager();
     }
 
     protected function tearDown()
     {
-        $sql = 'DELETE FROM app_users WHERE username = "'.Config::USER_NAME_TWO.'"';
-        $this->entityManager->getConnection()->prepare($sql)->execute();
-
+        $this->deleteUserByUsername(Config::USER_NAME_TWO);
         $this->entityManager->close();
         $this->entityManager = null;
     }
@@ -45,9 +41,9 @@ class RegistrationTest extends WebTestCase
      * @dataProvider inputProvider
      * @param $input
      */
-    public function testRegisterFormExists($input)
+    public function testRegisterFormExists($input): void
     {
-        $this->registerRequest;
+        $this->client->request('GET', '/register');
 
         $this->assertContains(
             $input,
@@ -55,9 +51,12 @@ class RegistrationTest extends WebTestCase
         );
     }
 
-    public function testRegister()
+    /**
+     * @return Crawler
+     */
+    public function testRegister(): Crawler
     {
-        $crawler = $this->registerRequest;
+        $crawler = $this->client->request('GET', '/register');
 
         $form = $crawler->selectButton('Registrieren!')->form();
         $form['user[username]'] = Config::USER_NAME_TWO;
@@ -68,13 +67,19 @@ class RegistrationTest extends WebTestCase
         $this->client->submit($form);
         $this->client->followRedirect();
 
-        $query = $this->entityManager->createQuery(
-            'SELECT u FROM App\User\Persistence\Entity\User u WHERE u.username = :name');
-        $query->setParameter('name', Config::USER_NAME_TWO);
-        $users = $query->getResult(2); // array of ForumUser objects
+        $userRepository = $this->entityManager->getRepository(UserEntity::class);
+        $user = $userRepository->loadUserByUsername(Config::USER_NAME_TWO);
 
-        $this->assertNotEmpty($users);
+        $this->assertNotEmpty($user);
         $this->assertContains('Login', $this->client->getResponse()->getContent());
+
+        return $crawler;
+    }
+
+    public function testUsernameAlreadyTakenError(): void
+    {
+        $this->testRegister();
+        $this->assertContains('form-error-message', $this->client->getResponse()->getContent());
     }
 
     /**
