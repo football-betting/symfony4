@@ -36,6 +36,8 @@ class SecurityTest extends WebTestCase
 
     public function testLoginFormExists(): void
     {
+        $this->client->request('GET', '/');
+
         $this->assertContains(
             '_username',
             $this->client->getResponse()->getContent()
