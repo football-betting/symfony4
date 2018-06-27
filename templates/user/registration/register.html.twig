@@ -2,15 +2,17 @@
 
 {% block body %}
 
-    {# For future translations#}
-    {#{{ form_widget(form.username, { 'attr': {'class': "span12",#}
-        {#'placeholder': 'security.login.usernameplaceholder'|trans} }) }}#}
-
     {{ form_start(form, {label_attr: {class: 'form'} }) }}
 <div class="card card-login">
     <div class="card-header ">
         <h3 class="header text-center">Registrieren</h3>
     </div>
+
+    {# @TODO implement translation for error message, if branche is merged#}
+        <div class="text-center error">
+            {{ form_errors(form.username)}}
+            {{ form_errors(form.email) }}
+        </div>
     <div class="card-body ">
         <div class="input-group">
             <div class="input-group-prepend">
