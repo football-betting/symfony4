@@ -106,6 +106,10 @@
                    <source>dashboard.pastGames</source>
                    <target>Alle vergangenen Spiele</target>
               </trans-unit>
+              <trans-unit id="dashboard.pastTenGames">
+                   <source>dashboard.pastTenGames</source>
+                   <target>Vergangene 10 Spiele</target>
+              </trans-unit>
               <trans-unit id="dashboard.top3">
                    <source>dashboard.top3</source>
                    <target>Top 3</target>
@@ -113,6 +117,14 @@
               <trans-unit id="dashboard.rank">
                    <source>dashboard.rank</source>
                    <target>Tabellenplatz</target>
+              </trans-unit>
+              <trans-unit id="dashboard.rankList">
+                   <source>dashboard.rankList</source>
+                   <target>Rangliste</target>
+              </trans-unit>
+              <trans-unit id="dashboard.worldChampion">
+                   <source>dashboard.worldChampion</source>
+                   <target>Wer wird Weltmeister 2018</target>
               </trans-unit>
               <trans-unit id="dashboard.ranking.position">
                    <source>dashboard.ranking.position</source>
@@ -130,7 +142,6 @@
                    <source>dashboard.ranking.nohit</source>
                    <target>Kein Treffer</target>
               </trans-unit>
-
 
         </body>
     </file>
