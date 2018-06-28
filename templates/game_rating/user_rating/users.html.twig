@@ -49,7 +49,7 @@
                                             {% if myUserId == userScoreWithPosition.userScore.user.id %}
                                                 {{ userScoreWithPosition.userScore.user.username }}
                                             {% else %}
-                                                <a href="{{ path('game_past_games_by_users', {'userId': userScoreWithPosition.userScore.user.id}) }}">
+                                                <a class="text-danger" href="{{ path('game_past_games_by_users', {'userId': userScoreWithPosition.userScore.user.id}) }}">
                                                     {{ userScoreWithPosition.userScore.user.username }}
                                                 </a>
                                             {% endif %}

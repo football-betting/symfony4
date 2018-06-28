@@ -38,46 +38,99 @@ class UserPastGames implements UserPastGamesInterface
      */
     public function get(UserInterface $user): array
     {
-        $pastGamesForm = [];
-
         /** @var Game[] $pastGames */
         $pastGames = $this->entityManager
             ->getRepository(Game::class)
             ->findPastGames();
 
-        $gameId2UserBets = $this->getGameIdForUserBets($user, $pastGames);
+        return $this->getGamePastBetting($user, $pastGames);
+    }
 
-        foreach ($pastGames as $pastGame) {
+    /**
+     * @param UserInterface $user
+     * @param int $id
+     * @return GamePastBetting[]
+     */
+    public function getOnePastGame(UserInterface $user, int $id): array
+    {
+        /** @var Game[] $pastGames */
+        $pastGames = $this->entityManager
+            ->getRepository(Game::class)
+            ->findPastGamesById($id);
 
-            $firstTeamUserResult = null;
-            $secondTeamUserResult = null;
-            if (isset($gameId2UserBets[$pastGame->getId()])) {
-                $firstTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getFirstTeamResult();
-                $secondTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getSecondTeamResult();
-            }
+        return $this->getGamePastBetting($user, $pastGames);
+    }
 
-            $gameResult = new Result(
-                (int)$pastGame->getFirstTeamResult(),
-                (int)$pastGame->getSecondTeamResult(),
-                $firstTeamUserResult,
-                $secondTeamUserResult
-            );
 
-            $pastGamesForm[$pastGame->getId()] = new GamePastBetting(
-                $pastGame->getTeamFirst()->getName(),
-                $pastGame->getTeamSecond()->getName(),
-                $pastGame->getDate(),
-                $gameResult->getFirstTeamResult(),
-                $gameResult->getSecondTeamResult(),
-                $gameResult->getFirstTeamUserResult(),
-                $gameResult->getSecondTeamUserResult(),
-                $this->points->get($gameResult)
+    /**
+     * @param UserInterface $user
+     * @return array
+     * @throws \Exception
+     */
+    public function getActiveGames(UserInterface $user): array
+    {
+        /** @var Game[] $pastGames */
+        $activeGamesGames = $this->entityManager
+            ->getRepository(Game::class)
+            ->findActiveGames();
+
+        return $this->getGamePastBetting($user, $activeGamesGames);
+    }
+
+    /**
+     * @param UserInterface $user
+     * @param Game[] $games
+     * @return array
+     */
+    private function getGamePastBetting(UserInterface $user, array $games): array
+    {
+        $pastGamesForm = [];
+        $gameId2UserBets = $this->getGameIdForUserBets($user, $games);
+
+        foreach ($games as $pastGame) {
+
+            $pastGamesForm[$pastGame->getId()] = $this->getGamePastBettingInfo(
+                $gameId2UserBets,
+                $pastGame
             );
         }
 
         return $pastGamesForm;
     }
 
+    /**
+     * @param array $gameId2UserBets
+     * @param Game $pastGame
+     * @return GamePastBetting
+     */
+    private function getGamePastBettingInfo(array $gameId2UserBets, Game $pastGame): GamePastBetting
+    {
+        $firstTeamUserResult = null;
+        $secondTeamUserResult = null;
+        if (isset($gameId2UserBets[$pastGame->getId()])) {
+            $firstTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getFirstTeamResult();
+            $secondTeamUserResult = $gameId2UserBets[$pastGame->getId()]->getSecondTeamResult();
+        }
+
+        $gameResult = new Result(
+            (int)$pastGame->getFirstTeamResult(),
+            (int)$pastGame->getSecondTeamResult(),
+            $firstTeamUserResult,
+            $secondTeamUserResult
+        );
+
+        return new GamePastBetting(
+            $pastGame->getId(),
+            $pastGame->getTeamFirst()->getName(),
+            $pastGame->getTeamSecond()->getName(),
+            $pastGame->getDate(),
+            $gameResult->getFirstTeamResult(),
+            $gameResult->getSecondTeamResult(),
+            $gameResult->getFirstTeamUserResult(),
+            $gameResult->getSecondTeamUserResult(),
+            $this->points->get($gameResult)
+        );
+    }
 
     /**
      * @param UserInterface $user
@@ -86,6 +139,10 @@ class UserPastGames implements UserPastGamesInterface
      */
     private function getGameIdForUserBets(UserInterface $user, array $pastGames): array
     {
+        if (empty($pastGames)) {
+            return [];
+        }
+
         /** @var UserBettingEntity[] $userBets */
         $userBets = $this->entityManager
             ->getRepository(UserBettingEntity::class)

@@ -1,0 +1,43 @@
+{% for game in activeGames %}
+    <div class="card">
+        <div class="timeline-heading" style="padding: 10px">
+            <span class="badge badge-pill badge-danger">{{ game.gameDate|date("d.m.Y G:i") }}</span>
+        </div>
+        <div class="timeline-body betting-wrapper-dashboard">
+            <div class="row ">
+                <div class="col-md-4 text-center">
+                    {{ game.firstTeamName }}
+                </div>
+                <div class="col-md-2 text-center">
+                    {{ game.firstTeamResult }}
+                </div>
+                <div class="col-md-2 text-center">
+                    {{ game.secondTeamResult }}
+                </div>
+                <div class="col-md-4 text-center">
+                    {{ game.secondTeamName }}
+                </div>
+                <div class="card-footer col-md-12">
+                    <hr>
+                </div>
+                <hr>
+                <div style="color: #9A9A9A;" class="col-md-6 text-center">
+                    Punkte: {{ game.score }}
+                </div>
+                <div style="color: #9A9A9A;" class="col-md-6 text-center">
+                    Dein Tipp:
+
+                    <a class="text-danger" href="{{ path('past_game_detail', {'gameId': game.gameId}) }}">
+                        {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
+                            ( - : - )
+                        {% else %}
+                            ( {{ game.firstTeamUserResult }} : {{ game.secondTeamUserResult }} )
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="card-footer col-md-12">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

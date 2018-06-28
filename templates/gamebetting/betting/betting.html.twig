@@ -6,6 +6,10 @@
         <div class="col-md-6">
 
             {{ render(controller(
+                'App\\GameBetting\\Communication\\Controller\\UserBetting::getActiveGames'
+            )) }}
+
+            {{ render(controller(
                 'App\\GameRating\\Communication\\Controller\\UserRating::myInfo'
             )) }}
 
@@ -15,7 +19,7 @@
 
             <div class="card">
                 <div class="card-header text-center">
-                    <h5>Vergangene 10 Spiele</h5>
+                    <h5>Vergangene 6 Spiele</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -49,7 +53,9 @@
                                             </td>
                                             <td>{{ game.secondTeamName }}</td>
                                             <td>
-                                                {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                                <a class="text-danger" href="{{ path('past_game_detail', {'gameId': game.gameId}) }}">
+                                                    {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                                </a>
                                             </td>
                                             <td>
                                                 {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
