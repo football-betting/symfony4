@@ -33,7 +33,7 @@ class Client implements ClientInterface
      */
     public function getGames() : array
     {
-        $res = $this->getClient()->get(self::GAMES, $this->options);
+        $res = $this->getClient()->get(self::GAMES);
         $gameInfo = (array)json_decode(
             (string)$res->getBody()->getContents(),
             true
