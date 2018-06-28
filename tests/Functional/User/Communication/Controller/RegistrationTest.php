@@ -32,6 +32,7 @@ class RegistrationTest extends WebTestCase
 
     protected function tearDown()
     {
+        $this->deleteUserByUsername(Config::USER_NAME_TWO);
         $this->entityManager->close();
         $this->entityManager = null;
     }
