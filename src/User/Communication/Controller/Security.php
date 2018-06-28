@@ -14,13 +14,14 @@ class Security extends Controller
 {
     /**
      * @Route("/", name="login")
+     * @param Request             $request
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('user/security/login.html.twig', array(
@@ -36,10 +37,11 @@ class Security extends Controller
      * and handle the logout automatically. See logout in config/packages/security.yaml
      *
      * @Route("/logout", name="logout")
+     * @throws \Exception
      */
     public function logout(): void
     {
-        throw new \Exception('This should never be reached!');
+        throw new \RuntimeException('This should never be reached!');
     }
 
     /**
@@ -49,7 +51,7 @@ class Security extends Controller
      * @param Request $request
      * @return Response
      */
-    public function placeHolderFunction(Request $request)
+    public function placeHolderFunction(Request $request): Response
     {
         return $this->render('base.html.twig');
     }
