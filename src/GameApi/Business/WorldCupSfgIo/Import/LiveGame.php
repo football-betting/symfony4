@@ -55,7 +55,7 @@ class LiveGame implements LiveGameInterface
             }
 
             if ($changeEntity === true) {
-                $this->entityManager->flush($activeGamesGame);
+                $this->entityManager->flush();
             }
         }
     }
