@@ -18,7 +18,7 @@ class Game implements GameInterface
     private $client;
 
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
