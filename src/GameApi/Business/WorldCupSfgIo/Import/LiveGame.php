@@ -45,7 +45,7 @@ class LiveGame implements LiveGameInterface
                     $findTeamSecond = $activeGamesGame->getTeamSecond()->getName() === $game->getSecondTeamName();
                     $checkTeamFirstResult = (int)$activeGamesGame->getFirstTeamResult() !== $game->getFirstTeamResult();
                     $checkTeamSecondResult = (int)$activeGamesGame->getSecondTeamResult() !== $game->getSecondTeamResult();
-                    if ($findTeamFirst && $findTeamSecond && $checkTeamFirstResult && $checkTeamSecondResult) {
+                    if ($findTeamFirst && $findTeamSecond && ($checkTeamFirstResult || $checkTeamSecondResult)) {
                         $changeEntity = true;
                         $activeGamesGame->setFirstTeamResult($game->getFirstTeamResult());
                         $activeGamesGame->setSecondTeamResult($game->getSecondTeamResult());
