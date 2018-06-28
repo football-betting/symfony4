@@ -24,7 +24,7 @@ class Game implements GameInterface
 
     /**
      * @param ClientInterface $client
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      */
     public function __construct(ClientInterface $client, EntityManagerInterface $entityManager)
     {
@@ -33,7 +33,7 @@ class Game implements GameInterface
     }
 
 
-    public function import()
+    public function import() : void
     {
         $games = $this->client->getGames();
 

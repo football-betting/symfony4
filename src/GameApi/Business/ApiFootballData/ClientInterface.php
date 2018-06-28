@@ -2,7 +2,19 @@
 
 namespace App\GameApi\Business\ApiFootballData;
 
+/**
+ * @package App\GameApi\Business\ApiFootballData
+ */
 interface ClientInterface
 {
-    public function getTeams();
+
+    /**
+     * @return array
+     */
+    public function getTeams(): array;
+
+    /**
+     * @return array
+     */
+    public function getGames(): array;
 }

@@ -12,12 +12,12 @@ class Client implements ClientInterface
     private const GAMES = '/v1/competitions/467/fixtures';
 
     /**
-     * @var Client
+     * @var GuzzleHttpClient
      */
     private $client;
 
     /**
-     * @var string
+     * @var array
      */
     private $options = [];
 
@@ -34,25 +34,33 @@ class Client implements ClientInterface
         }
     }
 
-
-    public function getTeams()
+    /**
+     * @return array
+     */
+    public function getTeams() : array
     {
-        $res = $this->getClient()->get(self::TEAMS, $this->options);
+        $res = (array)$this->getClient()->get(self::TEAMS, $this->options);
         return json_decode(
             (string)$res->getBody()->getContents(),
             true
         );
     }
 
-    public function getGames()
+    /**
+     * @return array
+     */
+    public function getGames() : array
     {
         $res = $this->getClient()->get(self::GAMES, $this->options);
-        return json_decode(
+        return (array)json_decode(
             (string)$res->getBody()->getContents(),
             true
         );
     }
 
+    /**
+     * @return GuzzleHttpClient
+     */
     private function getClient()
     {
         if ($this->client === null) {

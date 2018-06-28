@@ -18,13 +18,13 @@ class Team implements TeamInterface
     private $client;
 
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
     /**
      * @param ClientInterface $client
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      */
     public function __construct(ClientInterface $client, EntityManagerInterface $entityManager)
     {
@@ -33,7 +33,7 @@ class Team implements TeamInterface
     }
 
 
-    public function import()
+    public function import() : void
     {
         $teams = $this->client->getTeams();
         $teamRepository = $this->entityManager->getRepository(TeamEntity::class);
