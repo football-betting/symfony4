@@ -39,8 +39,8 @@ class Client implements ClientInterface
      */
     public function getTeams() : array
     {
-        $res = (array)$this->getClient()->get(self::TEAMS, $this->options);
-        return json_decode(
+        $res = $this->getClient()->get(self::TEAMS, $this->options);
+        return (array)json_decode(
             (string)$res->getBody()->getContents(),
             true
         );
