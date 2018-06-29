@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+              <trans-unit id="login">
+                    <source>login</source>
+                    <target>Login</target>
+              </trans-unit>
+              <trans-unit id="login.username">
+                    <source>login.username</source>
+                    <target>Username</target>
+              </trans-unit>
+              <trans-unit id="login.password">
+                    <source>login.password</source>
+                    <target>Password</target>
+              </trans-unit>
+              <trans-unit id="register">
+                   <source>register</source>
+                   <target>Register</target>
+              </trans-unit>
+              <trans-unit id="register.mail">
+                     <source>register.mail</source>
+                     <target>Mail</target>
+              </trans-unit>
+              <trans-unit id="register.repeat-password">
+                     <source>register.repeat-password</source>
+                     <target>Repeat passwort</target>
+              </trans-unit>
+              <trans-unit id="betting">
+                   <source>Betting</source>
+                   <target>Betting!</target>
+              </trans-unit>
+              <trans-unit id="sidebar.bet">
+                   <source>sidebar.bet</source>
+                   <target>Bet</target>
+              </trans-unit>
+              <trans-unit id="sidebar.dashboard">
+                   <source>sidebar.dashboard</source>
+                   <target>Dashboard</target>
+              </trans-unit>
+              <trans-unit id="sidebar.dashboard.first-letter">
+                   <source>sidebar.dashboard.first-letter</source>
+                   <target>D</target>
+              </trans-unit>
+              <trans-unit id="sidebar.scores">
+                   <source>sidebar.scores</source>
+                   <target>Scores</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking">
+                   <source>sidebar.ranking</source>
+                   <target>Ranking</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking.first-letter">
+                   <source>sidebar.ranking.first-letter</source>
+                   <target>R</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games">
+                   <source>sidebar.past-games</source>
+                   <target>Past games</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games.first-letter">
+                   <source>sidebar.past-games.first-letter</source>
+                   <target>P</target>
+              </trans-unit>
+        </body>
+    </file>
+</xliff>

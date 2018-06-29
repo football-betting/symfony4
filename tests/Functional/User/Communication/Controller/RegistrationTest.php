@@ -96,7 +96,7 @@ class RegistrationTest extends WebTestCase
      */
     protected function submitRegisterForm($crawler): void
     {
-        $form = $crawler->selectButton('Registrieren!')->form();
+        $form = $crawler->selectButton('Registrieren')->form();
         $form['user[username]'] = Config::USER_NAME_TWO;
         $form['user[email]'] = Config::USER_EMAIL_TWO;
         $form['user[plainPassword][first]'] = Config::USER_PASS_TWO;
