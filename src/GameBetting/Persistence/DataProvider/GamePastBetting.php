@@ -7,6 +7,11 @@ namespace App\GameBetting\Persistence\DataProvider;
 class GamePastBetting
 {
     /**
+     * @var int
+     */
+    private $gameId;
+
+    /**
      * @var string
      */
     private $firstTeamName;
@@ -47,6 +52,7 @@ class GamePastBetting
     private $score;
 
     /**
+     * @param int $gameId
      * @param string $firstTeamName
      * @param string $secondTeamName
      * @param \DateTimeInterface $gameDate
@@ -57,6 +63,7 @@ class GamePastBetting
      * @param int $score
      */
     public function __construct(
+        int $gameId,
         string $firstTeamName,
         string $secondTeamName,
         \DateTimeInterface $gameDate,
@@ -67,6 +74,7 @@ class GamePastBetting
         int $score
     )
     {
+        $this->gameId = $gameId;
         $this->firstTeamName = $firstTeamName;
         $this->secondTeamName = $secondTeamName;
         $this->gameDate = $gameDate;
@@ -75,6 +83,14 @@ class GamePastBetting
         $this->firstTeamUserResult = $firstTeamUserResult;
         $this->secondTeamUserResult = $secondTeamUserResult;
         $this->score = $score;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGameId(): int
+    {
+        return $this->gameId;
     }
 
     /**

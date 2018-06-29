@@ -14,28 +14,71 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class GameRepository extends ServiceEntityRepository
 {
+    const GAME_TIME_RANGE = 'PT115M';
+
+    /**
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Game::class);
     }
 
-
+    /**
+     * @return Game[]
+     */
     public function findFutureGames()
     {
         $qb = $this->createQueryBuilder('game');
         $qb->where('game.date > :date')
-           ->setParameter('date', new \DateTime())
+            ->setParameter('date', new \DateTime())
             ->orderBy('game.date', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return Game[]
+     */
     public function findPastGames()
     {
         $qb = $this->createQueryBuilder('game');
         $qb->where('game.date <= :date')
             ->setParameter('date', new \DateTime())
             ->orderBy('game.date', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function findPastGamesById(int $id)
+    {
+        $qb = $this->createQueryBuilder('game');
+        $qb->where('game.date <= :date');
+        $qb->andWhere('game.id = :id');
+        $qb->setParameter('date', new \DateTime());
+        $qb->setParameter('id', $id);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return Game[]
+     * @throws \Exception
+     */
+    public function findActiveGames()
+    {
+        $dateGameStartRange = new \DateTime();
+        $dateGameStartRange->sub(new \DateInterval(self::GAME_TIME_RANGE));
+
+        $qb = $this->createQueryBuilder('game');
+        $qb->where('game.date <= :dateNow');
+        $qb->andWhere('game.date >= :dateGameStartRange');
+        $qb->setParameter('dateNow', new \DateTime());
+        $qb->setParameter('dateGameStartRange', $dateGameStartRange);
+        $qb->orderBy('game.date', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

@@ -6,6 +6,12 @@
     <div class="card-header ">
         <h3 class="header text-center">{{ 'register'|trans }}</h3>
     </div>
+
+    {# @TODO implement translation for error message, if branche is merged#}
+        <div class="text-center error">
+            {{ form_errors(form.username)}}
+            {{ form_errors(form.email) }}
+        </div>
     <div class="card-body ">
         <div class="input-group">
             <div class="input-group-prepend">

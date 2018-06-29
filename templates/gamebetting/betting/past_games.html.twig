@@ -43,9 +43,13 @@
                                             <td>
                                                 {{ game.firstTeamName }}
                                             </td>
-                                            <td>{{ game.secondTeamName }}</td>
                                             <td>
-                                                {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                                {{ game.secondTeamName }}
+                                            </td>
+                                            <td>
+                                                <a class="text-danger" href="{{ path('past_game_detail', {'gameId': game.gameId}) }}">
+                                                    {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                                </a>
                                             </td>
                                             <td>
                                                 {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
