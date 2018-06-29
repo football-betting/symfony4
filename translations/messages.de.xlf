@@ -78,6 +78,10 @@
                    <source>dashboard.save</source>
                    <target>Speichern</target>
               </trans-unit>
+              <trans-unit id="dashboard.user">
+                   <source>dashboard.user</source>
+                   <target>Benutzer</target>
+              </trans-unit>
               <trans-unit id="dashboard.date">
                    <source>dashboard.date</source>
                    <target>Datum</target>
@@ -117,6 +121,10 @@
               <trans-unit id="dashboard.rank">
                    <source>dashboard.rank</source>
                    <target>Tabellenplatz</target>
+              </trans-unit>
+              <trans-unit id="dashboard.Deadline">
+                   <source>dashboard.Deadline</source>
+                   <target>Bitte bis 29.06.2018 23:59:59 Tip abgeben</target>
               </trans-unit>
               <trans-unit id="dashboard.rankList">
                    <source>dashboard.rankList</source>
