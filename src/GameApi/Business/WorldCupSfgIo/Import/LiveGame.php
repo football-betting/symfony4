@@ -5,6 +5,7 @@ namespace App\GameApi\Business\WorldCupSfgIo\Import;
 
 
 use App\GameApi\Business\WorldCupSfgIo\Client\ClientInterface;
+use App\GameApi\Persistence\DataProvider\GameResult;
 use App\GameCore\Persistence\Entity\Game;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -30,7 +31,7 @@ class LiveGame implements LiveGameInterface
         $this->client = $client;
     }
 
-    public function updateLiveGames() : void
+    public function updateLiveGames(): void
     {
         $activeGamesGames = $this->entityManager
             ->getRepository(Game::class)
@@ -41,11 +42,7 @@ class LiveGame implements LiveGameInterface
             $games = $this->client->getGames();
             foreach ($activeGamesGames as $activeGamesGame) {
                 foreach ($games as $game) {
-                    $findTeamFirst = $activeGamesGame->getTeamFirst()->getName() === $game->getFirstTeamName();
-                    $findTeamSecond = $activeGamesGame->getTeamSecond()->getName() === $game->getSecondTeamName();
-                    $checkTeamFirstResult = (int)$activeGamesGame->getFirstTeamResult() !== $game->getFirstTeamResult();
-                    $checkTeamSecondResult = (int)$activeGamesGame->getSecondTeamResult() !== $game->getSecondTeamResult();
-                    if ($findTeamFirst && $findTeamSecond && ($checkTeamFirstResult || $checkTeamSecondResult)) {
+                    if ($this->checkForNewResult($activeGamesGame, $game)) {
                         $changeEntity = true;
                         $activeGamesGame->setFirstTeamResult($game->getFirstTeamResult());
                         $activeGamesGame->setSecondTeamResult($game->getSecondTeamResult());
@@ -58,6 +55,20 @@ class LiveGame implements LiveGameInterface
                 $this->entityManager->flush();
             }
         }
+    }
+
+    /**
+     * @param Game $activeGamesGame
+     * @param GameResult $game
+     * @return bool
+     */
+    private function checkForNewResult(Game $activeGamesGame, GameResult $game): bool
+    {
+        $findTeamFirst = $activeGamesGame->getTeamFirst()->getName() === $game->getFirstTeamName();
+        $findTeamSecond = $activeGamesGame->getTeamSecond()->getName() === $game->getSecondTeamName();
+        $checkTeamFirstResult = (int)$activeGamesGame->getFirstTeamResult() !== $game->getFirstTeamResult();
+        $checkTeamSecondResult = (int)$activeGamesGame->getSecondTeamResult() !== $game->getSecondTeamResult();
+        return $findTeamFirst && $findTeamSecond && ($checkTeamFirstResult || $checkTeamSecondResult);
     }
 
 

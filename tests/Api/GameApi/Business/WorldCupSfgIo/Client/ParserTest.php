@@ -30,4 +30,21 @@ class ParserTest extends TestCase
         $this->assertSame($resultGames[1]->getFirstTeamResult(), 0);
         $this->assertSame($resultGames[1]->getSecondTeamResult(), 1);
     }
+
+    public function testPenalties()
+    {
+        $jsonInfo = json_decode(
+            file_get_contents( __DIR__ . '/../../../../../Integration/Helper/json/current_game_penalties.json'),
+            true
+        );
+        $paser = new Parser();
+        $resultGames = $paser->get($jsonInfo);
+
+        $this->assertSame($resultGames[0]->getFirstTeamName(), 'Spain');
+        $this->assertSame($resultGames[0]->getSecondTeamName(), 'Russia');
+
+        $this->assertSame($resultGames[0]->getFirstTeamResult(), 4);
+        $this->assertSame($resultGames[0]->getSecondTeamResult(), 5);
+
+    }
 }

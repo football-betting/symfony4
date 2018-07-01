@@ -62,6 +62,23 @@ class Game implements GameInterface
         $this->entityManager->flush();
     }
 
+//"result": {
+    //"goalsHomeTeam": 1,
+    //"goalsAwayTeam": 1,
+    //"halfTime": {
+        //"goalsHomeTeam": 1,
+        //"goalsAwayTeam": 1
+    //},
+    //"extraTime": {
+    //      "goalsHomeTeam": 0,
+    //      "goalsAwayTeam": 0
+    //},
+    //"penaltyShootout": {
+    //      "goalsHomeTeam": 3,
+    //      "goalsAwayTeam": 4
+    //}
+//},
+
     /**
      * @return TeamEntity[]
      */

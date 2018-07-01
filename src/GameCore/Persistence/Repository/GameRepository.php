@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class GameRepository extends ServiceEntityRepository
 {
-    const GAME_TIME_RANGE = 'PT115M';
+    const GAME_TIME_RANGE = 'PT160M';
 
     /**
      * @param RegistryInterface $registry
