@@ -219,18 +219,13 @@ class UserBetting extends Controller
      * @param array $params
      * @return bool
      */
-    private function isSaveFormInValid($form, array $params) : bool
+    private function isSaveFormInValid($form, array $params): bool
     {
-        $isFromInValid = false;
-        if (!$form->isSubmitted() && !$form->isValid()) {
-            $isFromInValid = true;
-        } else if (!isset($params['firstTeamResult']) || $params['firstTeamResult'] < 0) {
-            $isFromInValid = true;
-        } else if (!isset($params['secondTeamResult']) || $params['secondTeamResult'] < 0) {
-            $isFromInValid = true;
-        }
+        $isSymfonyFormInValid = (!$form->isSubmitted() && !$form->isValid());
+        $isFirstTeamResultNotValid = (!isset($params['firstTeamResult']) || $params['firstTeamResult'] < 0);
+        $isSecondTeamResultNotValid = (!isset($params['secondTeamResult']) || $params['secondTeamResult'] < 0);
 
-        return $isFromInValid;
+        return $isSymfonyFormInValid || $isFirstTeamResultNotValid || $isSecondTeamResultNotValid;
     }
 
     /**
