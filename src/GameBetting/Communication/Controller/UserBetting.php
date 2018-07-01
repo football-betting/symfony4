@@ -180,22 +180,16 @@ class UserBetting extends Controller
      */
     public function saveBet(Request $request)
     {
-        $params = $request->get('user_betting');
+        $params = (array)$request->get('user_betting');
         $userBetting = new UserBettingEntity();
         $form = $this->createForm(UserBettingType::class, $userBetting);
         $form->handleRequest($request);
-        if (!$form->isSubmitted() && !$form->isValid()) {
-            return $this->json(['status' => false]);
-        }
-        if (!isset($params['firstTeamResult']) || $params['firstTeamResult'] < 0) {
-            return $this->json(['status' => false]);
-        }
-        if (!isset($params['secondTeamResult']) || $params['secondTeamResult'] < 0) {
+
+        if ($this->isSaveFormInValid($form, $params) === true) {
             return $this->json(['status' => false]);
         }
 
         $entityManager = $this->getDoctrine()->getManager();
-
         $userBetting = $entityManager->getRepository(UserBettingEntity::class)
             ->findByGameIdAndUserId($params['gameId'], $this->getUser()->getId());
         if (!$userBetting instanceof UserBettingEntity) {
@@ -218,6 +212,25 @@ class UserBetting extends Controller
         $entityManager->flush();
 
         return $this->json(['status' => true]);
+    }
+
+    /**
+     * @param $form
+     * @param array $params
+     * @return bool
+     */
+    private function isSaveFormInValid($form, array $params) : bool
+    {
+        $isFromInValid = false;
+        if (!$form->isSubmitted() && !$form->isValid()) {
+            $isFromInValid = true;
+        } else if (!isset($params['firstTeamResult']) || $params['firstTeamResult'] < 0) {
+            $isFromInValid = true;
+        } else if (!isset($params['secondTeamResult']) || $params['secondTeamResult'] < 0) {
+            $isFromInValid = true;
+        }
+
+        return $isFromInValid;
     }
 
     /**
