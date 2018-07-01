@@ -38,23 +38,33 @@ class LiveGame implements LiveGameInterface
             ->findActiveGames();
 
         if (!empty($activeGamesGames)) {
-            $changeEntity = false;
-            $games = $this->client->getGames();
-            foreach ($activeGamesGames as $activeGamesGame) {
-                foreach ($games as $game) {
-                    if ($this->checkForNewResult($activeGamesGame, $game)) {
-                        $changeEntity = true;
-                        $activeGamesGame->setFirstTeamResult($game->getFirstTeamResult());
-                        $activeGamesGame->setSecondTeamResult($game->getSecondTeamResult());
-                        $this->entityManager->persist($activeGamesGame);
-                    }
-                }
-            }
+            $changeEntity = $this->checkGames($activeGamesGames);
 
             if ($changeEntity === true) {
                 $this->entityManager->flush();
             }
         }
+    }
+
+    /**
+     * @param array $activeGamesGames
+     * @return bool
+     */
+    private function checkGames(array $activeGamesGames): bool
+    {
+        $changeEntity = false;
+        $games = $this->client->getGames();
+        foreach ($activeGamesGames as $activeGamesGame) {
+            foreach ($games as $game) {
+                if ($this->checkForNewResult($activeGamesGame, $game)) {
+                    $changeEntity = true;
+                    $activeGamesGame->setFirstTeamResult($game->getFirstTeamResult());
+                    $activeGamesGame->setSecondTeamResult($game->getSecondTeamResult());
+                    $this->entityManager->persist($activeGamesGame);
+                }
+            }
+        }
+        return $changeEntity;
     }
 
     /**
@@ -70,6 +80,5 @@ class LiveGame implements LiveGameInterface
         $checkTeamSecondResult = (int)$activeGamesGame->getSecondTeamResult() !== $game->getSecondTeamResult();
         return $findTeamFirst && $findTeamSecond && ($checkTeamFirstResult || $checkTeamSecondResult);
     }
-
 
 }
