@@ -33,7 +33,7 @@ class Game implements GameInterface
     }
 
 
-    public function import() : void
+    public function import(): void
     {
         $games = $this->client->getGames();
 
@@ -54,30 +54,41 @@ class Game implements GameInterface
                 $gameEntity->setDate($dateTime);
                 $gameEntity->setTeamFirst($teamName2Entity[$game['homeTeamName']]);
                 $gameEntity->setTeamSecond($teamName2Entity[$game['awayTeamName']]);
-                $gameEntity->setFirstTeamResult($game['result']['goalsHomeTeam']);
-                $gameEntity->setSecondTeamResult($game['result']['goalsAwayTeam']);
+                $gameEntity->setFirstTeamResult($this->getHomeGoals($game['result']));
+                $gameEntity->setSecondTeamResult($this->getAwayGoals($game['result']));
                 $this->entityManager->persist($gameEntity);
             }
         }
         $this->entityManager->flush();
     }
 
-//"result": {
-    //"goalsHomeTeam": 1,
-    //"goalsAwayTeam": 1,
-    //"halfTime": {
-        //"goalsHomeTeam": 1,
-        //"goalsAwayTeam": 1
-    //},
-    //"extraTime": {
-    //      "goalsHomeTeam": 0,
-    //      "goalsAwayTeam": 0
-    //},
-    //"penaltyShootout": {
-    //      "goalsHomeTeam": 3,
-    //      "goalsAwayTeam": 4
-    //}
-//},
+    /**
+     * @param array $result
+     * @return int|null
+     */
+    private function getHomeGoals(array $result) : ?int
+    {
+        $goals = $result['goalsHomeTeam'];
+        if (isset($result['penaltyShootout'])) {
+            $goals += $result['penaltyShootout']['goalsHomeTeam'];
+        }
+
+        return $goals;
+    }
+
+    /**
+     * @param array $result
+     * @return int|null
+     */
+    private function getAwayGoals(array $result) : ?int
+    {
+        $goals = $result['goalsAwayTeam'];
+        if (isset($result['penaltyShootout'])) {
+            $goals += $result['penaltyShootout']['goalsAwayTeam'];
+        }
+
+        return $goals;
+    }
 
     /**
      * @return TeamEntity[]
