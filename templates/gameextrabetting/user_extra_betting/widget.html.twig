@@ -1,7 +1,8 @@
 
     <div class="card">
         <div class="card-header text-center">
-            <h5>Wer wird Weltmeister 2018</h5>
+            <h5>{{ 'dashboard.worldChampion'|trans }}</h5>
+            <i style="color: #9A9A9A;">{{ 'dashboard.Deadline'|trans }}</i>
         </div>
         <div class="card-body">
             {% for betId, form in forms %}
@@ -15,7 +16,7 @@
                     </div>
                     <div class=" mr-5">
                         <button type="submit" class="btn btn-primary mb-2 extra-bet-submit" id="user_betting_saveBet"
-                                name="user_extra_betting[saveExtraBet]">Save
+                                name="user_extra_betting[saveExtraBet]">{{ 'dashboard.save'|trans }}
                         </button>
                     </div>
                     {{ form_row( form.type ) }}

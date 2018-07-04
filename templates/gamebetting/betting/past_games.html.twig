@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center">
-                    <h5>Alle vergangene Spiele{% if username is not empty  %} von {{ username }}{% endif %}</h5>
+                    <h5>{{ 'dashboard.pastGames'|trans }}{% if username is not empty  %} von {{ username }}{% endif %}</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -15,22 +15,22 @@
                                     <thead class="">
                                     <tr>
                                         <th>
-                                            Datum
+                                            {{ 'dashboard.date'|trans }}
                                         </th>
                                         <th>
-                                            Team 1
+                                            {{ 'dashboard.team'|trans }} 1
                                         </th>
                                         <th>
-                                            Team 2
+                                            {{ 'dashboard.team'|trans }} 2
                                         </th>
                                         <th>
-                                            Ergebnis
+                                            {{ 'dashboard.result'|trans }}
                                         </th>
                                         <th>
-                                            Tipp
+                                            {{ 'dashboard.bet'|trans }}
                                         </th>
                                         <th class="text-right">
-                                            Punkte
+                                            {{ 'dashboard.points'|trans }}
                                         </th>
                                     </tr>
                                     </thead>
@@ -43,9 +43,13 @@
                                             <td>
                                                 {{ game.firstTeamName }}
                                             </td>
-                                            <td>{{ game.secondTeamName }}</td>
                                             <td>
-                                                {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                                {{ game.secondTeamName }}
+                                            </td>
+                                            <td>
+                                                <a class="text-danger" href="{{ path('past_game_detail', {'gameId': game.gameId}) }}">
+                                                    {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
+                                                </a>
                                             </td>
                                             <td>
                                                 {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}

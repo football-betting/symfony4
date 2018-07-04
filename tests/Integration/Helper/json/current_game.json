@@ -1,0 +1,382 @@
+[
+  {
+    "venue": "Kaliningrad",
+    "location": "Kaliningrad Stadium",
+    "status": "in progress",
+    "time": "90'+4'",
+    "fifa_id": "300340184",
+    "home_team_statistics": {
+      "attempts_on_goal": 16,
+      "on_target": 4,
+      "off_target": 11,
+      "blocked": 1,
+      "woodwork": 0,
+      "corners": 7,
+      "offsides": 2,
+      "ball_possession": 68,
+      "pass_accuracy": 90,
+      "num_passes": 747,
+      "passes_completed": 675,
+      "distance_covered": 99,
+      "balls_recovered": 27,
+      "tackles": 8,
+      "clearances": 4,
+      "yellow_cards": 0,
+      "red_cards": 0,
+      "fouls_committed": 5,
+      "country": "Spain"
+    },
+    "away_team_statistics": {
+      "attempts_on_goal": 6,
+      "on_target": 3,
+      "off_target": 2,
+      "blocked": 1,
+      "woodwork": 1,
+      "corners": 1,
+      "offsides": 1,
+      "ball_possession": 32,
+      "pass_accuracy": 82,
+      "num_passes": 245,
+      "passes_completed": 202,
+      "distance_covered": 107,
+      "balls_recovered": 38,
+      "tackles": 8,
+      "clearances": 30,
+      "yellow_cards": 5,
+      "red_cards": 0,
+      "fouls_committed": 16,
+      "country": "Morocco"
+    },
+    "home_team_country": "Spain",
+    "away_team_country": "Morocco",
+    "datetime": "2018-06-25T18:00:00Z",
+    "winner": null,
+    "winner_code": null,
+    "home_team": {
+      "country": "Spain",
+      "code": "ESP",
+      "goals": 2
+    },
+    "away_team": {
+      "country": "Morocco",
+      "code": "MAR",
+      "goals": 2
+    },
+    "home_team_events": [
+      {
+        "id": 618,
+        "type_of_event": "goal",
+        "player": "ISCO",
+        "time": "19'"
+      },
+      {
+        "id": 639,
+        "type_of_event": "substitution-out",
+        "player": "THIAGO",
+        "time": "74'"
+      },
+      {
+        "id": 640,
+        "type_of_event": "substitution-out",
+        "player": "Diego COSTA",
+        "time": "74'"
+      },
+      {
+        "id": 641,
+        "type_of_event": "substitution-in",
+        "player": "Iago ASPAS",
+        "time": "74'"
+      },
+      {
+        "id": 642,
+        "type_of_event": "substitution-in",
+        "player": "Marco ASENSIO",
+        "time": "74'"
+      },
+      {
+        "id": 646,
+        "type_of_event": "substitution-out",
+        "player": "David SILVA",
+        "time": "84'"
+      },
+      {
+        "id": 647,
+        "type_of_event": "substitution-in",
+        "player": "RODRIGO",
+        "time": "84'"
+      },
+      {
+        "id": 655,
+        "type_of_event": "goal",
+        "player": "Iago ASPAS",
+        "time": "90'+3'"
+      }
+    ],
+    "away_team_events": [
+      {
+        "id": 617,
+        "type_of_event": "goal",
+        "player": "Khalid BOUTAIB",
+        "time": "14'"
+      },
+      {
+        "id": 620,
+        "type_of_event": "yellow-card",
+        "player": "Karim EL AHMADI",
+        "time": "21'"
+      },
+      {
+        "id": 619,
+        "type_of_event": "yellow-card",
+        "player": "Karim EL AHMADI",
+        "time": "22'"
+      },
+      {
+        "id": 621,
+        "type_of_event": "yellow-card",
+        "player": "Noureddine AMRABAT",
+        "time": "29'"
+      },
+      {
+        "id": 622,
+        "type_of_event": "yellow-card",
+        "player": "Manuel DA COSTA",
+        "time": "31'"
+      },
+      {
+        "id": 623,
+        "type_of_event": "yellow-card",
+        "player": "Mbark BOUSSOUFA",
+        "time": "31'"
+      },
+      {
+        "id": 630,
+        "type_of_event": "substitution-out",
+        "player": "Younes BELHANDA",
+        "time": "63'"
+      },
+      {
+        "id": 631,
+        "type_of_event": "substitution-in",
+        "player": "Faycal FAJR",
+        "time": "63'"
+      },
+      {
+        "id": 637,
+        "type_of_event": "substitution-out",
+        "player": "Khalid BOUTAIB",
+        "time": "72'"
+      },
+      {
+        "id": 638,
+        "type_of_event": "substitution-in",
+        "player": "Youssef EN NESYRI",
+        "time": "72'"
+      },
+      {
+        "id": 645,
+        "type_of_event": "goal",
+        "player": "Youssef EN NESYRI",
+        "time": "81'"
+      },
+      {
+        "id": 651,
+        "type_of_event": "substitution-out",
+        "player": "Hakim ZIYACH",
+        "time": "85'"
+      },
+      {
+        "id": 652,
+        "type_of_event": "substitution-in",
+        "player": "Aziz BOUHADDOUZ",
+        "time": "85'"
+      },
+      {
+        "id": 654,
+        "type_of_event": "yellow-card",
+        "player": "Monir EL KAJOUI",
+        "time": "88'"
+      },
+      {
+        "id": 653,
+        "type_of_event": "yellow-card",
+        "player": "Monir EL KAJOUI",
+        "time": "89'"
+      },
+      {
+        "id": 656,
+        "type_of_event": "yellow-card",
+        "player": "Achraf HAKIMI",
+        "time": "90'+3'"
+      }
+    ],
+    "last_event_update_at": "2018-06-25T19:52:14Z",
+    "last_score_update_at": "2018-06-25T19:52:13Z"
+  },
+  {
+    "venue": "Saransk",
+    "location": "Mordovia Arena",
+    "status": "in progress",
+    "time": "90'+3'",
+    "fifa_id": "300331500",
+    "home_team_statistics": {
+      "attempts_on_goal": 5,
+      "on_target": 1,
+      "off_target": 4,
+      "blocked": 0,
+      "woodwork": 0,
+      "corners": 1,
+      "offsides": 1,
+      "ball_possession": 31,
+      "pass_accuracy": 67,
+      "num_passes": 196,
+      "passes_completed": 131,
+      "distance_covered": 93,
+      "balls_recovered": 35,
+      "tackles": 21,
+      "clearances": 19,
+      "yellow_cards": 2,
+      "red_cards": 0,
+      "fouls_committed": 16,
+      "country": "Iran"
+    },
+    "away_team_statistics": {
+      "attempts_on_goal": 14,
+      "on_target": 4,
+      "off_target": 7,
+      "blocked": 3,
+      "woodwork": 0,
+      "corners": 5,
+      "offsides": 1,
+      "ball_possession": 69,
+      "pass_accuracy": 88,
+      "num_passes": 574,
+      "passes_completed": 507,
+      "distance_covered": 89,
+      "balls_recovered": 36,
+      "tackles": 6,
+      "clearances": 18,
+      "yellow_cards": 3,
+      "red_cards": 0,
+      "fouls_committed": 9,
+      "country": "Portugal"
+    },
+    "home_team_country": "Iran",
+    "away_team_country": "Portugal",
+    "datetime": "2018-06-25T18:00:00Z",
+    "winner": null,
+    "winner_code": null,
+    "home_team": {
+      "country": "Iran",
+      "code": "IRN",
+      "goals": 0
+    },
+    "away_team": {
+      "country": "Portugal",
+      "code": "POR",
+      "goals": 1
+    },
+    "home_team_events": [
+      {
+        "id": 626,
+        "type_of_event": "yellow-card",
+        "player": "Ehsan HAJI SAFI",
+        "time": "52'"
+      },
+      {
+        "id": 627,
+        "type_of_event": "yellow-card",
+        "player": "Sardar AZMOUN",
+        "time": "54'"
+      },
+      {
+        "id": 628,
+        "type_of_event": "substitution-out",
+        "player": "Ehsan HAJI SAFI",
+        "time": "56'"
+      },
+      {
+        "id": 629,
+        "type_of_event": "substitution-in",
+        "player": "Milad MOHAMMADI",
+        "time": "56'"
+      },
+      {
+        "id": 633,
+        "type_of_event": "substitution-out",
+        "player": "Alireza JAHANBAKHSH",
+        "time": "70'"
+      },
+      {
+        "id": 634,
+        "type_of_event": "substitution-in",
+        "player": "Saman GHODDOS",
+        "time": "70'"
+      },
+      {
+        "id": 643,
+        "type_of_event": "substitution-out",
+        "player": "Saeid EZATOLAHI",
+        "time": "76'"
+      },
+      {
+        "id": 644,
+        "type_of_event": "substitution-in",
+        "player": "Karim ANSARIFARD",
+        "time": "76'"
+      }
+    ],
+    "away_team_events": [
+      {
+        "id": 624,
+        "type_of_event": "yellow-card",
+        "player": "RAPHAEL GUERREIRO",
+        "time": "33'"
+      },
+      {
+        "id": 625,
+        "type_of_event": "goal",
+        "player": "RICARDO QUARESMA",
+        "time": "45'"
+      },
+      {
+        "id": 632,
+        "type_of_event": "yellow-card",
+        "player": "RICARDO QUARESMA",
+        "time": "64'"
+      },
+      {
+        "id": 635,
+        "type_of_event": "substitution-out",
+        "player": "RICARDO QUARESMA",
+        "time": "70'"
+      },
+      {
+        "id": 636,
+        "type_of_event": "substitution-in",
+        "player": "BERNARDO SILVA",
+        "time": "70'"
+      },
+      {
+        "id": 648,
+        "type_of_event": "yellow-card",
+        "player": "CRISTIANO RONALDO",
+        "time": "83'"
+      },
+      {
+        "id": 649,
+        "type_of_event": "substitution-out",
+        "player": "JOAO MARIO",
+        "time": "84'"
+      },
+      {
+        "id": 650,
+        "type_of_event": "substitution-in",
+        "player": "JOAO MOUTINHO",
+        "time": "84'"
+      }
+    ],
+    "last_event_update_at": "2018-06-25T19:52:25Z",
+    "last_score_update_at": "2018-06-25T19:52:24Z"
+  }
+]

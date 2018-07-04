@@ -15,7 +15,7 @@
 </head>
 <body class="">
 <div class="wrapper ">
-    <div class="sidebar" data-color="black" data-active-color="danger">
+    <div class="sidebar" data-color="white" data-active-color="danger">
 
         <div class="logo text-center">
             <img src="{{ asset('build/images/wm2018.8847ac5b.png') }}" width="150" class="" alt="">
@@ -43,15 +43,21 @@
                         <ul class="nav">
                             <li class="{{ app.request.get('_route') == 'game_bet_list'  ? 'active' }}">
                                 <a href="{{ path('game_bet_list') }}">
+                                    <span class="sidebar-mini">&nbsp;</span>
                                     <span class="sidebar-mini">{{ 'sidebar.dashboard.first-letter'|trans }}</span>
                                     <span class="sidebar-normal">{{ 'sidebar.dashboard'|trans }}</span>
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-normal">Dashboard</span>
                                 </a>
                             </li>
                             <li class="{{ app.request.get('_route') == 'all_upcomming_games'  ? 'active' }}">
                                 <a href="{{ path('all_upcomming_games') }}">
 
+                                    <span class="sidebar-mini">&nbsp;</span>
                                     <span class="sidebar-mini"> {{ 'sidebar.future-games.first-letter'|trans }}</span>
                                     <span class="sidebar-normal"> {{ 'sidebar.future-games'|trans }}</span>
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-normal">{{ 'sidebar.future-games'|trans }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -79,13 +85,22 @@
                         <ul class="nav">
                             <li class="{{ app.request.get('_route') == 'game_rating_users'  ? 'active' }}">
                                 <a href="{{ path('game_rating_users') }}">
-                                    <span class="sidebar-mini">R</span>
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-mini">{{ 'sidebar.ranking.first-letter'|trans }}</span>
+                                    <span class="sidebar-normal">{{ 'sidebar.ranking'|trans }}</span>
+
+                                    <span class="sidebar-mini">&nbsp;</span>
                                     <span class="sidebar-normal">{{ 'sidebar.ranking'|trans }}</span>
                                 </a>
                             </li>
                             <li class="{{ app.request.get('_route') == 'all_past_games' ? 'active' }}">
                                 <a href="{{ path('all_past_games') }}">
-                                    <span class="sidebar-mini">V</span>
+                                    <span class="sidebar-mini">&nbsp;</span>
+
+                                    <span class="sidebar-mini">{{ 'sidebar.past-games.first-letter'|trans }}</span>
+                                    <span class="sidebar-normal">{{ 'sidebar.past-games'|trans }}</span>
+
+                                    <span class="sidebar-mini">&nbsp;</span>
                                     <span class="sidebar-normal">{{ 'sidebar.past-games'|trans }}</span>
                                 </a>
                             </li>
@@ -122,7 +137,7 @@
 
                                 <i class="nc-icon nc-badge"></i>
                                 <p>
-                                    LOGOUT
+                                    {{ 'dashboard.logout'|trans }}
                                 </p>
                             </a>
                         </li>

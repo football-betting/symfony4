@@ -50,7 +50,23 @@ class UserBetting extends Controller
             'gamebetting/betting/betting.html.twig',
             [
                 'futureGamesForm' => $futureGamesFormBuilder,
-                'pastGamesForm'   => \array_slice($pastGamesForm, -10)
+                'pastGamesForm' => \array_reverse(\array_slice($pastGamesForm, -6))
+            ]
+        );
+    }
+
+    /**
+     * @Route("/active-games/", name="active-games")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getActiveGames()
+    {
+        $activeGames = $this->userPastGames->getActiveGames($this->getUser());
+
+        return $this->render(
+            'gamebetting/betting/active_games.html.twig',
+            [
+                'activeGames' => $activeGames
             ]
         );
     }
@@ -71,7 +87,6 @@ class UserBetting extends Controller
         );
     }
 
-
     /**
      * @Route("/all-past-games", name="all_past_games")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -83,8 +98,42 @@ class UserBetting extends Controller
         return $this->render(
             'gamebetting/betting/past_games.html.twig',
             [
-                'pastGamesForm'   => $pastGamesForm,
+                'pastGamesForm' => $pastGamesForm,
                 'username' => false
+            ]
+        );
+    }
+
+    /**
+     * toDo Refactor this
+     * @Route("/past-game-detail/{gameId}", name="past_game_detail")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function pastGameDetail(int $gameId)
+    {
+        $users = $this->getDoctrine()->getRepository(User::class)
+            ->findBy([], ['username' => 'ASC']);
+
+        $teamFirstName = '';
+        $teamSecondName = '';
+        $gameInfo2users = [];
+        foreach ($users as $user) {
+            $pastGamesForm = $this->userPastGames->getOnePastGame($user, $gameId);
+            if (!empty($pastGamesForm)) {
+                $teamFirstName = current($pastGamesForm)->getFirstTeamName();
+                $teamSecondName = current($pastGamesForm)->getSecondTeamName();
+
+                $gameInfo2users[$user->getUsername()] = current($pastGamesForm);
+            }
+
+        }
+
+        return $this->render(
+            'gamebetting/betting/past_game_detail.html.twig',
+            [
+                'gameInfo2users' => $gameInfo2users,
+                'teamFirstName' => $teamFirstName,
+                'teamSecondName' => $teamSecondName,
             ]
         );
     }
@@ -95,10 +144,10 @@ class UserBetting extends Controller
     public function allPastGameByUserId(int $userId)
     {
         $user = $this->getDoctrine()->getRepository(User::class)
-                            ->findOneBy(['id' => $userId]);
+            ->findOneBy(['id' => $userId]);
         $pastGamesForm = [];
         $username = '';
-        if($user instanceof User) {
+        if ($user instanceof User) {
             $pastGamesForm = $this->userPastGames->get($user);
             $username = $user->getUsername();
         }
@@ -106,8 +155,8 @@ class UserBetting extends Controller
         return $this->render(
             'gamebetting/betting/past_games.html.twig',
             [
-                'pastGamesForm'   => $pastGamesForm,
-                'username'   => $username
+                'pastGamesForm' => $pastGamesForm,
+                'username' => $username
             ]
         );
 
@@ -115,7 +164,7 @@ class UserBetting extends Controller
 
     public function getNextGames(int $numberOfGames)
     {
-        $gameBetResult = \array_slice($this->userFutureGames->get($this->getUser()),0,$numberOfGames);
+        $gameBetResult = \array_slice($this->userFutureGames->get($this->getUser()), 0, $numberOfGames);
 
         return $this->render(
             'dashboard/next_games.html.twig',
@@ -138,22 +187,21 @@ class UserBetting extends Controller
         if (!$form->isSubmitted() && !$form->isValid()) {
             return $this->json(['status' => false]);
         }
-        if(!isset($params['firstTeamResult'])  || $params['firstTeamResult'] < 0) {
+        if (!isset($params['firstTeamResult']) || $params['firstTeamResult'] < 0) {
             return $this->json(['status' => false]);
         }
-        if(!isset($params['secondTeamResult'])  || $params['secondTeamResult'] < 0) {
+        if (!isset($params['secondTeamResult']) || $params['secondTeamResult'] < 0) {
             return $this->json(['status' => false]);
         }
-        
+
         $entityManager = $this->getDoctrine()->getManager();
 
         $userBetting = $entityManager->getRepository(UserBettingEntity::class)
-                                     ->findByGameIdAndUserId($params['gameId'], $this->getUser()->getId())
-        ;
+            ->findByGameIdAndUserId($params['gameId'], $this->getUser()->getId());
         if (!$userBetting instanceof UserBettingEntity) {
             $userBetting = new UserBettingEntity();
             $game = $entityManager->getRepository(Game::class)
-                                  ->find($params['gameId']);
+                ->find($params['gameId']);
             $userBetting->setGame($game);
             $userBetting->setUser($this->getUser());
         }
@@ -162,7 +210,7 @@ class UserBetting extends Controller
         $userBetting->setFirstTeamResult((int)$params['firstTeamResult']);
         $userBetting->setSecondTeamResult((int)$params['secondTeamResult']);
 
-        if($userBetting->getGame()->getDate()->getTimestamp() < time() ) {
+        if ($userBetting->getGame()->getDate()->getTimestamp() < time()) {
             return $this->json(['status' => false]);
         }
 

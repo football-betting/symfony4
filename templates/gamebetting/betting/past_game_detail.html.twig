@@ -1,25 +1,11 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
     <div class="row">
-        <div class="col-md-6">
-
-            {{ render(controller(
-                'App\\GameBetting\\Communication\\Controller\\UserBetting::getActiveGames'
-            )) }}
-
-            {{ render(controller(
-                'App\\GameRating\\Communication\\Controller\\UserRating::myInfo'
-            )) }}
-
-            {{ render(controller(
-                'App\\GameExtraBetting\\Communication\\Controller\\UserExtraBetting::index'
-            )) }}
-
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center">
-                    <h5>{{ 'dashboard.pastTenGames'|trans }}</h5>
+                    <h5>Spiel {{ teamFirstName }} vs {{ teamSecondName }}</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -29,10 +15,7 @@
                                     <thead class="">
                                     <tr>
                                         <th>
-                                            {{ 'dashboard.team'|trans }} 1
-                                        </th>
-                                        <th>
-                                            {{ 'dashboard.team'|trans }} 2
+                                            {{ 'dashboard.user'|trans }}
                                         </th>
                                         <th>
                                             {{ 'dashboard.result'|trans }}
@@ -46,16 +29,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for game in pastGamesForm %}
+                                    {% for username,game in gameInfo2users %}
                                         <tr>
                                             <td>
-                                                {{ game.firstTeamName }}
+                                                {{ username }}
                                             </td>
-                                            <td>{{ game.secondTeamName }}</td>
                                             <td>
-                                                <a class="text-danger" href="{{ path('past_game_detail', {'gameId': game.gameId}) }}">
-                                                    {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
-                                                </a>
+                                                {{ game.firstTeamResult }} : {{ game.secondTeamResult }}
                                             </td>
                                             <td>
                                                 {% if game.firstTeamUserResult is null or game.secondTeamUserResult is null %}
@@ -76,16 +56,6 @@
                     </div>
                 </div>
             </div>
-
-            {{ render(controller(
-                'App\\GameRating\\Communication\\Controller\\UserRating::ratingTopThree'
-            )) }}
-
-        </div>
-        <div class="col-md-6">
-            {{ render(controller(
-                'App\\GameBetting\\Communication\\Controller\\UserBetting::getNextGames', {'numberOfGames': 4}
-            )) }}
         </div>
     </div>
 

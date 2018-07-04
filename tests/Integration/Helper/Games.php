@@ -5,6 +5,7 @@ namespace App\Tests\Integration\Helper;
 
 use App\GameCore\Persistence\Entity\Team as TeamEntity;
 use App\GameCore\Persistence\Entity\Game as GameEntity;
+use App\GameCore\Persistence\Repository\GameRepository;
 
 trait Games
 {
@@ -97,6 +98,30 @@ trait Games
         $gameEntity->setTeamSecond($teamEntityTwo);
         $gameEntity->setFirstTeamResult(null);
         $gameEntity->setSecondTeamResult(null);
+        $this->entityManager->persist($gameEntity);
+        $this->entityManager->flush();
+
+        return $gameEntity;
+    }
+
+    /**
+     * @return GameEntity
+     * @throws \Exception
+     */
+    public function createTestPastGamesNotActive()
+    {
+        $teamEntityOne = $this->getTeamUnitPastThree();
+        $teamEntityTwo = $this->getTeamUnitPastTwo();
+
+        $dateTime = new \DateTime(null, new \DateTimeZone('Europe/Berlin'));
+        $dateTime->sub(new \DateInterval(GameRepository::GAME_TIME_RANGE));
+        $dateTime->sub(new \DateInterval('PT1M'));
+        $gameEntity = new GameEntity();
+        $gameEntity->setDate($dateTime);
+        $gameEntity->setTeamFirst($teamEntityOne);
+        $gameEntity->setTeamSecond($teamEntityTwo);
+        $gameEntity->setFirstTeamResult(0);
+        $gameEntity->setSecondTeamResult(1);
         $this->entityManager->persist($gameEntity);
         $this->entityManager->flush();
 

@@ -4,5 +4,5 @@ namespace App\GameApi\Business\ApiFootballData\Import;
 
 interface TeamInterface
 {
-    public function import();
+    public function import() : void;
 }
