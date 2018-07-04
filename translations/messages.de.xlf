@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
+        <body>
+              <trans-unit id="login">
+                    <source>login</source>
+                    <target>Anmelden</target>
+              </trans-unit>
+              <trans-unit id="login.username">
+                    <source>login.username</source>
+                    <target>Benutzername</target>
+              </trans-unit>
+              <trans-unit id="login.password">
+                    <source>login.password</source>
+                    <target>Passwort</target>
+              </trans-unit>
+              <trans-unit id="register">
+                   <source>register</source>
+                   <target>Registrieren</target>
+              </trans-unit>
+              <trans-unit id="register.mail">
+                   <source>register.mail</source>
+                   <target>E-Mail</target>
+              </trans-unit>
+              <trans-unit id="register.repeat-password">
+                   <source>register.repeat-password</source>
+                   <target>Passwort wiederholen</target>
+              </trans-unit>
+              <trans-unit id="betting">
+                   <source>betting</source>
+                   <target>Tippspiel!</target>
+              </trans-unit>
+              <trans-unit id="sidebar.bet">
+                   <source>sidebar.bet</source>
+                   <target>Tippen</target>
+              </trans-unit>
+              <trans-unit id="sidebar.dashboard">
+                   <source>sidebar.dashboard</source>
+                   <target>Dashboard</target>
+              </trans-unit>
+              <trans-unit id="sidebar.dashboard.first-letter">
+                   <source>sidebar.dashboard.first-letter</source>
+                   <target>D</target>
+              </trans-unit>
+              <trans-unit id="sidebar.future-games">
+                   <source>sidebar.future-games</source>
+                   <target>Zukünftige spiele</target>
+              </trans-unit>
+              <trans-unit id="sidebar.future-games.first-letter">
+                   <source>sidebar.future-games.first-letter</source>
+                   <target>Z</target>
+              </trans-unit>
+              <trans-unit id="sidebar.scores">
+                   <source>sidebar.scores</source>
+                   <target>Punkte</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking">
+                   <source>sidebar.ranking</source>
+                   <target>Rangliste</target>
+              </trans-unit>
+              <trans-unit id="sidebar.ranking.first-letter">
+                   <source>sidebar.ranking.first-letter</source>
+                   <target>R</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games">
+                   <source>sidebar.past-games</source>
+                   <target>Vergangene Spiele</target>
+              </trans-unit>
+              <trans-unit id="sidebar.past-games.first-letter">
+                   <source>sidebar.past-games.first-letter</source>
+                   <target>V</target>
+              </trans-unit>
+              <trans-unit id="dashboard.logout">
+                   <source>dashboard.logout</source>
+                   <target>Abmelden</target>
+              </trans-unit>
+              <trans-unit id="dashboard.save">
+                   <source>dashboard.save</source>
+                   <target>Speichern</target>
+              </trans-unit>
+              <trans-unit id="dashboard.user">
+                   <source>dashboard.user</source>
+                   <target>Benutzer</target>
+              </trans-unit>
+              <trans-unit id="dashboard.date">
+                   <source>dashboard.date</source>
+                   <target>Datum</target>
+              </trans-unit>
+              <trans-unit id="dashboard.team">
+                   <source>dashboard.team</source>
+                   <target>Mannschaft</target>
+              </trans-unit>
+              <trans-unit id="dashboard.result">
+                   <source>dashboard.result</source>
+                   <target>Ergebnis</target>
+              </trans-unit>
+              <trans-unit id="dashboard.points">
+                   <source>dashboard.points</source>
+                   <target>Punkte</target>
+              </trans-unit>
+              <trans-unit id="dashboard.bet">
+                   <source>dashboard.bet</source>
+                   <target>Tipp</target>
+              </trans-unit>
+              <trans-unit id="dashboard.futureGames">
+                   <source>dashboard.futureGames</source>
+                   <target>Zukünftige Spiele</target>
+              </trans-unit>
+              <trans-unit id="dashboard.pastGames">
+                   <source>dashboard.pastGames</source>
+                   <target>Alle vergangenen Spiele</target>
+              </trans-unit>
+              <trans-unit id="dashboard.pastTenGames">
+                   <source>dashboard.pastTenGames</source>
+                   <target>Vergangene 10 Spiele</target>
+              </trans-unit>
+              <trans-unit id="dashboard.top3">
+                   <source>dashboard.top3</source>
+                   <target>Top 3</target>
+              </trans-unit>
+              <trans-unit id="dashboard.rank">
+                   <source>dashboard.rank</source>
+                   <target>Tabellenplatz</target>
+              </trans-unit>
+              <trans-unit id="dashboard.Deadline">
+                   <source>dashboard.Deadline</source>
+                   <target>Bitte bis 29.06.2018 23:59:59 Tip abgeben</target>
+              </trans-unit>
+              <trans-unit id="dashboard.rankList">
+                   <source>dashboard.rankList</source>
+                   <target>Rangliste</target>
+              </trans-unit>
+              <trans-unit id="dashboard.worldChampion">
+                   <source>dashboard.worldChampion</source>
+                   <target>Wer wird Weltmeister 2018</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.position">
+                   <source>dashboard.ranking.position</source>
+                   <target>Position</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.difference">
+                   <source>dashboard.ranking.difference</source>
+                   <target>Tordifferenz</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.winner">
+                   <source>dashboard.ranking.winner</source>
+                   <target>Sieger</target>
+              </trans-unit>
+              <trans-unit id="dashboard.ranking.nohit">
+                   <source>dashboard.ranking.nohit</source>
+                   <target>Kein Treffer</target>
+              </trans-unit>
+
+        </body>
+    </file>
+</xliff>

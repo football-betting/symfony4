@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        Tippspiel!
+        {{ 'betting'|trans }}
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -27,7 +27,7 @@
                 </button>
             </div>
             <a class="navbar-brand" href="#">
-                Tippspiel!
+                {{ 'betting'|trans }}
             </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
@@ -40,12 +40,14 @@
             <ul class="navbar-nav">
                 <li class="nav-item ">
                     <a href="{{ path('user_registration') }}" class="nav-link">
-                        <i class="nc-icon nc-book-bookmark"></i> Register
+                        <i class="nc-icon nc-book-bookmark"></i>
+                        {{ 'register'|trans }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a href="{{ path('login') }}" class="nav-link">
-                        <i class="nc-icon nc-single-02"></i> Login
+                        <i class="nc-icon nc-single-02"></i>
+                        {{ 'login'|trans }}
                     </a>
                 </li>
             </ul>
