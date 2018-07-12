@@ -66,9 +66,14 @@ class Game implements GameInterface
      * @param array $result
      * @return int|null
      */
-    private function getHomeGoals(array $result) : ?int
+    private function getHomeGoals(array $result): ?int
     {
         $goals = $result['goalsHomeTeam'];
+
+        if (isset($result['extraTime'])) {
+            $goals = $result['extraTime']['goalsHomeTeam'];
+        }
+
         if (isset($result['penaltyShootout'])) {
             $goals += $result['penaltyShootout']['goalsHomeTeam'];
         }
@@ -80,9 +85,14 @@ class Game implements GameInterface
      * @param array $result
      * @return int|null
      */
-    private function getAwayGoals(array $result) : ?int
+    private function getAwayGoals(array $result): ?int
     {
         $goals = $result['goalsAwayTeam'];
+
+        if (isset($result['extraTime'])) {
+            $goals = $result['extraTime']['goalsAwayTeam'];
+        }
+
         if (isset($result['penaltyShootout'])) {
             $goals += $result['penaltyShootout']['goalsAwayTeam'];
         }
