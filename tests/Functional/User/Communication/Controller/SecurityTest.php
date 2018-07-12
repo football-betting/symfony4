@@ -52,7 +52,10 @@ class SecurityTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/');
 
-        $form = $crawler->selectButton('login')->form();
+        /**
+         * @TODO @stz button text in konstante auslagern
+         */
+        $form = $crawler->selectButton('Anmelden')->form();
         $form['_username'] = Config::USER_NAME;
         $form['_password'] = Config::USER_PASS;
 
@@ -66,13 +69,13 @@ class SecurityTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/');
 
-        $form = $crawler->selectButton('login')->form();
+        $form = $crawler->selectButton('Anmelden')->form();
         $form['_username'] = 'FAIL_USER';
         $form['_password'] = 'FAILED';
 
         $this->client->submit($form);
         $this->client->followRedirect();
 
-        $this->assertContains('Invalid credentials.', $this->client->getResponse()->getContent());
+        $this->assertContains('Fehlerhafte Zugangsdaten.', $this->client->getResponse()->getContent());
     }
 }
