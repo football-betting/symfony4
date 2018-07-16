@@ -57,7 +57,6 @@ class UserScoreProvider implements UserScoreProviderInterface
                 $userScore->addScore($userPastGame->getScore());
             }
             $extraScore = $this->extraPointProvider->get($user);
-            dump($extraScore);
             $userScore->setExtraScore($extraScore);
             $usersScores[] = $userScore;
         }
