@@ -49,5 +49,11 @@ services:
             - '@App\GameBetting\Business\GamePoints\Score\WinScoreRightDiff'
             - '@App\GameBetting\Business\GamePoints\Score\WinTeam'
 
+    App\GameBetting\Business\GameExtraPoints\Points:
+        arguments:
+            - '@App\GameBetting\Business\GameExtraPoints\Score\WinFirstType'
+            - '@App\GameBetting\Business\GameExtraPoints\Score\WinSecondType'
+
+
     App\GameRating\Business\GameRatingFacade:
         public: true

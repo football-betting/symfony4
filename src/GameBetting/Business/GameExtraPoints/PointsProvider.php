@@ -4,7 +4,6 @@
 namespace App\GameBetting\Business\GameExtraPoints;
 
 
-use App\GameBetting\Business\GameExtraPoints\Score\ScoreInterface;
 use App\GameBetting\Persistence\DataProvider\ExtraResult;
 use App\GameExtraBetting\Persistence\Entity\UserExtraBetting;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,7 +46,11 @@ class PointsProvider implements PointsProviderInterface
                 (int)$userExterBetting->getType(),
                 (int)$userExterBetting->getText()
             );
+
             $extraScore = $this->points->get($extraResult);
+            if($extraScore > 0 ) {
+                break;
+            }
         }
 
         return $extraScore;
