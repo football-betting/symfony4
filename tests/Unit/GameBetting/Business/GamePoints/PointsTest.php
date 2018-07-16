@@ -5,7 +5,7 @@ namespace App\Tests\Unit\GameBetting\Business\GamePoints;
 
 
 use App\GameBetting\Business\GamePoints\Score\NoWin;
-use App\GameBetting\Business\GamePoints\Score\WinExact;
+use App\GameBetting\Business\GamePoints\Score\WinFirstType;
 use App\GameBetting\Business\GamePoints\Score\WinScoreRightDiff;
 use App\GameBetting\Business\GamePoints\Score\WinTeam;
 use App\GameBetting\Business\GamePoints\Points;
@@ -78,7 +78,7 @@ class PointsTest extends TestCase
     public function testPoint($firstTeamResult, $secondTeamResult, $firstTeamUserResult, $secondTeamUserResult, $expectedScore)
     {
         $points = new Points(
-            new WinExact(),
+            new WinFirstType(),
             new NoWin(),
             new WinTeam(),
             new WinScoreRightDiff()

@@ -7,6 +7,7 @@ use App\GameExtraBetting\Persistence\Entity\UserExtraBetting;
 use App\User\Persistence\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method Game|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,5 +20,10 @@ class UserExtraBettingRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, UserExtraBetting::class);
+    }
+
+    public function getByUser(UserInterface $user)
+    {
+        return $this->findBy(['user' => $user->getId()]);
     }
 }
