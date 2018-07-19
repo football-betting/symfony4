@@ -7,6 +7,23 @@
                 <div class="card-header text-center">
                     <h5>{{ 'dashboard.pastGames'|trans }}{% if username is not empty  %} von {{ username }}{% endif %}</h5>
                 </div>
+
+                <div class="card-body">
+                    <h5>{{ 'dashboard.worldChampion'|trans }}</h5>
+                    {% for info in extraInfo %}
+                        <div class="extra-bet-wrapper">
+                            <label for="">
+                            {% if info.type is same as( 1 ) %}
+                                Tipp 1 (+10 Punkte)
+                                {% else %}
+                                Tipp 2 (+5 Punkte)
+                            {% endif %}
+                            :</label>
+                            {{ info.countryName }}
+                        </div>
+                    {% endfor %}
+                </div>
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">

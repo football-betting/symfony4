@@ -10,10 +10,10 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @method Game|null find($id, $lockMode = null, $lockVersion = null)
- * @method Game|null findOneBy(array $criteria, array $orderBy = null)
- * @method Game[]    findAll()
- * @method Game[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method UserExtraBetting|null find($id, $lockMode = null, $lockVersion = null)
+ * @method UserExtraBetting|null findOneBy(array $criteria, array $orderBy = null)
+ * @method UserExtraBetting[]    findAll()
+ * @method UserExtraBetting[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserExtraBettingRepository extends ServiceEntityRepository
 {
@@ -22,6 +22,10 @@ class UserExtraBettingRepository extends ServiceEntityRepository
         parent::__construct($registry, UserExtraBetting::class);
     }
 
+    /**
+     * @param UserInterface $user
+     * @return UserExtraBetting[]
+     */
     public function getByUser(UserInterface $user)
     {
         return $this->findBy(['user' => $user->getId()]);

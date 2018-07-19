@@ -6,9 +6,12 @@ namespace App\GameBetting\Communication\Controller;
 use App\GameBetting\Business\Form\UserBettingType;
 use App\GameBetting\Business\Games\UserFutureGamesInterface;
 use App\GameBetting\Business\Games\UserPastGamesInterface;
+use App\GameBetting\Persistence\DataProvider\ExtraFrontendResult;
 use App\GameBetting\Persistence\Entity\UserBetting as UserBettingEntity;
 use App\GameCore\Persistence\Entity\Game;
+use App\GameCore\Persistence\Entity\Team;
 use App\GameCore\Persistence\Repository\GameRepository;
+use App\GameExtraBetting\Persistence\Entity\UserExtraBetting;
 use App\User\Persistence\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -93,13 +96,15 @@ class UserBetting extends Controller
      */
     public function allPastGames()
     {
-        $pastGamesForm = $this->userPastGames->get($this->getUser());
+        $user = $this->getUser();
+        $pastGamesForm = $this->userPastGames->get($user);
 
         return $this->render(
             'gamebetting/betting/past_games.html.twig',
             [
                 'pastGamesForm' => $pastGamesForm,
-                'username' => false
+                'username' => false,
+                'extraInfo' => $this->extraInfo($user)
             ]
         );
     }
@@ -147,16 +152,21 @@ class UserBetting extends Controller
             ->findOneBy(['id' => $userId]);
         $pastGamesForm = [];
         $username = '';
+        $extraInfo = [];
         if ($user instanceof User) {
             $pastGamesForm = $this->userPastGames->get($user);
             $username = $user->getUsername();
+            $extraInfo = $this->extraInfo($user);
         }
+
+
 
         return $this->render(
             'gamebetting/betting/past_games.html.twig',
             [
                 'pastGamesForm' => $pastGamesForm,
-                'username' => $username
+                'username' => $username,
+                'extraInfo' => $extraInfo,
             ]
         );
 
@@ -243,5 +253,23 @@ class UserBetting extends Controller
             )->createView();
         }
         return $gamesFormBuilder;
+    }
+
+    /**
+     * @param $user
+     * @return array
+     */
+    protected function extraInfo($user): array
+    {
+        $userExterBettings = $this->getDoctrine()->getRepository(UserExtraBetting::class)->getByUser($user);
+        $extraInfo = [];
+        foreach ($userExterBettings as $userExterBetting) {
+            $team = $this->getDoctrine()->getRepository(Team::class)->find((int)$userExterBetting->getText());
+            $extraInfo[] = new ExtraFrontendResult(
+                $userExterBetting->getType(),
+                $team->getName()
+            );
+        }
+        return $extraInfo;
     }
 }
