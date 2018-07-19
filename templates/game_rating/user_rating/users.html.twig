@@ -34,6 +34,9 @@
                                     <th>
                                         {{ 'dashboard.ranking.nohit'|trans }}
                                     </th>
+                                    <th>
+                                        {{ 'dashboard.ranking.extra_points'|trans }}
+                                    </th>
                                     <th class="text-left">
                                         {{ 'dashboard.points'|trans }}
                                     </th>
@@ -66,6 +69,9 @@
                                         </td>
                                         <td>
                                             {{ userScoreWithPosition.userScore.countNoWinTeam }}
+                                        </td>
+                                        <td>
+                                            {{ userScoreWithPosition.userScore.extraScore }}
                                         </td>
                                         <td class="text-left">
                                             {{ userScoreWithPosition.userScore.scoreSumme }}

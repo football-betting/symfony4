@@ -150,7 +150,10 @@
                    <source>dashboard.ranking.nohit</source>
                    <target>Kein Treffer</target>
               </trans-unit>
-
+              <trans-unit id="dashboard.ranking.extra_points">
+                    <source>dashboard.ranking.extra_points</source>
+                    <target>Bonuspunkte</target>
+              </trans-unit>
         </body>
     </file>
 </xliff>

@@ -13,6 +13,11 @@ class UserScore
     private $score = [];
 
     /**
+     * @var int
+     */
+    private $extraScore = 0;
+
+    /**
      * @var UserInterface $user
      */
     private $user;
@@ -43,11 +48,19 @@ class UserScore
     }
 
     /**
+     * @param int $extraScore
+     */
+    public function setExtraScore(int $extraScore): void
+    {
+        $this->extraScore = $extraScore;
+    }
+
+    /**
      * @return int
      */
     public function getScoreSumme(): int
     {
-        return array_sum($this->score);
+        return array_sum($this->score) + $this->getExtraScore();
     }
 
     /**
@@ -80,6 +93,14 @@ class UserScore
     public function getCountNoWinTeam(): int
     {
         return \count(array_keys($this->score, Config::NO_WIN_TEAM));
+    }
+
+    /**
+     * @return int
+     */
+    public function getExtraScore(): int
+    {
+        return $this->extraScore;
     }
 
     /**
