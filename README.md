@@ -1,3 +1,7 @@
+> [!WARNING] 
+> Version 1 for football-betting |  no longer current, we have developed something new
+
+
 # Football Betting
 
 [![Build Status](https://travis-ci.com/football-betting/symfony4.svg?branch=master)](https://travis-ci.com/football-betting/symfony4)
