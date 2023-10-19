@@ -1,5 +1,5 @@
 > [!WARNING] 
-> Version 1 for football-betting |  no longer current, we have developed something new
+> __Version 1 for football-betting |  no longer current, we have developed something new__
 
 
 # Football Betting
